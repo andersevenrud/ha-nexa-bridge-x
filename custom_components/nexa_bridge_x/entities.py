@@ -67,12 +67,12 @@ ENERGY_MAP = {
         'device': SensorDeviceClass.POWER
     },
     'currentKilowattHours': {
-        'name': 'NEXA Today kWh',
+        'name': 'NEXA Current kWh',
         'unit': ENERGY_KILO_WATT_HOUR,
         'device': SensorDeviceClass.ENERGY
     },
     'todayKilowattHours': {
-        'name': 'NEXA Current KwH',
+        'name': 'NEXA Today kWh',
         'unit': ENERGY_KILO_WATT_HOUR,
         'device': SensorDeviceClass.ENERGY
     },

@@ -6,9 +6,6 @@ from homeassistant.helpers.update_coordinator import (
     DataUpdateCoordinator,
     UpdateFailed,
 )
-import logging
-import async_timeout
-
 from .const import (
     DOMAIN,
     NODE_SENSOR_CAPABILITIES
@@ -18,6 +15,9 @@ from .api import (
     NexaApiError,
     NexaApiAuthorizationError
 )
+import asyncio
+import logging
+import async_timeout
 
 _LOGGER = logging.getLogger(__name__)
 

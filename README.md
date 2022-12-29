@@ -39,6 +39,8 @@ All connected devices will appear automatically as entities with names based on 
 
 > Note that names are based on device configuration in the Nexa Admin UI. Rooms are not taken into account.
 
+![example entity list](https://user-images.githubusercontent.com/161548/210004115-f69afac7-289b-47f5-801e-fc26a1f9ffb4.png)
+
 ## Documentation
 
 * [Nexa Bridge X API](https://nexa.se/docs/)

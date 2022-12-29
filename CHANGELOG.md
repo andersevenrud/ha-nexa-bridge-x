@@ -1,11 +1,12 @@
 # Changelog
 
-## 0.0.0
+## 0.1.0
 
 Initial release
 
 * Monitor energy use
 * Monitor switch states
-* Minitor dimmer states
+* Monitor dimmer switch states
 * Control switches
-* Control dimmers/lights
+* Control dimmer switches
+* Control lights

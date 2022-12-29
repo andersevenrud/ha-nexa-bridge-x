@@ -7,8 +7,6 @@ from .const import DOMAIN
 from .nexa import NexaCoordinator, NexaApi
 import logging
 
-# TODO: DeviceInfo
-
 PLATFORMS: list[Platform] = [Platform.SENSOR, Platform.SWITCH, Platform.LIGHT, Platform.BINARY_SENSOR]
 
 _LOGGER = logging.getLogger(__name__)

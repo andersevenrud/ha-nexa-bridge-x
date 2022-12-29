@@ -79,7 +79,7 @@ class NexaApi:
     async def test_connection(self):
         """See if the connection is valid"""
         result = await self.fetch_info()
-        # TODO: Check version number
+
         if "name" not in result or result["name"] != "Nexa Bridge X":
             raise NexaApiNotCompatibleError("Endpoint not compatible")
 

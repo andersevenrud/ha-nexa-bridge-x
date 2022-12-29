@@ -8,8 +8,8 @@ Makes it possible to view and control devices set up in the Nexa App (or Admin W
 
 ## Features
 
-> See [help](#help) below if you want to see support for more devices. I only have access to devices
-> I'm personally using, and this bridge supports several protocol and gateways.
+> This project depends on you! See [help](#help) below if you want to see support for more devices.
+> I only have access to devices I'm personally using, and this bridge supports several protocol and gateways.
 
 * Monitor energy use
 * Monitor switch states

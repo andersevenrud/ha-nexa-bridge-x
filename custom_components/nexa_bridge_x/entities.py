@@ -100,6 +100,7 @@ class NexaDimmerEntity(CoordinatorEntity, LightEntity):
     def __init__(self, coordinator, node):
         super().__init__(coordinator)
         self.id = node.id
+        self.switch_to_state = None
         self._attr_name = create_friendly_name("Light", node)
         self._attr_unique_id = f"dimmer_{node.id}"
 
@@ -108,21 +109,45 @@ class NexaDimmerEntity(CoordinatorEntity, LightEntity):
         node = self.coordinator.get_node_by_id(self.id)
         if node:
             v = node.get_value('switchLevel')
-            self._attr_is_on = int(v * 100) > 0
+            vv = int(v * 100)
+
+            if self.switch_to_state is not None:
+                self._attr_is_on = self.switch_to_state
+                if self.switch_to_state == True and vv == 0:
+                    self.switch_to_state = None
+                if self.switch_to_state == False and vv > 0:
+                    self.switch_to_state = None
+            else:
+                self._attr_is_on = vv > 0
+
             self._attr_brightness = int(v * 255)
             self._attr_name = create_friendly_name("Light", node)
             self.async_write_ha_state()
+        else:
+            self.switch_to_state = False
 
     async def async_turn_on(self, **kwargs):
-        await self.coordinator.handle_dimmer(self.id, 1)
+        if ATTR_BRIGHTNESS in kwargs:
+            v = kwargs.get(ATTR_BRIGHTNESS, 255)
+            await self.coordinator.handle_dimmer(self.id, v / 255)
+        else:
+            v = 1.0
+            await self.coordinator.handle_dimmer(self.id, 1)
+
+        self.switch_to_state = True
+        self._attr_is_on = True
+        self._attr_brightness = v
+
+        self.async_write_ha_state()
         await self.coordinator.async_request_refresh()
 
     async def async_turn_off(self, **kwargs):
-        await self.coordinator.handle_dimmer(self.id, 0)
-        await self.coordinator.async_request_refresh()
+        self.switch_to_state = False
+        self._attr_is_on = False
+        self._attr_brightness = 0
 
-    async def async_set_brightness(self, **kwargs):
-        await self.coordinator.handle_dimmer(self.id, kwargs.get(ATTR_BRIGHTNESS, 255) / 255)
+        self.async_write_ha_state()
+        await self.coordinator.handle_dimmer(self.id, 0)
         await self.coordinator.async_request_refresh()
 
 
@@ -148,6 +173,9 @@ class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
         else:
             await self.coordinator.handle_dimmer(self.id, 1)
 
+        self._attr_is_on = True
+
+        self.async_write_ha_state()
         await self.coordinator.async_request_refresh()
 
     async def async_turn_off(self, **kwargs):
@@ -156,6 +184,9 @@ class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
         else:
             await self.coordinator.handle_dimmer(self.id, 0)
 
+        self._attr_is_on = False
+
+        self.async_write_ha_state()
         await self.coordinator.async_request_refresh()
 
 

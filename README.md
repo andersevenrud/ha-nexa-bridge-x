@@ -6,7 +6,7 @@ Makes it possible to view and control devices set up in the Nexa App (or Admin W
 
 ## Features
 
-> See [help](#help) below if you want to see support for more devices. I don't personally own every single type, and this hub supports devices with different protocols.
+> See [help](#help) below if you want to see support for more devices. I don't personally own every single type, and this bridge supports devices with different protocols.
 
 * Monitor energy use
 * Monitor switch states
@@ -49,22 +49,22 @@ All connected devices will appear automatically as entities with names based on 
 
 ## Help
 
-If you're having issues with a device or don't see a device you have connected to your hub,
+If you're having issues with a device or don't see a device you have connected to your bridge,
 run the following commands:
 
 > **Make sure to remove any personal information from the information file. This will contain
 > location information.**
 
 ```bash
-curl --user nexa:nexa http://<ip-of-hub>/v1/info -o hub-information.txt
-curl --user nexa:nexa http://<ip-of-hub>/v1/nodes -o hub-nodes.txt
+curl --user nexa:nexa http://<ip-of-bridge>/v1/info -o bridge-information.txt
+curl --user nexa:nexa http://<ip-of-bridge>/v1/nodes -o bridge-nodes.txt
 ```
 
 Then leave a [comment in the device issue](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/6) with the files attached.
 
 ## Notes
 
-This project was developed with a hub with firmware version `2.4.1`.
+This project was developed with a bridge with firmware version `2.4.1`.
 
 ## License
 

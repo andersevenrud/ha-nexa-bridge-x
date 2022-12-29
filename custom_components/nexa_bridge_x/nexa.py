@@ -84,7 +84,7 @@ class NexaApi:
             raise NexaApiNotCompatibleError("Endpoint not compatible")
 
     async def fetch_info(self):
-        """Get information about hub"""
+        """Get information about bridge"""
         return await self.request('get', 'info')
 
     async def fetch_nodes(self):

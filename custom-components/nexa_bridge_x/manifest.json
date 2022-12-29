@@ -1,0 +1,15 @@
+{
+  "domain": "nexa_bridge_x",
+  "name": "Nexa Bridge X",
+  "config_flow": true,
+  "documentation": "https://www.home-assistant.io/integrations/nexa_bridge_x",
+  "requirements": [],
+  "ssdp": [],
+  "zeroconf": [],
+  "homekit": {},
+  "dependencies": [],
+  "codeowners": [
+    "@andersevenrud"
+  ],
+  "iot_class": "local_polling"
+}

@@ -4,9 +4,12 @@ This is a custom integration for Home Assistant that integrates with the [Nexa B
 
 Makes it possible to view and control devices set up in the Nexa App (or Admin Web UI).
 
+> This project is a **unofficial** integration and not affiliated with Nexa in any way.
+
 ## Features
 
-> See [help](#help) below if you want to see support for more devices. I don't personally own every single type, and this bridge supports devices with different protocols.
+> See [help](#help) below if you want to see support for more devices. I only have access to devices
+> I'm personally using, and this bridge supports several protocol and gateways.
 
 * Monitor energy use
 * Monitor switch states
@@ -70,6 +73,8 @@ Then leave a [comment in the device issue](https://github.com/andersevenrud/ha-
 This project was developed with a bridge with firmware version `2.4.1`.
 
 ## Documentation
+
+Kudos to Nexa for providing developer documentation for this device!
 
 * [Nexa Bridge X API](https://nexa.se/docs/)
 

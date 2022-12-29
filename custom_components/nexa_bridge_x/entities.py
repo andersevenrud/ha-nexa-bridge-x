@@ -202,7 +202,7 @@ class NexaSensorEntity(CoordinatorEntity, SensorEntity):
         self._attr_name = create_friendly_name("Sensor", node)
         self._attr_unique_id = f"sensor_{node.id}_{str.lower(key)}"
 
-        self._attr_native_value_class = SensorStateClass.MEASUREMENT
+        self._attr_state_class = SensorStateClass.MEASUREMENT
         if key in SENSOR_MAP:
             self._attr_name = create_friendly_name(f"{SENSOR_MAP[key]['name']} Sensor", node)
             self._attr_native_unit_of_measurement = SENSOR_MAP[key]['unit']

@@ -163,7 +163,10 @@ class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
     def _handle_coordinator_update(self) -> None:
         node = self.coordinator.get_node_by_id(self.id)
         if node:
-            self._attr_is_on = node.get_value('switchBinary')
+            if self.is_binary:
+                self._attr_is_on = node.get_value('switchBinary')
+            else:
+                self._attr_is_on = int(node.get_value('switchLevel') * 100) > 0
             self._attr_name = create_friendly_name("Switch", node)
             self.async_write_ha_state()
 

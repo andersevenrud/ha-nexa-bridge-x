@@ -32,6 +32,10 @@ class NexaApiInvalidBodyError(NexaApiError):
 class NexaApiGeneralError(NexaApiError):
     pass
 
+
+class NexaApiNotCompatibleError(NexaApiError):
+    pass
+
 class NexaApi:
     def __init__(self, host: str, username: str, password: str) -> None:
         self.host = host
@@ -72,8 +76,10 @@ class NexaApi:
                     return await self.handle_response(method, url, response)
 
     async def test_connection(self):
-        await self.fetch_info()
-        return True
+        result = await self.fetch_info()
+        # TODO: Check version number
+        if "name" not in result or result["name"] != "Nexa Bridge X":
+            raise NexaApiNotCompatibleError("Endpoint not compatible")
 
     async def fetch_info(self):
         return await self.request('get', 'info')

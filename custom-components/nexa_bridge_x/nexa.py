@@ -31,12 +31,12 @@ class NexaNodeValue:
 
 class NexaEnergy:
     def __init__(self, data, node_data):
-        self.totalKilowattHours = 0
-        self.currentWattage = 0
-        self.currentKilowattHours = 0
-        self.todayKilowattHours = 0
-        self.yesterdayKilowattHours = 0
-        self.monthKilowattHours = 0
+        self.totalKilowattHours = None
+        self.currentWattage = None
+        self.currentKilowattHours = None
+        self.todayKilowattHours = None
+        self.yesterdayKilowattHours = None
+        self.monthKilowattHours = None
 
         if node_data["status"] == "OK":
             if "list" in node_data["data"]:

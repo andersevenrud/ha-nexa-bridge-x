@@ -4,8 +4,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from .const import DOMAIN
-from .nexa import NexaCoordinator
-from .api import NexaApi
+from .nexa import NexaCoordinator, NexaApi
 import logging
 
 # TODO: DeviceInfo

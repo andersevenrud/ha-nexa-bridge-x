@@ -46,10 +46,6 @@ All connected devices will appear automatically as entities with names based on 
 
 ![example entity list](https://user-images.githubusercontent.com/161548/210004115-f69afac7-289b-47f5-801e-fc26a1f9ffb4.png)
 
-## Documentation
-
-* [Nexa Bridge X API](https://nexa.se/docs/)
-
 ## Help
 
 If you're having issues with a device or don't see a device you have connected to your bridge,
@@ -72,6 +68,10 @@ Then leave a [comment in the device issue](https://github.com/andersevenrud/ha-
 ## Notes
 
 This project was developed with a bridge with firmware version `2.4.1`.
+
+## Documentation
+
+* [Nexa Bridge X API](https://nexa.se/docs/)
 
 ## License
 

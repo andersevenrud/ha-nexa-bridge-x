@@ -12,7 +12,10 @@ from homeassistant.helpers.update_coordinator import (
     DataUpdateCoordinator,
     UpdateFailed,
 )
-from .const import NODE_SENSOR_CAPABILITIES
+from .const import (
+    NODE_SENSOR_CAPABILITIES,
+    POLL_INTERVAL
+)
 import asyncio
 import aiohttp
 import json
@@ -214,7 +217,7 @@ class NexaCoordinator(DataUpdateCoordinator):
             hass,
             _LOGGER,
             name="Nexa Bridge X Coordinator",
-            update_interval=timedelta(seconds=10),
+            update_interval=timedelta(seconds=POLL_INTERVAL),
         )
         self.api = api
 

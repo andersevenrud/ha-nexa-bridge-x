@@ -15,6 +15,8 @@ from homeassistant.const import (
 
 DOMAIN = "nexa_bridge_x"
 
+POLL_INTERVAL = 10
+
 NODE_SENSOR_CAPABILITIES = [
     "switchLevel",
     "meter",

@@ -57,6 +57,10 @@ curl --user nexa:nexa http://<ip-of-hub>/v1/info -o hub-information.txt
 curl --user nexa:nexa http://<ip-of-hub>/v1/nodes -o hub-nodes.txt
 ```
 
+## Notes
+
+This project was developed with a hub with firmware version `2.4.1`.
+
 ## License
 
 MIT

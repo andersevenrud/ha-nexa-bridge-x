@@ -25,7 +25,7 @@ class NexaApi:
         self.password = password
 
     async def handle_response(self, method, url, response):
-        _LOGGER.info(f"{str.upper(method)} {url}: {response.status}")
+        _LOGGER.debug(f"{str.upper(method)} {url}: {response.status}")
 
         if not response.ok:
             text = await response.text()

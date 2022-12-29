@@ -2,15 +2,16 @@
 
 This is a custom component for Home Assistant that integrates with the [Nexa Bridge X](https://nexa.se/nexa-bridge-x).
 
-> The Nexa is a hub that collects data from various devices and represents it with a REST API and Websocket.
-
 Features:
+
+> See [help](#help) below if you want to see support for more devices. I don't personally own every single type, and this hub supports devices with different protocols.
 
 * Monitor energy use
 * Monitor switch states
-* Minitor dimmer states
+* Monitor dimmer switch states
 * Control switches
-* Control dimmers/lights
+* Control dimmer switches
+* Control lights
 
 ## Installation
 
@@ -30,15 +31,31 @@ repository with the URL to this repo and select the integration type.
 * Download this repository
 * Place `custom_components/nexa_bridge_x` inside your `custom_components` folder.
 
-## Usage
+## Setup
 
 Add the integration in HA settings and set up the correct connection credentials.
 
-All connected devices will appear automatically as entities with names based on features.
+All connected devices will appear automatically as entities with names based on features and configuration.
+
+> Note that names are based on device configuration in the Nexa Admin UI. Rooms are not taken into account.
 
 ## Documentation
 
 * [Nexa Bridge X API](https://nexa.se/docs/)
+
+## Help
+
+If you're having issues or don't see support for a device you have connected to your hub,
+run the following commands and open an issue with the files attached:
+
+```bash
+# You might wanna look through this and remove any location and IP information
+curl --user nexa:nexa http://<ip-of-hub>/v1/info -o hub-information.txt
+```
+
+```bash
+curl --user nexa:nexa http://<ip-of-hub>/v1/nodes -o hub-nodes.txt
+```
 
 ## License
 

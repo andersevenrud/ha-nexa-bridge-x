@@ -254,7 +254,7 @@ class NexaEnergyEntity(CoordinatorEntity, SensorEntity):
         self._attr_device_class = ENERGY_MAP[id]['device']
 
         if id == "totalKilowattHours":
-            self._attr_native_value_class = SensorStateClass.TOTAL_INCREASING
+            self._attr_state_class = SensorStateClass.TOTAL_INCREASING
 
     @callback
     def _handle_coordinator_update(self) -> None:

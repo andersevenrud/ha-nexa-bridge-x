@@ -117,9 +117,13 @@ class NexaCoordinator(DataUpdateCoordinator):
     async def _async_update_data(self):
         try:
             async with async_timeout.timeout(10):
-                nodes = await self.api.fetch_nodes()
-                energy = await self.api.fetch_energy()
-                energy_nodes = await self.api.fetch_energy_nodes()
+                results = await asyncio.gather(*[
+                    self.api.fetch_nodes(),
+                    self.api.fetch_energy(),
+                    self.api.fetch_energy_nodes(),
+                ])
+
+                (nodes, energy, energy_nodes) = results
 
                 return NexaData(
                     list(map(lambda n: NexaNode(n), nodes)),

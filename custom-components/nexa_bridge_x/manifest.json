@@ -1,8 +1,10 @@
 {
   "domain": "nexa_bridge_x",
+  "version": "0.0.0",
   "name": "Nexa Bridge X",
   "config_flow": true,
-  "documentation": "https://www.home-assistant.io/integrations/nexa_bridge_x",
+  "documentation": "https://github.com/andersevenrud/ha-nexa-bridge-x/#readme",
+  "issue_tracker": "https://github.com/andersevenrud/ha-nexa-bridge-x/issues",
   "requirements": [],
   "ssdp": [],
   "zeroconf": [],

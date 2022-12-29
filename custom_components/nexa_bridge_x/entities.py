@@ -212,7 +212,12 @@ class NexaSensorEntity(CoordinatorEntity, SensorEntity):
     def _handle_coordinator_update(self) -> None:
         node = self.coordinator.get_node_by_id(self.id)
         if node:
-            self._attr_native_value = node.get_value(self.key)
+            v = node.get_value(self.key)
+            if self.key == 'switchLevel':
+                self._attr_native_value = int(v * 100)
+            else:
+                self._attr_native_value = v
+
             if self.key in SENSOR_MAP:
                 self._attr_name = create_friendly_name(f"{SENSOR_MAP[self.key]['name']} Sensor", node)
             else:

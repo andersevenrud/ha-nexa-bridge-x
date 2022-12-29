@@ -41,7 +41,8 @@ Add the integration in HA settings and set up the correct connection credentials
 
 All connected devices will appear automatically as entities with names based on features and configuration.
 
-> Note that names are based on device configuration in the Nexa Admin UI. Rooms are not taken into account.
+> The names configured in the App or Web Admin UI defines the internal unique ID. Changing these
+> will create new entities. Duplicate names will be suffixed with a number.
 
 ![example entity list](https://user-images.githubusercontent.com/161548/210004115-f69afac7-289b-47f5-801e-fc26a1f9ffb4.png)
 

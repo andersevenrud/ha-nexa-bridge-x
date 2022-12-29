@@ -14,7 +14,21 @@ Features:
 
 ## Installation
 
-TODO
+### Automatic
+
+* Install and open https://hacs.xyz/
+* Click on download button
+* Search for "Nexa Bridge X" and download
+* Restart HA
+
+If for some reason the search comes up empty, select the hamburger menu and add a custom
+repository with the URL to this repo and select the integration type.
+
+### Manual
+
+* In your HA installation ensure that a folder named `custom_components` exists in your configuration directory
+* Download this repository
+* Place `custom_components/nexa_bridge_x` inside your `custom_components` folder.
 
 ## Usage
 

@@ -14,6 +14,7 @@ PLATFORMS: list[Platform] = [Platform.SENSOR, Platform.SWITCH, Platform.LIGHT, P
 _LOGGER = logging.getLogger(__name__)
 
 class NexaPlatform:
+    """Nexa Platform"""
     def __init__(self, hass, entry):
         host = entry.data['host']
         username = entry.data['username']
@@ -22,11 +23,13 @@ class NexaPlatform:
         self.coordinator = NexaCoordinator(hass, self.api)
 
     async def init(self):
+        """Initialize all services"""
         await self.api.test_connection()
         await self.coordinator.async_config_entry_first_refresh()
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Set up HA integration entry"""
     hass.data.setdefault(DOMAIN, {})
 
     platform = NexaPlatform(hass,entry)
@@ -40,6 +43,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Unload HA integration entry"""
     if unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
         hass.data[DOMAIN].pop(entry.entry_id)
 

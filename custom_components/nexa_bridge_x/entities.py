@@ -1,8 +1,8 @@
 from __future__ import annotations
 from homeassistant.core import callback
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.components.switch import SwitchEntity
 from homeassistant.components.binary_sensor import BinarySensorEntity
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.components.light import (
     LightEntity,
     ColorMode,
@@ -13,11 +13,6 @@ from homeassistant.components.sensor import (
     SensorEntity,
     SensorStateClass,
 )
-from homeassistant.helpers.update_coordinator import (
-    CoordinatorEntity,
-    DataUpdateCoordinator,
-    UpdateFailed,
-)
 from homeassistant.const import (
     ELECTRIC_POTENTIAL_VOLT,
     POWER_WATT,
@@ -25,7 +20,6 @@ from homeassistant.const import (
     ENERGY_KILO_WATT_HOUR,
     PERCENTAGE
 )
-import logging
 
 SENSOR_MAP = {
     'switchLevel': {
@@ -56,44 +50,44 @@ SENSOR_MAP = {
 }
 
 ENERGY_MAP = {
-    'totalKilowattHours': {
+    'total_kilowatt_hours': {
         'name': 'NEXA Total kWh',
         'unit': ENERGY_KILO_WATT_HOUR,
         'device': SensorDeviceClass.ENERGY
     },
-    'currentWattage': {
+    'current_wattage': {
         'name': 'NEXA Current W',
         'unit': POWER_WATT,
         'device': SensorDeviceClass.POWER
     },
-    'currentKilowattHours': {
+    'current_kilowatt_hours': {
         'name': 'NEXA Current kWh',
         'unit': ENERGY_KILO_WATT_HOUR,
         'device': SensorDeviceClass.ENERGY
     },
-    'todayKilowattHours': {
+    'today_kilowatt_hours': {
         'name': 'NEXA Today kWh',
         'unit': ENERGY_KILO_WATT_HOUR,
         'device': SensorDeviceClass.ENERGY
     },
-    'yesterdayKilowattHours': {
+    'yesterday_kilowatt_hours': {
         'name': 'NEXA Yesterday kWh',
         'unit': ENERGY_KILO_WATT_HOUR,
         'device': SensorDeviceClass.ENERGY
     },
-    'monthKilowattHours': {
+    'month_kilowatt_hours': {
         'name': 'NEXA Month kWh',
         'unit': ENERGY_KILO_WATT_HOUR,
         'device': SensorDeviceClass.ENERGY
     },
 }
 
-_LOGGER = logging.getLogger(__name__)
-
 def create_friendly_name(prefix, node):
+    """Create a friendly name for HA"""
     return f"{prefix} {node.name or node.id}"
 
 class NexaDimmerEntity(CoordinatorEntity, LightEntity):
+    """Entity for light"""
     _attr_color_mode = ColorMode.BRIGHTNESS
     _attr_supported_color_modes = {ColorMode.ONOFF, ColorMode.BRIGHTNESS}
 
@@ -108,19 +102,19 @@ class NexaDimmerEntity(CoordinatorEntity, LightEntity):
     def _handle_coordinator_update(self) -> None:
         node = self.coordinator.get_node_by_id(self.id)
         if node:
-            v = node.get_value('switchLevel')
-            vv = int(v * 100)
+            value = node.get_value('switchLevel')
+            value_percentage = int(value * 100)
 
             if self.switch_to_state is not None:
                 self._attr_is_on = self.switch_to_state
-                if self.switch_to_state == True and vv == 0:
+                if self.switch_to_state is True and value_percentage == 0:
                     self.switch_to_state = None
-                if self.switch_to_state == False and vv > 0:
+                if self.switch_to_state is False and value_percentage > 0:
                     self.switch_to_state = None
             else:
-                self._attr_is_on = vv > 0
+                self._attr_is_on = value_percentage > 0
 
-            self._attr_brightness = int(v * 255)
+            self._attr_brightness = int(value * 255)
             self._attr_name = create_friendly_name("Light", node)
             self.async_write_ha_state()
         else:
@@ -128,15 +122,15 @@ class NexaDimmerEntity(CoordinatorEntity, LightEntity):
 
     async def async_turn_on(self, **kwargs):
         if ATTR_BRIGHTNESS in kwargs:
-            v = kwargs.get(ATTR_BRIGHTNESS, 255)
-            await self.coordinator.handle_dimmer(self.id, v / 255)
+            value = kwargs.get(ATTR_BRIGHTNESS, 255)
+            await self.coordinator.handle_dimmer(self.id, value / 255)
         else:
-            v = 1.0
+            value = 1.0
             await self.coordinator.handle_dimmer(self.id, 1)
 
         self.switch_to_state = True
         self._attr_is_on = True
-        self._attr_brightness = v
+        self._attr_brightness = value
 
         self.async_write_ha_state()
         await self.coordinator.async_request_refresh()
@@ -152,6 +146,7 @@ class NexaDimmerEntity(CoordinatorEntity, LightEntity):
 
 
 class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
+    """Entity for swtich"""
     def __init__(self, coordinator, node, is_binary = True):
         super().__init__(coordinator)
         self.id = node.id
@@ -194,13 +189,14 @@ class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
 
 
 class NexaSensorEntity(CoordinatorEntity, SensorEntity):
+    """Entity for sensor"""
     def __init__(self, coordinator, node, key):
         super().__init__(coordinator)
         self.id = node.id
         self.key = key
         self._attr_native_value = None
         self._attr_name = create_friendly_name("Sensor", node)
-        self._attr_unique_id = f"sensor_{node.id}_{str.lower(key)}"
+        self._attr_unique_id = f"sensor_{node.id}_{key}"
 
         self._attr_state_class = SensorStateClass.MEASUREMENT
         if key in SENSOR_MAP:
@@ -212,11 +208,11 @@ class NexaSensorEntity(CoordinatorEntity, SensorEntity):
     def _handle_coordinator_update(self) -> None:
         node = self.coordinator.get_node_by_id(self.id)
         if node:
-            v = node.get_value(self.key)
+            value = node.get_value(self.key)
             if self.key == 'switchLevel':
-                self._attr_native_value = int(v * 100)
+                self._attr_native_value = int(value * 100)
             else:
-                self._attr_native_value = v
+                self._attr_native_value = value
 
             if self.key in SENSOR_MAP:
                 self._attr_name = create_friendly_name(f"{SENSOR_MAP[self.key]['name']} Sensor", node)
@@ -226,6 +222,7 @@ class NexaSensorEntity(CoordinatorEntity, SensorEntity):
 
 
 class NexaBinarySensorEntity(CoordinatorEntity, BinarySensorEntity):
+    """Entity for binary sensor"""
     def __init__(self, coordinator, node, key):
         super().__init__(coordinator)
         self.id = node.id
@@ -244,16 +241,17 @@ class NexaBinarySensorEntity(CoordinatorEntity, BinarySensorEntity):
 
 
 class NexaEnergyEntity(CoordinatorEntity, SensorEntity):
-    def __init__(self, coordinator, id):
+    """Entity for global energy usage"""
+    def __init__(self, coordinator, attr):
         super().__init__(coordinator)
-        self.id = id
+        self.id = attr
         self._attr_native_value = None
-        self._attr_unique_id = f"nexa_energy_{id}"
-        self._attr_name = ENERGY_MAP[id]['name']
-        self._attr_native_unit_of_measurement = ENERGY_MAP[id]['unit']
-        self._attr_device_class = ENERGY_MAP[id]['device']
+        self._attr_unique_id = f"nexa_energy_{attr}"
+        self._attr_name = ENERGY_MAP[attr]['name']
+        self._attr_native_unit_of_measurement = ENERGY_MAP[attr]['unit']
+        self._attr_device_class = ENERGY_MAP[attr]['device']
 
-        if id == "totalKilowattHours":
+        if attr == "total_kilowatt_hours":
             self._attr_state_class = SensorStateClass.TOTAL_INCREASING
 
     @callback

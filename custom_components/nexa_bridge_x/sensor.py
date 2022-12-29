@@ -16,23 +16,23 @@ async def async_setup_entry(
     entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    api = hass.data[DOMAIN][entry.entry_id].api
+    """Set up all detected sensors"""
     coordinator = hass.data[DOMAIN][entry.entry_id].coordinator
 
     entities = [
-        NexaEnergyEntity(coordinator, 'totalKilowattHours'),
-        NexaEnergyEntity(coordinator, 'currentWattage'),
-        NexaEnergyEntity(coordinator, 'todayKilowattHours'),
-        NexaEnergyEntity(coordinator, 'currentKilowattHours'),
-        NexaEnergyEntity(coordinator, 'yesterdayKilowattHours'),
-        NexaEnergyEntity(coordinator, 'monthKilowattHours'),
+        NexaEnergyEntity(coordinator, 'total_kilowatt_hours'),
+        NexaEnergyEntity(coordinator, 'current_wattage'),
+        NexaEnergyEntity(coordinator, 'today_kilowatt_hours'),
+        NexaEnergyEntity(coordinator, 'current_kilowatt_hours'),
+        NexaEnergyEntity(coordinator, 'yesterday_kilowatt_hours'),
+        NexaEnergyEntity(coordinator, 'month_kilowatt_hours'),
     ]
 
     for node in coordinator.data.nodes:
         if node.is_sensor():
-            for n in node.get_sensor_capabilities():
-                _LOGGER.info(f"Found sensor {node.id}: {node.name} - {n}")
-                entities.append(NexaSensorEntity(coordinator, node, n))
+            for name in node.get_sensor_capabilities():
+                _LOGGER.info("Found sensor %s: %s - %s", node.id, node.name, name)
+                entities.append(NexaSensorEntity(coordinator, node, name))
 
     if entities:
         async_add_entities(entities)

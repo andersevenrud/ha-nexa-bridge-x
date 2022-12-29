@@ -13,13 +13,13 @@ async def async_setup_entry(
     entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    api = hass.data[DOMAIN][entry.entry_id].api
+    """Set up all detected binary sensors"""
     coordinator = hass.data[DOMAIN][entry.entry_id].coordinator
     entities = []
 
     for node in coordinator.data.nodes:
         if node.is_switch():
-            _LOGGER.info(f"Found binary sensor {node.id}: {node.name}")
+            _LOGGER.info("Found binary sensor %s: %s", node.id, node.name)
             entities.append(NexaBinarySensorEntity(coordinator, node, "switchBinary"))
 
     if entities:

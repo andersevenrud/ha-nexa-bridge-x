@@ -52,13 +52,17 @@ All connected devices will appear automatically as entities with names based on 
 If you're having issues with a device or don't see a device you have connected to your bridge,
 run the following commands:
 
-> **Make sure to remove any personal information from the information file. This will contain
-> location information.**
+> If you have registered a new device in the app you have to reload the integration first.
+> This is done from the integration settings and the hamburger menu on the card shown on the page.
+> If it still does not show up, proceed with instructions.
 
 ```bash
 curl --user nexa:nexa http://<ip-of-bridge>/v1/info -o bridge-information.txt
 curl --user nexa:nexa http://<ip-of-bridge>/v1/nodes -o bridge-nodes.txt
 ```
+
+> **Make sure to remove any personal information from the information file. This will contain
+> location data.**
 
 Then leave a [comment in the device issue](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/6) with the files attached.
 

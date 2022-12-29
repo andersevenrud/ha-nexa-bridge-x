@@ -1,8 +1,10 @@
 # Home Assistant - Nexa Bridge X Integration
 
-This is a custom component for Home Assistant that integrates with the [Nexa Bridge X](https://nexa.se/nexa-bridge-x).
+This is a custom integration for Home Assistant that integrates with the [Nexa Bridge X](https://nexa.se/nexa-bridge-x).
 
-Features:
+Makes it possible to view and control devices set up in the Nexa App (or Admin Web UI).
+
+## Features
 
 > See [help](#help) below if you want to see support for more devices. I don't personally own every single type, and this hub supports devices with different protocols.
 

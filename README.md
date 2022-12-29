@@ -37,6 +37,8 @@ repository with the URL to this repo and select the integration type.
 
 Add the integration in HA settings and set up the correct connection credentials.
 
+> The factory login is `nexa` / `nexa`.
+
 All connected devices will appear automatically as entities with names based on features and configuration.
 
 > Note that names are based on device configuration in the Nexa Admin UI. Rooms are not taken into account.

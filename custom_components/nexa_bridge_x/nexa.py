@@ -34,6 +34,21 @@ class NexaApiGeneralError(NexaApiError):
 class NexaApiNotCompatibleError(NexaApiError):
     """Not a Nexa API error"""
 
+
+class NexaPlatform:
+    """Nexa Platform"""
+    def __init__(self, hass, entry):
+        host = entry.data['host']
+        username = entry.data['username']
+        password = entry.data['username']
+        self.api = NexaApi(host, username, password)
+        self.coordinator = NexaCoordinator(hass, self.api)
+
+    async def init(self):
+        """Initialize all services"""
+        await self.api.test_connection()
+        await self.coordinator.async_config_entry_first_refresh()
+
 class NexaApi:
     """Nexa API"""
     def __init__(self, host: str, username: str, password: str) -> None:

@@ -47,17 +47,18 @@ All connected devices will appear automatically as entities with names based on 
 
 ## Help
 
-If you're having issues or don't see support for a device you have connected to your hub,
-run the following commands and open an issue with the files attached:
+If you're having issues with a device or don't see a device you have connected to your hub,
+run the following commands:
+
+> **Make sure to remove any personal information from the information file. This will contain
+> location information.**
 
 ```bash
-# You might wanna look through this and remove any location and IP information
 curl --user nexa:nexa http://<ip-of-hub>/v1/info -o hub-information.txt
-```
-
-```bash
 curl --user nexa:nexa http://<ip-of-hub>/v1/nodes -o hub-nodes.txt
 ```
+
+Then leave a [comment in the device issue](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/6) with the files attached.
 
 ## Notes
 

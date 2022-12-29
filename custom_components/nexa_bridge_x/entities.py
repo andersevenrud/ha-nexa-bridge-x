@@ -41,17 +41,17 @@ SENSOR_MAP = {
     'power': {
         'name': 'Wattage',
         'unit': POWER_WATT,
-        'device': SensorDeviceClass.ENERGY
+        'device': SensorDeviceClass.POWER
     },
     'electric_voltage': {
         'name': 'Voltage',
         'unit': ELECTRIC_POTENTIAL_VOLT,
-        'device': SensorDeviceClass.ENERGY
+        'device': SensorDeviceClass.VOLTAGE
     },
     'electric_ampere': {
         'name': 'Amperage',
         'unit': ELECTRIC_CURRENT_AMPERE,
-        'device': SensorDeviceClass.ENERGY
+        'device': SensorDeviceClass.CURRENT
     }
 }
 
@@ -64,7 +64,7 @@ ENERGY_MAP = {
     'currentWattage': {
         'name': 'NEXA Current W',
         'unit': POWER_WATT,
-        'device': SensorDeviceClass.ENERGY
+        'device': SensorDeviceClass.POWER
     },
     'currentKilowattHours': {
         'name': 'NEXA Today kWh',

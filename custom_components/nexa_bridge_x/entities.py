@@ -1,3 +1,9 @@
+"""
+Home Assistant - Nexa Bridge X Integration
+
+Homepage: https://github.com/andersevenrud/ha-nexa-bridge-x
+License: MIT
+"""
 from __future__ import annotations
 from homeassistant.core import callback
 from homeassistant.components.switch import SwitchEntity

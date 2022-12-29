@@ -1,4 +1,9 @@
-"""Constants for the Nexa Bridge X integration."""
+"""
+Home Assistant - Nexa Bridge X Integration
+
+Homepage: https://github.com/andersevenrud/ha-nexa-bridge-x
+License: MIT
+"""
 
 DOMAIN = "nexa_bridge_x"
 

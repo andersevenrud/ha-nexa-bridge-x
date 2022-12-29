@@ -51,12 +51,12 @@ All connected devices will appear automatically as entities with names based on 
 
 ## Help
 
-If you're having issues with a device or don't see a device you have connected to your bridge,
-run the following commands:
-
 > If you have registered a new device in the app you have to reload the integration first.
 > This is done from the integration settings and the hamburger menu on the card shown on the page.
 > If it still does not show up, proceed with instructions.
+
+If you're having issues with a device or don't see a device you have connected to your bridge,
+run the following commands:
 
 ```bash
 curl --user nexa:nexa http://<ip-of-bridge>/v1/info -o bridge-information.txt

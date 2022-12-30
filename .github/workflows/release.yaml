@@ -40,6 +40,7 @@ jobs:
         with:
           token: ${{ github.token }}
           tag: ${{ steps.semver.outputs.next }}
+          excludeTypes: "build,other,style"
 
       - name: Commit manifest.json
         uses: stefanzweifel/git-auto-commit-action@v4

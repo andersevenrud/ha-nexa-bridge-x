@@ -1,8 +1,8 @@
 # Home Assistant - Nexa Bridge X Integration
 
-This is a custom integration for Home Assistant that integrates with the [Nexa Bridge X](https://nexa.se/nexa-bridge-x).
+This is a custom Home Assistant integration for the [Nexa Bridge X](https://nexa.se/nexa-bridge-x).
 
-Makes it possible to view and control devices set up in the Nexa App (or Admin Web UI).
+Makes it possible to view and control devices set up in the Nexa App/Web UI.
 
 > This project is a **unofficial** integration and not affiliated with Nexa in any way.
 
@@ -44,14 +44,14 @@ Add the integration in HA settings and set up the correct connection credentials
 
 All connected devices will appear automatically as entities with names based on features and configuration.
 
-> The names configured in the App or Web Admin UI defines the internal unique ID. Changing these
+> The names configured in the App/Web UI defines the internal unique ID. Changing these
 > will create new entities. Duplicate names will be suffixed with a number.
 
 ![example entity list](https://user-images.githubusercontent.com/161548/210004115-f69afac7-289b-47f5-801e-fc26a1f9ffb4.png)
 
 ## Help
 
-> If you have registered a new device in the app you have to reload the integration first.
+> If you have registered a new device in the App/Web UI you have to reload the integration first.
 > This is done from the integration settings and the hamburger menu on the card shown on the page.
 > If it still does not show up, proceed with instructions.
 

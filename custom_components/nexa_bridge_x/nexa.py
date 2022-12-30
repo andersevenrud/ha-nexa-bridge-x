@@ -77,9 +77,9 @@ class NexaApi:
         self.username = username
         self.password = password
 
-    async def handle_response(self, method: str, url, response: Response) -> Any:
+    async def handle_response(self, response: Response) -> Any:
         """Handles response"""
-        _LOGGER.debug("%s %s: %s", str.upper(method), url, response.status)
+        _LOGGER.debug("%s %s: %s", str.upper(response.method), response.url, response.status)
 
         if not response.ok:
             text = await response.text()
@@ -107,10 +107,10 @@ class NexaApi:
                 _LOGGER.debug("POST %s: %s", url, json.dumps(body))
 
                 async with session.post(url, auth=auth, json=body, headers=headers) as response:
-                    return await self.handle_response(method, url, response)
+                    return await self.handle_response(response)
             else:
                 async with session.get(url, auth=auth) as response:
-                    return await self.handle_response(method, url, response)
+                    return await self.handle_response(response)
 
     async def test_connection(self) -> None:
         """See if the connection is valid"""

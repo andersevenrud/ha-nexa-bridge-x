@@ -17,6 +17,7 @@ import logging
 
 _LOGGER = logging.getLogger(__name__)
 
+
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: ConfigEntry,
@@ -37,7 +38,11 @@ async def async_setup_entry(
     for node in coordinator.data.nodes:
         if node.is_sensor():
             for name in node.get_sensor_capabilities():
-                _LOGGER.info("Found sensor %s: %s - %s", node.id, node.name, name)
+                _LOGGER.info("Found sensor %s: %s - %s",
+                             node.id,
+                             node.name,
+                             name)
+
                 entities.append(NexaSensorEntity(coordinator, node, name))
 
     if entities:

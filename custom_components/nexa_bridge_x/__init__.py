@@ -12,9 +12,15 @@ from .nexa import NexaPlatform
 from .const import DOMAIN
 import logging
 
-PLATFORMS: list[Platform] = [Platform.SENSOR, Platform.SWITCH, Platform.LIGHT, Platform.BINARY_SENSOR]
+PLATFORMS: list[Platform] = [
+    Platform.SENSOR,
+    Platform.SWITCH,
+    Platform.LIGHT,
+    Platform.BINARY_SENSOR
+]
 
 _LOGGER = logging.getLogger(__name__)
+
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up HA integration entry"""
@@ -32,8 +38,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload HA integration entry"""
-    if unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
+    if unload_ok := await hass.config_entries.async_unload_platforms(
+        entry,
+        PLATFORMS
+    ):
         hass.data[DOMAIN].pop(entry.entry_id)
 
     return unload_ok
-

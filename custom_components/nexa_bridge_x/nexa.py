@@ -36,6 +36,7 @@ NexaNodeData = Any
 NexaInfoData = Any
 NexaCallData = Any
 
+
 class NexaApiError(Exception):
     """Base error"""
 
@@ -58,6 +59,7 @@ class NexaApiNotCompatibleError(NexaApiError):
 
 class NexaPlatform:
     """Nexa Platform"""
+
     def __init__(self, hass: HomeAssistant, entry: ConfigEntry):
         host = entry.data['host']
         username = entry.data['username']
@@ -70,8 +72,10 @@ class NexaPlatform:
         await self.api.test_connection()
         await self.coordinator.async_config_entry_first_refresh()
 
+
 class NexaApi:
     """Nexa API"""
+
     def __init__(self, host: str, username: str, password: str) -> None:
         self.host = host
         self.username = username
@@ -79,7 +83,10 @@ class NexaApi:
 
     async def handle_response(self, response: Response) -> Any:
         """Handles response"""
-        _LOGGER.debug("%s %s: %s", str.upper(response.method), response.url, response.status)
+        _LOGGER.debug("%s %s: %s",
+                      str.upper(response.method),
+                      response.url,
+                      response.status)
 
         if not response.ok:
             text = await response.text()
@@ -92,7 +99,12 @@ class NexaApi:
 
         return await response.json()
 
-    async def request(self, method: str, endpoint: str, body: Any = None) -> Response:
+    async def request(
+        self,
+        method: str,
+        endpoint: str,
+        body: Any = None
+    ) -> Response:
         """Performs a request"""
         url = "http://%s/v1/%s" % (self.host, endpoint or '')
         auth = aiohttp.BasicAuth(self.username, self.password)
@@ -106,7 +118,12 @@ class NexaApi:
 
                 _LOGGER.debug("POST %s: %s", url, json.dumps(body))
 
-                async with session.post(url, auth=auth, json=body, headers=headers) as response:
+                async with session.post(
+                    url,
+                    auth=auth,
+                    json=body,
+                    headers=headers
+                ) as response:
                     return await self.handle_response(response)
             else:
                 async with session.get(url, auth=auth) as response:
@@ -139,13 +156,27 @@ class NexaApi:
         """Get energy node stats"""
         return await self.request('get', "energy/nodes")
 
-    async def node_call(self, node: str, capability: str, value: any) -> NexaCallData:
+    async def node_call(
+        self,
+        node: str,
+        capability: str,
+        value: any
+    ) -> NexaCallData:
         """Perform an action on a device"""
-        return await self.request('post', f"nodes/{node}/call", { 'capability': capability, 'value': value })
+        body = {'capability': capability, 'value': value}
+        return await self.request('post', f"nodes/{node}/call", body)
+
 
 class NexaNodeValue:
     """Model for node values"""
-    def __init__(self, name: str, value: NexaNodeValueType, prev_value: NexaNodeValueType, time: str):
+
+    def __init__(
+        self,
+        name: str,
+        value: NexaNodeValueType,
+        prev_value: NexaNodeValueType,
+        time: str
+    ):
         self.name = name
         self.value = value
         self.prev_value = prev_value
@@ -153,6 +184,7 @@ class NexaNodeValue:
 
 
 class NexaEnergy:
+    """Model for energy stats"""
     total_kilowatt_hours: float | None
     current_wattage: int | None
     current_kilowatt_hours: float | None
@@ -160,8 +192,11 @@ class NexaEnergy:
     yesterday_kilowatt_hours: float | None
     month_kilowatt_hours: float | None
 
-    """Model for energy stats"""
-    def __init__(self, data: NexaEnergyData, node_data: NexaEnergyNodeData):
+    def __init__(
+        self,
+        data: NexaEnergyData,
+        node_data: NexaEnergyNodeData
+    ):
         self.total_kilowatt_hours = None
         self.current_wattage = None
         self.current_kilowatt_hours = None
@@ -179,25 +214,33 @@ class NexaEnergy:
 
         if data["status"] == "OK":
             if "current" in data["data"]:
-                self.current_wattage = data["data"]["current"]["total"]["wattage"]
-                self.current_kilowatt_hours = data["data"]["current"]["total"]["kwh"]
+                current = data["data"]["current"]["total"]
+                self.current_wattage = current["wattage"]
+                self.current_kilowatt_hours = current["kwh"]
             if "history" in data["data"]:
-                self.today_kilowatt_hours = data["data"]["history"]["today"]
-                self.yesterday_kilowatt_hours = data["data"]["history"]["yesterday"]
-                self.month_kilowatt_hours = data["data"]["history"]["month"]
+                history = data["data"]["history"]
+                self.today_kilowatt_hours = history["today"]
+                self.yesterday_kilowatt_hours = history["yesterday"]
+                self.month_kilowatt_hours = history["month"]
 
 
 class NexaNode:
-    id: string
-    name: string
+    """Model for a node"""
+    id: str
+    name: str
     capabilities: List[str]
     values: List[NexaNodeValue]
 
-    """Model for a node"""
     def __init__(self, node: NexaNodeData):
         values = []
         for key, data in node["lastEvents"].items():
-            values.append(NexaNodeValue(key, data["value"], data["prevValue"], data["time"]))
+            nv = NexaNodeValue(
+                key,
+                data["value"],
+                data["prevValue"],
+                data["time"]
+            )
+            values.append(nv)
 
         self.id = node["id"]
         self.name = node["name"]
@@ -206,7 +249,10 @@ class NexaNode:
 
     def get_sensor_capabilities(self) -> List[str]:
         """Get all capabilities"""
-        return list(filter(lambda n: n in NODE_SENSOR_CAPABILITIES, self.capabilities))
+        return list(filter(
+            lambda n: n in NODE_SENSOR_CAPABILITIES,
+            self.capabilities
+        ))
 
     def get_value(self, name: str) -> NexaNodeValueType | None:
         """Get current state value"""
@@ -234,12 +280,15 @@ class NexaNode:
 
 class NexaData:
     """Model for polled data"""
+
     def __init__(self, nodes: List[NexaNode], energy: NexaEnergy):
         self.nodes = nodes
         self.energy = energy
 
+
 class NexaCoordinator(DataUpdateCoordinator):
     """Coordinates updates between entities"""
+
     def __init__(self, hass: HomeAssistant, api: NexaApi):
         super().__init__(
             hass,
@@ -257,11 +306,19 @@ class NexaCoordinator(DataUpdateCoordinator):
                     return node
         return None
 
-    async def handle_switch(self, node_id: str, value: NexaNodeValueType) -> None:
+    async def handle_switch(
+        self,
+        node_id: str,
+        value: bool
+    ) -> None:
         """Handle a switch action"""
         await self.api.node_call(node_id, "switchBinary", value)
 
-    async def handle_dimmer(self, node_id: str, value: NexaNodeValueType) -> None:
+    async def handle_dimmer(
+        self,
+        node_id: str,
+        value: NexaNodeValueType
+    ) -> None:
         """Handle a dimmer action"""
         await self.api.node_call(node_id, "switchLevel", value)
 

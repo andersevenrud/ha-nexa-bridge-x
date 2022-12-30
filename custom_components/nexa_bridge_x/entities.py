@@ -21,9 +21,11 @@ from homeassistant.components.light import (
 from .const import (SENSOR_MAP, ENERGY_MAP)
 from .nexa import NexaNode
 
-def create_friendly_name(prefix: str, node: NexaNode):
+
+def create_friendly_name(prefix: str, node: NexaNode) -> str:
     """Create a friendly name for HA"""
     return f"{prefix} {node.name or node.id}"
+
 
 class NexaDimmerEntity(CoordinatorEntity, LightEntity):
     """Entity for light"""
@@ -86,7 +88,13 @@ class NexaDimmerEntity(CoordinatorEntity, LightEntity):
 
 class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
     """Entity for swtich"""
-    def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode, is_binary: bool = True):
+
+    def __init__(
+        self,
+        coordinator: DataUpdateCoordinator,
+        node: NexaNode,
+        is_binary: bool = True
+    ):
         super().__init__(coordinator)
         self.id = node.id
         self.is_binary = is_binary
@@ -129,7 +137,13 @@ class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
 
 class NexaSensorEntity(CoordinatorEntity, SensorEntity):
     """Entity for sensor"""
-    def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode, key: str):
+
+    def __init__(
+        self,
+        coordinator: DataUpdateCoordinator,
+        node: NexaNode,
+        key: str
+    ):
         super().__init__(coordinator)
         self.id = node.id
         self.key = key
@@ -138,7 +152,8 @@ class NexaSensorEntity(CoordinatorEntity, SensorEntity):
         self._attr_unique_id = f"sensor_{node.id}_{key}"
 
         if key in SENSOR_MAP:
-            self._attr_name = create_friendly_name(f"{SENSOR_MAP[key]['name']} Sensor", node)
+            friendly = f"{SENSOR_MAP[key]['name']} Sensor"
+            self._attr_name = create_friendly_name(friendly, node)
             self._attr_native_unit_of_measurement = SENSOR_MAP[key]['unit']
             self._attr_device_class = SENSOR_MAP[key]['device']
             self._attr_state_class = SENSOR_MAP[key]['class']
@@ -154,7 +169,8 @@ class NexaSensorEntity(CoordinatorEntity, SensorEntity):
                 self._attr_native_value = value
 
             if self.key in SENSOR_MAP:
-                self._attr_name = create_friendly_name(f"{SENSOR_MAP[self.key]['name']} Sensor", node)
+                friendly = f"{SENSOR_MAP[self.key]['name']} Sensor"
+                self._attr_name = create_friendly_name(friendly, node)
             else:
                 self._attr_name = create_friendly_name("Sensor", node)
             self.async_write_ha_state()
@@ -162,7 +178,13 @@ class NexaSensorEntity(CoordinatorEntity, SensorEntity):
 
 class NexaBinarySensorEntity(CoordinatorEntity, BinarySensorEntity):
     """Entity for binary sensor"""
-    def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode, key: str):
+
+    def __init__(
+        self,
+        coordinator: DataUpdateCoordinator,
+        node: NexaNode,
+        key: str
+    ):
         super().__init__(coordinator)
         self.id = node.id
         self.key = key
@@ -181,6 +203,7 @@ class NexaBinarySensorEntity(CoordinatorEntity, BinarySensorEntity):
 
 class NexaEnergyEntity(CoordinatorEntity, SensorEntity):
     """Entity for global energy usage"""
+
     def __init__(self, coordinator: DataUpdateCoordinator, attr: str):
         super().__init__(coordinator)
         self.id = attr
@@ -193,5 +216,8 @@ class NexaEnergyEntity(CoordinatorEntity, SensorEntity):
 
     @callback
     def _handle_coordinator_update(self) -> None:
-        self._attr_native_value = getattr(self.coordinator.data.energy, self.id)
+        self._attr_native_value = getattr(
+            self.coordinator.data.energy,
+            self.id
+        )
         self.async_write_ha_state()

@@ -1,0 +1,79 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Get Next Version
+        id: semver
+        uses: ietf-tools/semver-action@v1
+        with:
+          token: ${{ github.token }}
+          branch: main
+
+      - name: Create Release Draft
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          draft: false
+          commit: ${{ github.sha }}
+          tag: ${{ steps.semver.outputs.next }}
+          name: ${{ steps.semver.outputs.next }}
+          body: ${{ steps.semver.outputs.next }}
+
+      - name: Bump component version
+        uses: jossef/action-set-json-field@v2
+        with:
+          file: custom_components/nexa_bridge_x/manifest.json
+          field: version
+          value: ${{ steps.semver.outputs.nextStrict }}
+
+      - name: Update CHANGELOG.md
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          token: ${{ github.token }}
+          tag: ${{ steps.semver.outputs.next }}
+
+      - name: Commit manifest.json
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: 'chore(manifest): bump version'
+          file_pattern: custom_components/nexa_bridge_x/manifest.json
+
+      - name: Commit CHANGELOG.md
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: 'docs(changelog): add ${{ steps.semver.outputs.next }} release info'
+          file_pattern: CHANGELOG.md
+
+      - name: Move files to be zipped
+        run: mv custom_components/nexa_bridge_x .
+
+      - name: Create zip
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r ha-nexa-bridge-x-${{ steps.semver.outputs.next }}.zip nexa_bridge_x
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          allowUpdates: true
+          draft: false
+          makeLatest: true
+          name: ${{ steps.semver.outputs.next }}
+          tag: ${{ steps.semver.outputs.next }}
+          token: ${{ github.token }}
+          artifacts: "ha-nexa-bridge-x-${{ steps.semver.outputs.next }}.zip"
+          body: |
+            ## Release changes:
+
+            ${{ steps.changelog.outputs.changes }}

@@ -6,6 +6,7 @@ License: MIT
 """
 from __future__ import annotations
 from homeassistant.core import callback
+from homeassistant.components.sensor import SensorEntity
 from homeassistant.components.switch import SwitchEntity
 from homeassistant.components.binary_sensor import BinarySensorEntity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -13,10 +14,6 @@ from homeassistant.components.light import (
     LightEntity,
     ColorMode,
     ATTR_BRIGHTNESS
-)
-from homeassistant.components.sensor import (
-    SensorEntity,
-    SensorStateClass,
 )
 from .const import (SENSOR_MAP, ENERGY_MAP)
 
@@ -136,11 +133,11 @@ class NexaSensorEntity(CoordinatorEntity, SensorEntity):
         self._attr_name = create_friendly_name("Sensor", node)
         self._attr_unique_id = f"sensor_{node.id}_{key}"
 
-        self._attr_state_class = SensorStateClass.MEASUREMENT
         if key in SENSOR_MAP:
             self._attr_name = create_friendly_name(f"{SENSOR_MAP[key]['name']} Sensor", node)
             self._attr_native_unit_of_measurement = SENSOR_MAP[key]['unit']
             self._attr_device_class = SENSOR_MAP[key]['device']
+            self._attr_state_class = SENSOR_MAP[key]['class']
 
     @callback
     def _handle_coordinator_update(self) -> None:
@@ -188,9 +185,7 @@ class NexaEnergyEntity(CoordinatorEntity, SensorEntity):
         self._attr_name = ENERGY_MAP[attr]['name']
         self._attr_native_unit_of_measurement = ENERGY_MAP[attr]['unit']
         self._attr_device_class = ENERGY_MAP[attr]['device']
-
-        if attr == "total_kilowatt_hours":
-            self._attr_state_class = SensorStateClass.TOTAL_INCREASING
+        self._attr_state_class = ENERGY_MAP[attr]['class']
 
     @callback
     def _handle_coordinator_update(self) -> None:

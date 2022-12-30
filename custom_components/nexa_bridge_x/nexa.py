@@ -173,10 +173,14 @@ class NexaApi:
 
 class NexaInfo:
     """Model for device information"""
+    name: str
     version: str
+    model: str
 
     def __init__(self, data: NexaInfoData):
+        self.name = data["name"]
         self.version = data["version"]
+        self.model = data["systemType"]
 
 
 class NexaNodeValue:

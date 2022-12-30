@@ -39,14 +39,18 @@ class NexaEntity(CoordinatorEntity):
         super().__init__(coordinator)
         self._server_unique_id = coordinator.config_entry.entry_id
         self._attr_device_info = DeviceInfo(
+            manufacturer="Nexa",
+            suggested_area="Indoors",
+            entry_type=DeviceEntryType.SERVICE,
+            model=coordinator.data.info.model,
+            name=coordinator.data.info.name,
+            sw_version=coordinator.data.info.version,
+            identifiers={
+                (DOMAIN, coordinator.config_entry.entry_id)
+            },
             configuration_url=(
                 f"http://{coordinator.api.host}"
-            ),
-            entry_type=DeviceEntryType.SERVICE,
-            identifiers={(DOMAIN, coordinator.config_entry.entry_id)},
-            manufacturer="Nexa",
-            name="Nexa Bridge X",
-            sw_version=coordinator.data.info.version,
+            )
         )
 
 

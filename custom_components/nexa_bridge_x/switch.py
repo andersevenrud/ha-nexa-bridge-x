@@ -29,9 +29,6 @@ async def async_setup_entry(
         if node.is_switch():
             _LOGGER.info("Found switch %s: %s", node.id, node.name)
             entities.append(NexaSwitchEntity(coordinator, node))
-        if node.is_light():
-            _LOGGER.info("Found simulated switch %s: %s", node.id, node.name)
-            entities.append(NexaSwitchEntity(coordinator, node, False))
 
     if entities:
         async_add_entities(entities)

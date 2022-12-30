@@ -40,7 +40,6 @@ class NexaEntity(CoordinatorEntity):
         self._server_unique_id = coordinator.config_entry.entry_id
         self._attr_device_info = DeviceInfo(
             manufacturer="Nexa",
-            suggested_area="Indoors",
             entry_type=DeviceEntryType.SERVICE,
             model=coordinator.data.info.model,
             name=coordinator.data.info.name,
@@ -116,15 +115,9 @@ class NexaDimmerEntity(NexaEntity, LightEntity):
 class NexaSwitchEntity(NexaEntity, SwitchEntity):
     """Entity for swtich"""
 
-    def __init__(
-        self,
-        coordinator: DataUpdateCoordinator,
-        node: NexaNode,
-        is_binary: bool = True
-    ):
+    def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode):
         super().__init__(coordinator)
         self.id = node.id
-        self.is_binary = is_binary
         self._attr_name = create_friendly_name("Switch", node)
         self._attr_unique_id = f"switch_{node.id}"
 
@@ -132,18 +125,12 @@ class NexaSwitchEntity(NexaEntity, SwitchEntity):
     def _handle_coordinator_update(self) -> None:
         node = self.coordinator.get_node_by_id(self.id)
         if node:
-            if self.is_binary:
-                self._attr_is_on = node.get_value('switchBinary')
-            else:
-                self._attr_is_on = int(node.get_value('switchLevel') * 100) > 0
+            self._attr_is_on = node.get_value('switchBinary')
             self._attr_name = create_friendly_name("Switch", node)
             self.async_write_ha_state()
 
     async def async_turn_on(self, **kwargs) -> None:
-        if self.is_binary:
-            await self.coordinator.handle_switch(self.id, True)
-        else:
-            await self.coordinator.handle_dimmer(self.id, 1)
+        await self.coordinator.handle_switch(self.id, True)
 
         self._attr_is_on = True
 
@@ -151,10 +138,7 @@ class NexaSwitchEntity(NexaEntity, SwitchEntity):
         await self.coordinator.async_request_refresh()
 
     async def async_turn_off(self, **kwargs) -> None:
-        if self.is_binary:
-            await self.coordinator.handle_switch(self.id, False)
-        else:
-            await self.coordinator.handle_dimmer(self.id, 0)
+        await self.coordinator.handle_switch(self.id, False)
 
         self._attr_is_on = False
 

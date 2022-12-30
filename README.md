@@ -20,23 +20,22 @@ Makes it possible to view and control devices set up in the Nexa App/Web UI.
 
 ## Installation
 
-### Automatic
+### Managed
 
-* Install and open https://hacs.xyz/
+* Install and open [HACS](https://hacs.xyz/)
 * Click on download button
 * Search for "Nexa Bridge X" and download
 * Restart HA
 
-If for some reason the search comes up empty, select the hamburger menu and add a custom
-repository with the URL to this repo and select the integration type.
+> If for some reason the search comes up empty, select the hamburger menu and add a custom
+> repository with the URL to this repo and select the integration type.
 
 ### Manual
 
-> You can also use git to do this instead of downloading releases.
-
-* In your HA installation ensure that a folder named `custom_components` exists in your configuration directory
-* Download a release from this repository on github
+* [Download a release](https://github.com/andersevenrud/ha-nexa-bridge-x/releases)
+* Create a `custom_components` directory inside of your HA `config` directory
 * Unzip into the `custom_components` directory
+* Restart HA
 
 ## Setup
 

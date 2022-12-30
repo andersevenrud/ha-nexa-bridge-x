@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.2.0] - 2022-12-30
+### :sparkles: New Features
+- [`0491db3`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/0491db3ba98c23b8e0efbd6a58496bcce5e63151) - add device service entity *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :recycle: Refactors
+- [`412de2f`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/412de2f3125070c2a809cd2cbb25d466b1cb32b7) - respect lsp formatting reports *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`30bf2e0`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/30bf2e08ced7d55395312e2af2cfe0cec21d2340) - use built in type for list annotation *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :memo: Documentation Changes
+- [`04b644f`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/04b644ff03ecc3b82c11f9b468be46011e69dd6f) - **changelog**: add v0.1.3 release info *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`f3200dd`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/f3200ddb2e9069642c288c417cb89b678846884d) - **readme**: update installation instructions *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`c200b95`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/c200b95fb2622a5de0fb1d30206e7f6104951be2) - **manifest**: bump version *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.1.3] - 2022-12-30
 ### :recycle: Refactors
 - [`270ff15`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/270ff1550301f37c53c22cb3c59fad66bd349171) - **nexta**: remove redundant arguments *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -62,3 +78,4 @@
 [v0.1.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.1.1...v0.1.2
 
 [v0.1.3]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.1.2...v0.1.3
+[v0.2.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.1.3...v0.2.0

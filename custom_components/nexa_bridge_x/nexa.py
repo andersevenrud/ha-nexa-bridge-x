@@ -7,7 +7,7 @@ License: MIT
 from __future__ import annotations
 from functools import reduce
 from datetime import timedelta
-from typing import List, Any
+from typing import Any
 from aiohttp.web import Response
 from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.config_entries import ConfigEntry
@@ -29,6 +29,7 @@ import async_timeout
 
 _LOGGER = logging.getLogger(__name__)
 
+# TODO: Add correct typing
 NexaNodeValueType = str | int | float | bool
 NexaEnergyData = Any
 NexaEnergyNodeData = Any
@@ -140,7 +141,7 @@ class NexaApi:
         """Get information about bridge"""
         return await self.request('get', 'info')
 
-    async def fetch_nodes(self) -> List[NexaNodeData]:
+    async def fetch_nodes(self) -> list[NexaNodeData]:
         """Get all configured nodes"""
         return await self.request('get', 'nodes')
 
@@ -228,8 +229,8 @@ class NexaNode:
     """Model for a node"""
     id: str
     name: str
-    capabilities: List[str]
-    values: List[NexaNodeValue]
+    capabilities: list[str]
+    values: list[NexaNodeValue]
 
     def __init__(self, node: NexaNodeData):
         values = []
@@ -247,7 +248,7 @@ class NexaNode:
         self.capabilities = node["capabilities"]
         self.values = values
 
-    def get_sensor_capabilities(self) -> List[str]:
+    def get_sensor_capabilities(self) -> list[str]:
         """Get all capabilities"""
         return list(filter(
             lambda n: n in NODE_SENSOR_CAPABILITIES,
@@ -281,7 +282,7 @@ class NexaNode:
 class NexaData:
     """Model for polled data"""
 
-    def __init__(self, nodes: List[NexaNode], energy: NexaEnergy):
+    def __init__(self, nodes: list[NexaNode], energy: NexaEnergy):
         self.nodes = nodes
         self.energy = energy
 

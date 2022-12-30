@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.3.0] - 2022-12-30
+### :sparkles: New Features
+- [`c789c09`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/c789c09de5bab2f456dc80d6af6a347c8aa82777) - expose more device information *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :recycle: Refactors
+- [`2625f8c`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/2625f8ccc4aa471d8b8af2527f370df8236cdf91) - don't show dimmers as switches *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :memo: Documentation Changes
+- [`287550e`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/287550e9bf9761473da5c0e4acff18308a3761c8) - **changelog**: add v0.2.0 release info *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`a0462aa`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/a0462aac528765a972d0c3d708cf68efcd5b7338) - update source headers *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`703a4b6`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/703a4b6af83febfea0b2d4243e7c2187db7188dd) - **manifest**: bump version *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.2.0] - 2022-12-30
 ### :sparkles: New Features
 - [`0491db3`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/0491db3ba98c23b8e0efbd6a58496bcce5e63151) - add device service entity *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -79,3 +94,4 @@
 
 [v0.1.3]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.1.2...v0.1.3
 [v0.2.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.1.3...v0.2.0
+[v0.3.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.2.0...v0.3.0

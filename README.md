@@ -32,9 +32,11 @@ repository with the URL to this repo and select the integration type.
 
 ### Manual
 
+> You can also use git to do this instead of downloading releases.
+
 * In your HA installation ensure that a folder named `custom_components` exists in your configuration directory
-* Download this repository
-* Place `custom_components/nexa_bridge_x` inside your `custom_components` folder.
+* Download a release from this repository on github
+* Unzip into the `custom_components` directory
 
 ## Setup
 

@@ -13,16 +13,36 @@
 - [`3fd4f68`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/3fd4f6829ad04341e848763afe3c01b0da58b0e3) - add module documentation headers *(commit by [@andersevenrud](https://github.com/andersevenrud))*
 - [`6b28c7f`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/6b28c7f25c918937934fc0e0b51b65860539c984) - add brand icon sources *(commit by [@andersevenrud](https://github.com/andersevenrud))*
 
+## v0.1.0
 
-## 0.1.0
-
-Initial release
-
-* Monitor energy use
-* Monitor switch states
-* Monitor dimmer switch states
-* Control switches
-* Control dimmer switches
-* Control lights
+* docs(changelog): first release docs
+* docs(readme): add more help
+* chore: replace 'hub' with 'bridge'
+* docs(readme): more detailed description
+* docs(readme): update help
+* refactor: cleanup and lint pass
+* docs(readme): screenshot of example entities
+* docs(readme): add notes
+* feat(nexa): basic api validation check
+* docs(readme): improve instructions
+* fix(entities): correct state class for energy sensor
+* fix(entities): correct state class for sensor
+* fix(entities): correct percentage value for switch level sensor
+* fix(entities): simulated switch on value
+* docs(readme): add installation instructions
+* build: add hacs json
+* chore(entities): update labels
+* fix(entities): correct binary sensor state attribute
+* fix(entities): improve light brightness state handling
+* fix(entities): correct device class
+* refactor: combine api file
+* fix(config_flow): default device name
+* refactor: rename component path
+* fix(manifest): correct links
+* feat(nexa): parallel api calls
+* fix: set default energy values to none
+* refactor: minor cleanup
+* chore(api): update default log level
+* chore: initial commit
 
 [v0.1.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.1.1...v0.1.2

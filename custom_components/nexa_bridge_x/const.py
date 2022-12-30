@@ -1,6 +1,7 @@
 """
 Home Assistant - Nexa Bridge X Integration
 
+Author: Anders Evenrud <andersevenrud@gmail.com>
 Homepage: https://github.com/andersevenrud/ha-nexa-bridge-x
 License: MIT
 """

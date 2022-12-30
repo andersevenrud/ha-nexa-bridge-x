@@ -20,7 +20,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up HA integration entry"""
     hass.data.setdefault(DOMAIN, {})
 
-    platform = NexaPlatform(hass,entry)
+    platform = NexaPlatform(hass, entry)
     hass.data[DOMAIN][entry.entry_id] = platform
 
     await platform.init()

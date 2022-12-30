@@ -9,15 +9,19 @@ from homeassistant.core import callback
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.components.switch import SwitchEntity
 from homeassistant.components.binary_sensor import BinarySensorEntity
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from homeassistant.helpers.update_coordinator import (
+    CoordinatorEntity,
+    DataUpdateCoordinator
+)
 from homeassistant.components.light import (
     LightEntity,
     ColorMode,
     ATTR_BRIGHTNESS
 )
 from .const import (SENSOR_MAP, ENERGY_MAP)
+from .nexa import NexaNode
 
-def create_friendly_name(prefix, node):
+def create_friendly_name(prefix: str, node: NexaNode):
     """Create a friendly name for HA"""
     return f"{prefix} {node.name or node.id}"
 
@@ -26,7 +30,7 @@ class NexaDimmerEntity(CoordinatorEntity, LightEntity):
     _attr_color_mode = ColorMode.BRIGHTNESS
     _attr_supported_color_modes = {ColorMode.ONOFF, ColorMode.BRIGHTNESS}
 
-    def __init__(self, coordinator, node):
+    def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode):
         super().__init__(coordinator)
         self.id = node.id
         self.switch_to_state = None
@@ -55,7 +59,7 @@ class NexaDimmerEntity(CoordinatorEntity, LightEntity):
         else:
             self.switch_to_state = False
 
-    async def async_turn_on(self, **kwargs):
+    async def async_turn_on(self, **kwargs) -> None:
         if ATTR_BRIGHTNESS in kwargs:
             value = kwargs.get(ATTR_BRIGHTNESS, 255)
             await self.coordinator.handle_dimmer(self.id, value / 255)
@@ -70,7 +74,7 @@ class NexaDimmerEntity(CoordinatorEntity, LightEntity):
         self.async_write_ha_state()
         await self.coordinator.async_request_refresh()
 
-    async def async_turn_off(self, **kwargs):
+    async def async_turn_off(self, **kwargs) -> None:
         self.switch_to_state = False
         self._attr_is_on = False
         self._attr_brightness = 0
@@ -82,7 +86,7 @@ class NexaDimmerEntity(CoordinatorEntity, LightEntity):
 
 class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
     """Entity for swtich"""
-    def __init__(self, coordinator, node, is_binary = True):
+    def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode, is_binary: bool = True):
         super().__init__(coordinator)
         self.id = node.id
         self.is_binary = is_binary
@@ -100,7 +104,7 @@ class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
             self._attr_name = create_friendly_name("Switch", node)
             self.async_write_ha_state()
 
-    async def async_turn_on(self, **kwargs):
+    async def async_turn_on(self, **kwargs) -> None:
         if self.is_binary:
             await self.coordinator.handle_switch(self.id, True)
         else:
@@ -111,7 +115,7 @@ class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
         self.async_write_ha_state()
         await self.coordinator.async_request_refresh()
 
-    async def async_turn_off(self, **kwargs):
+    async def async_turn_off(self, **kwargs) -> None:
         if self.is_binary:
             await self.coordinator.handle_switch(self.id, False)
         else:
@@ -125,7 +129,7 @@ class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
 
 class NexaSensorEntity(CoordinatorEntity, SensorEntity):
     """Entity for sensor"""
-    def __init__(self, coordinator, node, key):
+    def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode, key: str):
         super().__init__(coordinator)
         self.id = node.id
         self.key = key
@@ -158,7 +162,7 @@ class NexaSensorEntity(CoordinatorEntity, SensorEntity):
 
 class NexaBinarySensorEntity(CoordinatorEntity, BinarySensorEntity):
     """Entity for binary sensor"""
-    def __init__(self, coordinator, node, key):
+    def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode, key: str):
         super().__init__(coordinator)
         self.id = node.id
         self.key = key
@@ -177,7 +181,7 @@ class NexaBinarySensorEntity(CoordinatorEntity, BinarySensorEntity):
 
 class NexaEnergyEntity(CoordinatorEntity, SensorEntity):
     """Entity for global energy usage"""
-    def __init__(self, coordinator, attr):
+    def __init__(self, coordinator: DataUpdateCoordinator, attr: str):
         super().__init__(coordinator)
         self.id = attr
         self._attr_native_value = None

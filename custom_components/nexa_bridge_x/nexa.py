@@ -14,7 +14,8 @@ from homeassistant.helpers.update_coordinator import (
 )
 from .const import (
     NODE_SENSOR_CAPABILITIES,
-    POLL_INTERVAL
+    POLL_INTERVAL,
+    POLL_TIMEOUT
 )
 import asyncio
 import aiohttp
@@ -240,7 +241,7 @@ class NexaCoordinator(DataUpdateCoordinator):
     async def _async_update_data(self):
         """Update data for all nodes in the background"""
         try:
-            async with async_timeout.timeout(10):
+            async with async_timeout.timeout(POLL_TIMEOUT):
                 results = await asyncio.gather(*[
                     self.api.fetch_nodes(),
                     self.api.fetch_energy(),

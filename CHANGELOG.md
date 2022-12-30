@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.1.3] - 2022-12-30
+### :recycle: Refactors
+- [`270ff15`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/270ff1550301f37c53c22cb3c59fad66bd349171) - **nexta**: remove redundant arguments *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :memo: Documentation Changes
+- [`6a608a4`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/6a608a4ef616bbd478b6d201ac67c14471863700) - **changelog**: add v0.1.2 release info *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`596b32a`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/596b32a08c404f557d21b447defea3c486562ed3) - **changelog**: fill the blanks for releases *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`5e92b67`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/5e92b67397e77353853190597169ab442cd0a091) - **readme**: release install instructions *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`982a58d`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/982a58d3c183ec2e6496b0c39a208978c5c00f63) - **manifest**: bump version *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`ae06fa5`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/ae06fa598d081c15017ee5e4b771a38ad2e16991) - add some missing typing *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.1.2] - 2022-12-30
 ### :recycle: Refactors
 - [`63b8f70`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/63b8f70bb091e8b597b63aad05cf02abc6fefb39) - move nexa platform class *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -46,3 +60,5 @@
 * chore: initial commit
 
 [v0.1.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.1.1...v0.1.2
+
+[v0.1.3]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.1.2...v0.1.3

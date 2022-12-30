@@ -8,7 +8,7 @@ Makes it possible to view and control devices set up in the Nexa App/Web UI.
 
 ## Features
 
-> This project depends on you! See [help](#help) below if you want to see support for more devices.
+> This project depends on you! See the [help file](HELP.md) if you want to see support for more devices.
 > I only have access to devices I'm personally using, and this bridge supports several protocols and gateways.
 
 * Monitor energy use
@@ -49,30 +49,9 @@ All connected devices will appear automatically as entities with names based on 
 
 ![example entity list](https://user-images.githubusercontent.com/161548/210004115-f69afac7-289b-47f5-801e-fc26a1f9ffb4.png)
 
-## Help
-
-> If you have registered a new device in the App/Web UI you have to reload the integration first.
-> This is done from the integration settings and the hamburger menu on the card shown on the page.
-> If it still does not show up, proceed with instructions.
-
-If you're having issues with a device or don't see a device you have connected to your bridge,
-run the following commands:
-
-```bash
-curl --user nexa:nexa http://<ip-of-bridge>/v1/info -o bridge-information.txt
-curl --user nexa:nexa http://<ip-of-bridge>/v1/nodes -o bridge-nodes.txt
-```
-
-> **Make sure to remove any personal information from the information file. This will contain
-> location data.**
-
-Then leave a [comment in the device issue](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/6) with the files attached.
-
-## Notes
-
-This project was developed with a bridge with firmware version `2.4.1`.
-
 ## Documentation
+
+See the [help file](HELP.md) if you're having issues with this integration.
 
 Kudos to Nexa for providing developer documentation for this device!
 

@@ -65,6 +65,7 @@ class NexaPlatform:
         host = entry.data['host']
         username = entry.data['username']
         password = entry.data['username']
+
         self.api = NexaApi(host, username, password)
         self.coordinator = NexaCoordinator(hass, self.api)
 
@@ -76,6 +77,7 @@ class NexaPlatform:
 
 class NexaApi:
     """Nexa API"""
+    host: str
 
     def __init__(self, host: str, username: str, password: str) -> None:
         self.host = host
@@ -166,6 +168,14 @@ class NexaApi:
         """Perform an action on a device"""
         body = {'capability': capability, 'value': value}
         return await self.request('post', f"nodes/{node}/call", body)
+
+
+class NexaInfo:
+    """Model for device information"""
+    version: str
+
+    def __init__(self, data: NexaInfoData):
+        self.version = data["version"]
 
 
 class NexaNodeValue:
@@ -282,7 +292,13 @@ class NexaNode:
 class NexaData:
     """Model for polled data"""
 
-    def __init__(self, nodes: list[NexaNode], energy: NexaEnergy):
+    def __init__(
+        self,
+        info: NexaInfo,
+        nodes: list[NexaNode],
+        energy: NexaEnergy
+    ):
+        self.info = info
         self.nodes = nodes
         self.energy = energy
 
@@ -328,14 +344,16 @@ class NexaCoordinator(DataUpdateCoordinator):
         try:
             async with async_timeout.timeout(POLL_TIMEOUT):
                 results = await asyncio.gather(*[
+                    self.api.fetch_info(),
                     self.api.fetch_nodes(),
                     self.api.fetch_energy(),
                     self.api.fetch_energy_nodes(),
                 ])
 
-                (nodes, energy, energy_nodes) = results
+                (info, nodes, energy, energy_nodes) = results
 
                 return NexaData(
+                    NexaInfo(info),
                     list(map(lambda n: NexaNode(n), nodes)),
                     NexaEnergy(energy, energy_nodes)
                 )

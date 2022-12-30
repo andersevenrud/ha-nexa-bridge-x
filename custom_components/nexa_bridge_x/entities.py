@@ -9,6 +9,8 @@ from homeassistant.core import callback
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.components.switch import SwitchEntity
 from homeassistant.components.binary_sensor import BinarySensorEntity
+from homeassistant.helpers.entity import DeviceInfo
+from homeassistant.helpers.device_registry import DeviceEntryType
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator
@@ -18,7 +20,7 @@ from homeassistant.components.light import (
     ColorMode,
     ATTR_BRIGHTNESS
 )
-from .const import (SENSOR_MAP, ENERGY_MAP)
+from .const import (DOMAIN, SENSOR_MAP, ENERGY_MAP)
 from .nexa import NexaNode
 
 
@@ -27,7 +29,27 @@ def create_friendly_name(prefix: str, node: NexaNode) -> str:
     return f"{prefix} {node.name or node.id}"
 
 
-class NexaDimmerEntity(CoordinatorEntity, LightEntity):
+class NexaEntity(CoordinatorEntity):
+    """Representation of a Nexa entity."""
+
+    _attr_has_entity_name = True
+
+    def __init__(self, coordinator: CoordinatorEntity) -> None:
+        super().__init__(coordinator)
+        self._server_unique_id = coordinator.config_entry.entry_id
+        self._attr_device_info = DeviceInfo(
+            configuration_url=(
+                f"http://{coordinator.api.host}"
+            ),
+            entry_type=DeviceEntryType.SERVICE,
+            identifiers={(DOMAIN, coordinator.config_entry.entry_id)},
+            manufacturer="Nexa",
+            name="Nexa Bridge X",
+            sw_version=coordinator.data.info.version,
+        )
+
+
+class NexaDimmerEntity(NexaEntity, LightEntity):
     """Entity for light"""
     _attr_color_mode = ColorMode.BRIGHTNESS
     _attr_supported_color_modes = {ColorMode.ONOFF, ColorMode.BRIGHTNESS}
@@ -86,7 +108,7 @@ class NexaDimmerEntity(CoordinatorEntity, LightEntity):
         await self.coordinator.async_request_refresh()
 
 
-class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
+class NexaSwitchEntity(NexaEntity, SwitchEntity):
     """Entity for swtich"""
 
     def __init__(
@@ -135,7 +157,7 @@ class NexaSwitchEntity(CoordinatorEntity, SwitchEntity):
         await self.coordinator.async_request_refresh()
 
 
-class NexaSensorEntity(CoordinatorEntity, SensorEntity):
+class NexaSensorEntity(NexaEntity, SensorEntity):
     """Entity for sensor"""
 
     def __init__(
@@ -176,7 +198,7 @@ class NexaSensorEntity(CoordinatorEntity, SensorEntity):
             self.async_write_ha_state()
 
 
-class NexaBinarySensorEntity(CoordinatorEntity, BinarySensorEntity):
+class NexaBinarySensorEntity(NexaEntity, BinarySensorEntity):
     """Entity for binary sensor"""
 
     def __init__(
@@ -201,7 +223,7 @@ class NexaBinarySensorEntity(CoordinatorEntity, BinarySensorEntity):
             self.async_write_ha_state()
 
 
-class NexaEnergyEntity(CoordinatorEntity, SensorEntity):
+class NexaEnergyEntity(NexaEntity, SensorEntity):
     """Entity for global energy usage"""
 
     def __init__(self, coordinator: DataUpdateCoordinator, attr: str):

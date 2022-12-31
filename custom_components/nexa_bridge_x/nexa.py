@@ -293,6 +293,10 @@ class NexaNode:
 
         return False
 
+    def is_binary_sensor(self) -> bool:
+        """If this is a binary sensor"""
+        return False
+
 
 class NexaData:
     """Model for polled data"""

@@ -26,7 +26,7 @@ async def async_setup_entry(
     entities = []
 
     for node in coordinator.data.nodes:
-        if node.is_switch():
+        if node.is_binary_sensor():
             _LOGGER.info("Found binary sensor %s: %s", node.id, node.name)
             entities.append(
                 NexaBinarySensorEntity(coordinator, node, "switchBinary")

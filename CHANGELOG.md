@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.8.0] - 2022-12-31
+### :sparkles: New Features
+- [`7a3db97`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/7a3db9702214ef41cecc79cd103c31d76bc4f126) - media player support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :recycle: Refactors
+- [`849c6a2`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/849c6a29473e4a0e631b8d6ef031bcd731b5da88) - stick to double quotes *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :memo: Documentation Changes
+- [`5cd8804`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/5cd8804a7eb8600779a0f2cd9cecb66096e0f221) - **changelog**: add v0.7.0 release info *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`04e760f`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/04e760f4c9120dfdac8462cf4869155f25ee2d06) - **readme**: update features *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`45e5d87`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/45e5d87bbf8ba8a9531bfdb2ea29109f08cfa5b4) - **readme**: update features *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`c8afbac`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/c8afbac9f25dd7cf7ae27c394ed2310587c7f682) - **manifest**: bump version *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.7.0] - 2022-12-31
 ### :sparkles: New Features
 - [`8e9b5b7`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/8e9b5b7cbc8aae19e023a3c424ed4913f0ec0ecf) - temperature/humidity/luminance sensor support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -147,3 +163,4 @@
 [v0.5.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.4.0...v0.5.0
 [v0.6.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.5.0...v0.6.0
 [v0.7.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.6.0...v0.7.0
+[v0.8.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.7.0...v0.8.0

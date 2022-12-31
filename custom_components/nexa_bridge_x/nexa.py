@@ -19,6 +19,7 @@ from homeassistant.helpers.update_coordinator import (
 )
 from .const import (
     NODE_SENSOR_CAPABILITIES,
+    NODE_BINARY_CAPABILITIES,
     POLL_INTERVAL,
     POLL_TIMEOUT
 )
@@ -295,6 +296,10 @@ class NexaNode:
 
     def is_binary_sensor(self) -> bool:
         """If this is a binary sensor"""
+        for cap in NODE_BINARY_CAPABILITIES:
+            if cap in self.capabilities:
+                return True
+
         return False
 
 

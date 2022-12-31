@@ -23,6 +23,14 @@ POLL_INTERVAL = 10
 
 POLL_TIMEOUT = 10
 
+NODE_BINARY_CAPABILITIES = [
+    "notificationContact",
+    "notificationMotion",
+    "notificationSmoke",
+    "notificationWater",
+    "notificationTwilight"
+]
+
 NODE_SENSOR_CAPABILITIES = [
     "switchLevel",
     "meter",

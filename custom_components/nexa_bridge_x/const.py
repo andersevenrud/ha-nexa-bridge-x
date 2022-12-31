@@ -45,91 +45,91 @@ NODE_SENSOR_CAPABILITIES = [
 ]
 
 SENSOR_MAP = {
-    'switchLevel': {
-        'name': 'Level',
-        'unit': PERCENTAGE,
-        'device': None,
-        'class': SensorStateClass.MEASUREMENT
+    "switchLevel": {
+        "name": "Level",
+        "unit": PERCENTAGE,
+        "device": None,
+        "class": SensorStateClass.MEASUREMENT
     },
-    'meter': {
-        'name': 'Energy',
-        'unit': ENERGY_KILO_WATT_HOUR,
-        'device': SensorDeviceClass.ENERGY,
-        'class': SensorStateClass.TOTAL_INCREASING
+    "meter": {
+        "name": "Energy",
+        "unit": ENERGY_KILO_WATT_HOUR,
+        "device": SensorDeviceClass.ENERGY,
+        "class": SensorStateClass.TOTAL_INCREASING
     },
-    'power': {
-        'name': 'Wattage',
-        'unit': POWER_WATT,
-        'device': SensorDeviceClass.POWER,
-        'class': SensorStateClass.MEASUREMENT
+    "power": {
+        "name": "Wattage",
+        "unit": POWER_WATT,
+        "device": SensorDeviceClass.POWER,
+        "class": SensorStateClass.MEASUREMENT
     },
-    'electric_voltage': {
-        'name': 'Voltage',
-        'unit': ELECTRIC_POTENTIAL_VOLT,
-        'device': SensorDeviceClass.VOLTAGE,
-        'class': SensorStateClass.MEASUREMENT
+    "electric_voltage": {
+        "name": "Voltage",
+        "unit": ELECTRIC_POTENTIAL_VOLT,
+        "device": SensorDeviceClass.VOLTAGE,
+        "class": SensorStateClass.MEASUREMENT
     },
-    'electric_ampere': {
-        'name': 'Amperage',
-        'unit': ELECTRIC_CURRENT_AMPERE,
-        'device': SensorDeviceClass.CURRENT,
-        'class': SensorStateClass.MEASUREMENT
+    "electric_ampere": {
+        "name": "Amperage",
+        "unit": ELECTRIC_CURRENT_AMPERE,
+        "device": SensorDeviceClass.CURRENT,
+        "class": SensorStateClass.MEASUREMENT
     },
-    'temperature': {
-        'name': 'Temperature',
-        'unit': TEMP_CELSIUS,
-        'device': SensorDeviceClass.TEMPERATURE,
-        'class': SensorStateClass.MEASUREMENT
+    "temperature": {
+        "name": "Temperature",
+        "unit": TEMP_CELSIUS,
+        "device": SensorDeviceClass.TEMPERATURE,
+        "class": SensorStateClass.MEASUREMENT
     },
-    'humidity': {
-        'name': 'Temperature',
-        'unit': PERCENTAGE,
-        'device': SensorDeviceClass.HUMIDITY,
-        'class': SensorStateClass.MEASUREMENT
+    "humidity": {
+        "name": "Temperature",
+        "unit": PERCENTAGE,
+        "device": SensorDeviceClass.HUMIDITY,
+        "class": SensorStateClass.MEASUREMENT
     },
-    'luminance': {
-        'name': 'Luminance',
-        'unit': LIGHT_LUX,
-        'device': SensorDeviceClass.ILLUMINANCE,
-        'class': SensorStateClass.MEASUREMENT
+    "luminance": {
+        "name": "Luminance",
+        "unit": LIGHT_LUX,
+        "device": SensorDeviceClass.ILLUMINANCE,
+        "class": SensorStateClass.MEASUREMENT
     },
 }
 
 ENERGY_MAP = {
-    'total_kilowatt_hours': {
-        'name': 'NEXA Total kWh',
-        'unit': ENERGY_KILO_WATT_HOUR,
-        'device': SensorDeviceClass.ENERGY,
-        'class': SensorStateClass.TOTAL_INCREASING
+    "total_kilowatt_hours": {
+        "name": "NEXA Total kWh",
+        "unit": ENERGY_KILO_WATT_HOUR,
+        "device": SensorDeviceClass.ENERGY,
+        "class": SensorStateClass.TOTAL_INCREASING
     },
-    'current_wattage': {
-        'name': 'NEXA Current W',
-        'unit': POWER_WATT,
-        'device': SensorDeviceClass.POWER,
-        'class': SensorStateClass.MEASUREMENT
+    "current_wattage": {
+        "name": "NEXA Current W",
+        "unit": POWER_WATT,
+        "device": SensorDeviceClass.POWER,
+        "class": SensorStateClass.MEASUREMENT
     },
-    'current_kilowatt_hours': {
-        'name': 'NEXA Current kWh',
-        'unit': ENERGY_KILO_WATT_HOUR,
-        'device': SensorDeviceClass.ENERGY,
-        'class': SensorStateClass.MEASUREMENT
+    "current_kilowatt_hours": {
+        "name": "NEXA Current kWh",
+        "unit": ENERGY_KILO_WATT_HOUR,
+        "device": SensorDeviceClass.ENERGY,
+        "class": SensorStateClass.MEASUREMENT
     },
-    'today_kilowatt_hours': {
-        'name': 'NEXA Today kWh',
-        'unit': ENERGY_KILO_WATT_HOUR,
-        'device': SensorDeviceClass.ENERGY,
-        'class': SensorStateClass.TOTAL_INCREASING
+    "today_kilowatt_hours": {
+        "name": "NEXA Today kWh",
+        "unit": ENERGY_KILO_WATT_HOUR,
+        "device": SensorDeviceClass.ENERGY,
+        "class": SensorStateClass.TOTAL_INCREASING
     },
-    'yesterday_kilowatt_hours': {
-        'name': 'NEXA Yesterday kWh',
-        'unit': ENERGY_KILO_WATT_HOUR,
-        'device': SensorDeviceClass.ENERGY,
-        'class': SensorStateClass.TOTAL_INCREASING
+    "yesterday_kilowatt_hours": {
+        "name": "NEXA Yesterday kWh",
+        "unit": ENERGY_KILO_WATT_HOUR,
+        "device": SensorDeviceClass.ENERGY,
+        "class": SensorStateClass.TOTAL_INCREASING
     },
-    'month_kilowatt_hours': {
-        'name': 'NEXA Month kWh',
-        'unit': ENERGY_KILO_WATT_HOUR,
-        'device': SensorDeviceClass.ENERGY,
-        'class': SensorStateClass.TOTAL_INCREASING
+    "month_kilowatt_hours": {
+        "name": "NEXA Month kWh",
+        "unit": ENERGY_KILO_WATT_HOUR,
+        "device": SensorDeviceClass.ENERGY,
+        "class": SensorStateClass.TOTAL_INCREASING
     },
 }

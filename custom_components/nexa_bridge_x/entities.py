@@ -69,7 +69,7 @@ class NexaDimmerEntity(NexaEntity, LightEntity):
     def _handle_coordinator_update(self) -> None:
         node = self.coordinator.get_node_by_id(self.id)
         if node:
-            value = node.get_value('switchLevel')
+            value = node.get_value("switchLevel")
             value_percentage = int(value * 100)
 
             if self.switch_to_state is not None:
@@ -125,7 +125,7 @@ class NexaSwitchEntity(NexaEntity, SwitchEntity):
     def _handle_coordinator_update(self) -> None:
         node = self.coordinator.get_node_by_id(self.id)
         if node:
-            self._attr_is_on = node.get_value('switchBinary')
+            self._attr_is_on = node.get_value("switchBinary")
             self._attr_name = create_friendly_name("Switch", node)
             self.async_write_ha_state()
 
@@ -165,16 +165,16 @@ class NexaSensorEntity(NexaEntity, SensorEntity):
         if key in SENSOR_MAP:
             friendly = f"{SENSOR_MAP[key]['name']} Sensor"
             self._attr_name = create_friendly_name(friendly, node)
-            self._attr_native_unit_of_measurement = SENSOR_MAP[key]['unit']
-            self._attr_device_class = SENSOR_MAP[key]['device']
-            self._attr_state_class = SENSOR_MAP[key]['class']
+            self._attr_native_unit_of_measurement = SENSOR_MAP[key]["unit"]
+            self._attr_device_class = SENSOR_MAP[key]["device"]
+            self._attr_state_class = SENSOR_MAP[key]["class"]
 
     @callback
     def _handle_coordinator_update(self) -> None:
         node = self.coordinator.get_node_by_id(self.id)
         if node:
             value = node.get_value(self.key)
-            if self.key == 'switchLevel':
+            if self.key == "switchLevel":
                 self._attr_native_value = int(value * 100)
             else:
                 self._attr_native_value = value
@@ -220,10 +220,10 @@ class NexaEnergyEntity(NexaEntity, SensorEntity):
         self.id = attr
         self._attr_native_value = None
         self._attr_unique_id = f"nexa_energy_{attr}"
-        self._attr_name = ENERGY_MAP[attr]['name']
-        self._attr_native_unit_of_measurement = ENERGY_MAP[attr]['unit']
-        self._attr_device_class = ENERGY_MAP[attr]['device']
-        self._attr_state_class = ENERGY_MAP[attr]['class']
+        self._attr_name = ENERGY_MAP[attr]["name"]
+        self._attr_native_unit_of_measurement = ENERGY_MAP[attr]["unit"]
+        self._attr_device_class = ENERGY_MAP[attr]["device"]
+        self._attr_state_class = ENERGY_MAP[attr]["class"]
 
     @callback
     def _handle_coordinator_update(self) -> None:

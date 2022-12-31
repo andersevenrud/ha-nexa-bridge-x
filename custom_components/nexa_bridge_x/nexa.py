@@ -64,9 +64,9 @@ class NexaPlatform:
     """Nexa Platform"""
 
     def __init__(self, hass: HomeAssistant, entry: ConfigEntry):
-        host = entry.data['host']
-        username = entry.data['username']
-        password = entry.data['username']
+        host = entry.data["host"]
+        username = entry.data["username"]
+        password = entry.data["username"]
 
         self.api = NexaApi(host, username, password)
         self.coordinator = NexaCoordinator(hass, self.api)
@@ -111,14 +111,14 @@ class NexaApi:
         body: Any = None
     ) -> Response:
         """Performs a request"""
-        url = "http://%s/v1/%s" % (self.host, endpoint or '')
+        url = "http://%s/v1/%s" % (self.host, endpoint or "")
         auth = aiohttp.BasicAuth(self.username, self.password)
 
         async with aiohttp.ClientSession() as session:
-            if method == 'post':
+            if method == "post":
                 headers = {
-                    'accept': 'application/json',
-                    'content-type': 'application/json'
+                    "accept": "application/json",
+                    "content-type": "application/json"
                 }
 
                 _LOGGER.debug("POST %s: %s", url, json.dumps(body))
@@ -143,23 +143,23 @@ class NexaApi:
 
     async def fetch_info(self) -> NexaInfoData:
         """Get information about bridge"""
-        return await self.request('get', 'info')
+        return await self.request("get", "info")
 
     async def fetch_nodes(self) -> list[NexaNodeData]:
         """Get all configured nodes"""
-        return await self.request('get', 'nodes')
+        return await self.request("get", "nodes")
 
     async def fetch_node(self, node: str) -> NexaNodeData:
         """Get a confiured node"""
-        return await self.request('get', f"nodes/{node}")
+        return await self.request("get", f"nodes/{node}")
 
     async def fetch_energy(self) -> NexaEnergyData:
         """Get energy stats"""
-        return await self.request('get', "energy")
+        return await self.request("get", "energy")
 
     async def fetch_energy_nodes(self) -> NexaEnergyNodeData:
         """Get energy node stats"""
-        return await self.request('get', "energy/nodes")
+        return await self.request("get", "energy/nodes")
 
     async def node_call(
         self,
@@ -168,8 +168,8 @@ class NexaApi:
         value: any
     ) -> NexaCallData:
         """Perform an action on a device"""
-        body = {'capability': capability, 'value': value}
-        return await self.request('post', f"nodes/{node}/call", body)
+        body = {"capability": capability, "value": value}
+        return await self.request("post", f"nodes/{node}/call", body)
 
 
 class NexaInfo:

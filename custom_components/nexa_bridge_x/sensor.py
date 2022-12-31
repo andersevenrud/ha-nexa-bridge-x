@@ -28,12 +28,12 @@ async def async_setup_entry(
     coordinator = hass.data[DOMAIN][entry.entry_id].coordinator
 
     entities = [
-        NexaEnergyEntity(coordinator, 'total_kilowatt_hours'),
-        NexaEnergyEntity(coordinator, 'current_wattage'),
-        NexaEnergyEntity(coordinator, 'today_kilowatt_hours'),
-        NexaEnergyEntity(coordinator, 'current_kilowatt_hours'),
-        NexaEnergyEntity(coordinator, 'yesterday_kilowatt_hours'),
-        NexaEnergyEntity(coordinator, 'month_kilowatt_hours'),
+        NexaEnergyEntity(coordinator, "total_kilowatt_hours"),
+        NexaEnergyEntity(coordinator, "current_wattage"),
+        NexaEnergyEntity(coordinator, "today_kilowatt_hours"),
+        NexaEnergyEntity(coordinator, "current_kilowatt_hours"),
+        NexaEnergyEntity(coordinator, "yesterday_kilowatt_hours"),
+        NexaEnergyEntity(coordinator, "month_kilowatt_hours"),
     ]
 
     for node in coordinator.data.nodes:

@@ -144,7 +144,18 @@ class NexaApi:
         """See if the connection is valid"""
         result = await self.fetch_info()
 
-        if "name" not in result or result["name"] != "Nexa Bridge X":
+        if not result:
+            raise NexaApiNotCompatibleError("Device reported no information")
+
+        for key in ["name", "systemType", "version"]:
+            if key not in result:
+                raise NexaApiNotCompatibleError("Device response invalid")
+
+        if result["systemType"] != "Bridge2":
+            raise NexaApiNotCompatibleError("Device system not compatible")
+
+        # TODO: Add semver check in the future if there are firmware diffs
+        if not str(result["version"]).startswith("2"):
             raise NexaApiNotCompatibleError("Endpoint not compatible")
 
     async def fetch_info(self) -> NexaInfoData:

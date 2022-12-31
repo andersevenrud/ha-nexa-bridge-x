@@ -20,6 +20,7 @@ from homeassistant.helpers.update_coordinator import (
 from .const import (
     NODE_SENSOR_CAPABILITIES,
     NODE_BINARY_CAPABILITIES,
+    NODE_MEDIA_CAPABILITIES,
     POLL_INTERVAL,
     POLL_TIMEOUT
 )
@@ -302,6 +303,14 @@ class NexaNode:
 
         return False
 
+    def is_media_player(self) -> bool:
+        """If this is a media player"""
+        for cap in NODE_MEDIA_CAPABILITIES:
+            if cap in self.capabilities:
+                return True
+
+        return False
+
 
 class NexaData:
     """Model for polled data"""
@@ -352,6 +361,15 @@ class NexaCoordinator(DataUpdateCoordinator):
     ) -> None:
         """Handle a dimmer action"""
         await self.api.node_call(node_id, "switchLevel", value)
+
+    async def handle_media_player(
+        self,
+        node_id: str,
+        capability: str,
+        value: NexaNodeValueType
+    ) -> None:
+        """Handle a media player action"""
+        await self.api.node_call(node_id, capability, value)
 
     async def _async_update_data(self) -> None:
         """Update data for all nodes in the background"""

@@ -25,6 +25,12 @@ POLL_INTERVAL = 10
 
 POLL_TIMEOUT = 10
 
+NODE_MEDIA_CAPABILITIES = [
+    "mediaVolume",
+    "mediaPlayPause",
+    "mediaMute"
+]
+
 NODE_BINARY_CAPABILITIES = [
     "notificationContact",
     "notificationMotion",

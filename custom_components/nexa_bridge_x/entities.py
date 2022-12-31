@@ -10,6 +10,13 @@ from homeassistant.core import callback
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.components.switch import SwitchEntity
 from homeassistant.components.binary_sensor import BinarySensorEntity
+from homeassistant.components.media_player import (
+    MediaPlayerDeviceClass,
+    MediaPlayerEntity,
+    MediaPlayerEntityFeature,
+    MediaPlayerState,
+    MediaType,
+)
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.device_registry import DeviceEntryType
 from homeassistant.helpers.update_coordinator import (
@@ -232,3 +239,76 @@ class NexaEnergyEntity(NexaEntity, SensorEntity):
             self.id
         )
         self.async_write_ha_state()
+
+
+class NexaMediaPlayerEntity(NexaEntity, MediaPlayerEntity):
+    """Entity for media player"""
+
+    _attr_device_class = MediaPlayerDeviceClass.SPEAKER
+    _attr_media_content_type = MediaType.MUSIC
+    _attr_is_volume_muted: bool | None = None
+    _attr_state: MediaPlayerState | None = None
+    _attr_volume_level: float | None = None
+    _attr_supported_features: MediaPlayerEntityFeature = (
+        MediaPlayerEntityFeature.PAUSE
+        | MediaPlayerEntityFeature.VOLUME_SET
+        | MediaPlayerEntityFeature.VOLUME_MUTE
+        | MediaPlayerEntityFeature.PLAY
+    )
+
+    def __init__(
+        self,
+        coordinator: DataUpdateCoordinator,
+        node: NexaNode
+    ):
+        super().__init__(coordinator)
+        self.id = node.id
+        self._attr_native_value = None
+        self._attr_unique_id = f"media_player_{node.id}"
+        self._attr_name = node.name or node.id
+
+    @callback
+    def _handle_coordinator_update(self) -> None:
+        node = self.coordinator.get_node_by_id(self.id)
+        if node:
+            if node.get_value("mediaPlayPause"):
+                self._attr_state = MediaPlayerState.PLAYING
+            else:
+                self._attr_state = MediaPlayerState.PAUSED
+
+            self._attr_volume_level = node.get_value("mediaVolume")
+            self._attr_is_volume_muted = node.get_value("mediaMute")
+
+            self.async_write_ha_state()
+
+    async def async_media_play(self) -> None:
+        """Send play command to media player"""
+        await self.coordinator.handle_media_player(
+            self.id,
+            "mediaPlayPause",
+            True
+        )
+
+    async def async_media_pause(self) -> None:
+        """Send pause command to media player"""
+        await self.coordinator.handle_media_player(
+            self.id,
+            "mediaPlayPause",
+            False
+        )
+
+    async def async_set_volume_level(self, volume: float) -> None:
+        """Send volume level to media player"""
+        await self.coordinator.handle_media_player(
+            self.id,
+            "mediaVolume",
+            int(volume * 100)
+        )
+
+    async def async_mute_volume(self, mute: bool) -> None:
+        """Send mute command to media player."""
+        await self.coordinator.handle_media_player(
+            self.id,
+            "mediaMute",
+            mute
+        )

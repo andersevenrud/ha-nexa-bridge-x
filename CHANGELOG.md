@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.9.0] - 2022-12-31
+### :sparkles: New Features
+- [`fa0629c`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/fa0629cf3a14b3720f647a73f221cdad9ed7ab04) - zeroconf auto discovery *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :bug: Bug Fixes
+- [`844ccad`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/844ccad7f3517c908bb02db1b6172c1cb243f7e4) - **config_flow**: missing return after discovery *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :memo: Documentation Changes
+- [`0ae1e1d`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/0ae1e1d244713c6d711b43a25b5e801a57f03741) - **changelog**: add v0.8.1 release info *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`4024149`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/4024149744de113fcfe2029232c29ffdfe004eb9) - **readme**: update with auto discovery information *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`4663b65`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/4663b658329da364803f47fac6267424f731ba32) - **manifest**: bump version *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.8.1] - 2022-12-31
 ### :recycle: Refactors
 - [`e7b0d56`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/e7b0d56acc7fcd87bf7b1316bc54473105b7edd9) - more idiomatic python syntax *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -176,3 +191,4 @@
 [v0.7.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.6.0...v0.7.0
 [v0.8.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.7.0...v0.8.0
 [v0.8.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.8.0...v0.8.1
+[v0.9.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.8.1...v0.9.0

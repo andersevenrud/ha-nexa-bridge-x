@@ -14,6 +14,7 @@ Makes it possible to view and control devices set up in the Nexa App/Web UI.
 * Monitor energy use
 * Monitor switch states
 * Monitor dimmer switch states
+* Monitor notification states (motion, contact, smoke, etc.)
 * Control switches
 * Control dimmer switches
 * Control lights

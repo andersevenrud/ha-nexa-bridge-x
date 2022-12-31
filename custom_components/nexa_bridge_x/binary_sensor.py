@@ -11,9 +11,6 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.config_entries import ConfigEntry
 from .const import DOMAIN
 from .entities import NexaBinarySensorEntity
-import logging
-
-_LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(
@@ -23,14 +20,11 @@ async def async_setup_entry(
 ) -> None:
     """Set up all detected binary sensors"""
     coordinator = hass.data[DOMAIN][entry.entry_id].coordinator
-    entities = []
-
-    for node in coordinator.data.nodes:
-        if node.is_binary_sensor():
-            _LOGGER.info("Found binary sensor %s: %s", node.id, node.name)
-            entities.append(
-                NexaBinarySensorEntity(coordinator, node, "switchBinary")
-            )
+    entities = (
+        NexaBinarySensorEntity(coordinator, node, "switchBinary")
+        for node in coordinator.data.nodes
+        if node.is_binary_sensor()
+    )
 
     if entities:
         async_add_entities(entities)

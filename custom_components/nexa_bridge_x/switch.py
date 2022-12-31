@@ -11,9 +11,6 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.config_entries import ConfigEntry
 from .const import DOMAIN
 from .entities import NexaSwitchEntity
-import logging
-
-_LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(
@@ -23,12 +20,11 @@ async def async_setup_entry(
 ) -> None:
     """Set up all detected switches"""
     coordinator = hass.data[DOMAIN][entry.entry_id].coordinator
-    entities = []
-
-    for node in coordinator.data.nodes:
-        if node.is_switch():
-            _LOGGER.info("Found switch %s: %s", node.id, node.name)
-            entities.append(NexaSwitchEntity(coordinator, node))
+    entities = (
+        NexaSwitchEntity(coordinator, node)
+        for node in coordinator.data.nodes
+        if node.is_switch()
+    )
 
     if entities:
         async_add_entities(entities)

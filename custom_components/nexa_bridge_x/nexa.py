@@ -41,6 +41,11 @@ NexaInfoData = Any
 NexaCallData = Any
 
 
+def is_capable_of(node: NexaNode, items: list(str)):
+    """Check if given capability is available"""
+    return any(cap for cap in items if cap in node.capabilities)
+
+
 class NexaApiError(Exception):
     """Base error"""
 
@@ -289,27 +294,15 @@ class NexaNode:
 
     def is_sensor(self) -> bool:
         """If this is a sensor"""
-        for cap in NODE_SENSOR_CAPABILITIES:
-            if cap in self.capabilities:
-                return True
-
-        return False
+        return is_capable_of(self, NODE_SENSOR_CAPABILITIES)
 
     def is_binary_sensor(self) -> bool:
         """If this is a binary sensor"""
-        for cap in NODE_BINARY_CAPABILITIES:
-            if cap in self.capabilities:
-                return True
-
-        return False
+        return is_capable_of(self, NODE_BINARY_CAPABILITIES)
 
     def is_media_player(self) -> bool:
         """If this is a media player"""
-        for cap in NODE_MEDIA_CAPABILITIES:
-            if cap in self.capabilities:
-                return True
-
-        return False
+        return is_capable_of(self, NODE_MEDIA_CAPABILITIES)
 
 
 class NexaData:

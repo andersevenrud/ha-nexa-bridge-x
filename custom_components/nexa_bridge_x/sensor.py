@@ -6,17 +6,15 @@ Homepage: https://github.com/andersevenrud/ha-nexa-bridge-x
 License: MIT
 """
 from __future__ import annotations
+from itertools import chain
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.config_entries import ConfigEntry
-from .const import DOMAIN
+from .const import (DOMAIN, ENERGY_ATTRS)
 from .entities import (
     NexaSensorEntity,
     NexaEnergyEntity
 )
-import logging
-
-_LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(
@@ -27,24 +25,22 @@ async def async_setup_entry(
     """Set up all detected sensors"""
     coordinator = hass.data[DOMAIN][entry.entry_id].coordinator
 
-    entities = [
-        NexaEnergyEntity(coordinator, "total_kilowatt_hours"),
-        NexaEnergyEntity(coordinator, "current_wattage"),
-        NexaEnergyEntity(coordinator, "today_kilowatt_hours"),
-        NexaEnergyEntity(coordinator, "current_kilowatt_hours"),
-        NexaEnergyEntity(coordinator, "yesterday_kilowatt_hours"),
-        NexaEnergyEntity(coordinator, "month_kilowatt_hours"),
-    ]
+    found_sensors = filter(
+        lambda node: node.is_sensor(),
+        coordinator.data.nodes
+    )
 
-    for node in coordinator.data.nodes:
-        if node.is_sensor():
-            for name in node.get_sensor_capabilities():
-                _LOGGER.info("Found sensor %s: %s - %s",
-                             node.id,
-                             node.name,
-                             name)
+    energy_entities = (
+        NexaEnergyEntity(coordinator, attr)
+        for attr in (ENERGY_ATTRS)
+    )
 
-                entities.append(NexaSensorEntity(coordinator, node, name))
+    sensor_entities = (
+        NexaSensorEntity(coordinator, node, name)
+        for node in found_sensors
+        for name in node.get_sensor_capabilities()
+    )
 
-    if entities:
-        async_add_entities(entities)
+    entities = chain(energy_entities, sensor_entities)
+
+    async_add_entities(entities)

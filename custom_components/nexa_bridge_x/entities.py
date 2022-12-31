@@ -30,6 +30,9 @@ from homeassistant.components.light import (
 )
 from .const import (DOMAIN, SENSOR_MAP, ENERGY_MAP)
 from .nexa import NexaNode
+import logging
+
+_LOGGER = logging.getLogger(__name__)
 
 
 def create_friendly_name(suffix: str, node: NexaNode) -> str:
@@ -66,6 +69,7 @@ class NexaDimmerEntity(NexaEntity, LightEntity):
     _attr_supported_color_modes = {ColorMode.ONOFF, ColorMode.BRIGHTNESS}
 
     def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode):
+        _LOGGER.info("Found light %s: %s", node.id, node.name)
         super().__init__(coordinator)
         self.id = node.id
         self.switch_to_state = None
@@ -123,6 +127,7 @@ class NexaSwitchEntity(NexaEntity, SwitchEntity):
     """Entity for swtich"""
 
     def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode):
+        _LOGGER.info("Found switch %s: %s", node.id, node.name)
         super().__init__(coordinator)
         self.id = node.id
         self._attr_name = create_friendly_name("Switch", node)
@@ -162,6 +167,7 @@ class NexaSensorEntity(NexaEntity, SensorEntity):
         node: NexaNode,
         key: str
     ):
+        _LOGGER.info("Found %s sensor %s: %s", key, node.id, node.name)
         super().__init__(coordinator)
         self.id = node.id
         self.key = key
@@ -200,12 +206,11 @@ class NexaBinarySensorEntity(NexaEntity, BinarySensorEntity):
     def __init__(
         self,
         coordinator: DataUpdateCoordinator,
-        node: NexaNode,
-        key: str
+        node: NexaNode
     ):
+        _LOGGER.info("Found binary sensor %s: %s", node.id, node.name)
         super().__init__(coordinator)
         self.id = node.id
-        self.key = key
         self._attr_is_on = None
         self._attr_name = create_friendly_name("Binary Sensor", node)
         self._attr_unique_id = f"binary_sensor_{node.id}"
@@ -214,7 +219,7 @@ class NexaBinarySensorEntity(NexaEntity, BinarySensorEntity):
     def _handle_coordinator_update(self) -> None:
         node = self.coordinator.get_node_by_id(self.id)
         if node:
-            self._attr_is_on = node.get_value(self.key)
+            self._attr_is_on = node.get_value("switchBinary")
             self._attr_name = create_friendly_name("Binary Sensor", node)
             self.async_write_ha_state()
 
@@ -223,6 +228,7 @@ class NexaEnergyEntity(NexaEntity, SensorEntity):
     """Entity for global energy usage"""
 
     def __init__(self, coordinator: DataUpdateCoordinator, attr: str):
+        _LOGGER.info("Found energy information: %s", attr)
         super().__init__(coordinator)
         self.id = attr
         self._attr_native_value = None
@@ -261,6 +267,7 @@ class NexaMediaPlayerEntity(NexaEntity, MediaPlayerEntity):
         coordinator: DataUpdateCoordinator,
         node: NexaNode
     ):
+        _LOGGER.info("Found media player %s: %s", node.id, node.name)
         super().__init__(coordinator)
         self.id = node.id
         self._attr_native_value = None

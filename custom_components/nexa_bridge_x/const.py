@@ -50,6 +50,15 @@ NODE_SENSOR_CAPABILITIES = [
     "luminance"
 ]
 
+ENERGY_ATTRS = [
+    "total_kilowatt_hours",
+    "current_wattage",
+    "current_kilowatt_hours",
+    "today_kilowatt_hours",
+    "yesterday_kilowatt_hours",
+    "month_kilowatt_hours"
+]
+
 SENSOR_MAP = {
     "switchLevel": {
         "name": "Level",

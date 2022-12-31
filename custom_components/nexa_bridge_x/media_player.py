@@ -11,9 +11,6 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.config_entries import ConfigEntry
 from .const import DOMAIN
 from .entities import NexaMediaPlayerEntity
-import logging
-
-_LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(
@@ -23,14 +20,11 @@ async def async_setup_entry(
 ) -> None:
     """Set up all detected media players"""
     coordinator = hass.data[DOMAIN][entry.entry_id].coordinator
-    entities = []
-
-    for node in coordinator.data.nodes:
-        if node.is_binary_sensor():
-            _LOGGER.info("Found media player %s: %s", node.id, node.name)
-            entities.append(
-                NexaMediaPlayerEntity(coordinator, node)
-            )
+    entities = (
+        NexaMediaPlayerEntity(coordinator, node)
+        for node in coordinator.data.nodes
+        if node.is_media_player()
+    )
 
     if entities:
         async_add_entities(entities)

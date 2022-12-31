@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.5.0] - 2022-12-31
+### :sparkles: New Features
+- [`002a691`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/002a691c12b7e6f6a2ac96795f88acdc8a296561) - distinguish binary sensors *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :memo: Documentation Changes
+- [`c48d048`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/c48d048f7c46514e6d2dddb44b262b44894caa51) - **changelog**: add v0.4.0 release info *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`711b2fc`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/711b2fc948ce1ba2d7f5f06b6c05d43474e8106c) - **readme**: update naming information *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`95f31f0`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/95f31f0b48002e7fea40efa985f135c8aeffe2a4) - **manifest**: bump version *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.4.0] - 2022-12-31
 ### :sparkles: New Features
 - [`fe493d2`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/fe493d26df5761f19272265be95a941ea0579afa) - change friendly name order *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -109,3 +121,4 @@
 [v0.2.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.1.3...v0.2.0
 [v0.3.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.2.0...v0.3.0
 [v0.4.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.3.0...v0.4.0
+[v0.5.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.4.0...v0.5.0

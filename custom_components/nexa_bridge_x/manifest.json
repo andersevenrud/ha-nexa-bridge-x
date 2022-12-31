@@ -1,17 +1,20 @@
 {
   "domain": "nexa_bridge_x",
-  "version": "0.8.1",
   "name": "Nexa Bridge X",
   "config_flow": true,
   "documentation": "https://github.com/andersevenrud/ha-nexa-bridge-x/#readme",
   "issue_tracker": "https://github.com/andersevenrud/ha-nexa-bridge-x/issues",
   "requirements": [],
-  "ssdp": [],
-  "zeroconf": [],
-  "homekit": {},
+  "zeroconf": [
+    {
+      "type": "_ssh._tcp.local.",
+      "name": "nexabridge2"
+    }
+  ],
   "dependencies": [],
   "codeowners": [
     "@andersevenrud"
   ],
-  "iot_class": "local_polling"
+  "iot_class": "local_polling",
+  "integration_type": "hub"
 }

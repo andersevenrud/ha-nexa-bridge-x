@@ -7,6 +7,9 @@
           "username": "[%key:common::config_flow::data::username%]",
           "password": "[%key:common::config_flow::data::password%]"
         }
+      },
+      "discovery_confirm": {
+        "description": "Do you want to set up{host}?"
       }
     },
     "error": {

@@ -183,11 +183,13 @@ class NexaInfo:
     name: str
     version: str
     model: str
+    id: str
 
     def __init__(self, data: NexaInfoData):
         self.name = data["name"]
         self.version = data["version"]
         self.model = data["systemType"]
+        self.id = data["gwid"]
 
 
 class NexaNodeValue:

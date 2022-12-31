@@ -42,8 +42,11 @@ Makes it possible to view and control devices set up in the Nexa App/Web UI.
 
 ## Setup
 
-Add the integration in HA settings and set up the correct connection credentials.
+Your bridge should be discovered automatically. Just click the configure button
+and you should be ready to go!
 
+> If it's not showing, just click the "add integration" button and search for
+> "Nexa Bridge X" to manually add it. This requires entering login information.
 > The factory login is `nexa` / `nexa`.
 
 All connected devices will appear automatically as a device with entities using

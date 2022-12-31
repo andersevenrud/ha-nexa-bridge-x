@@ -25,6 +25,7 @@ jobs:
           name: ${{ steps.semver.outputs.next }}
           body: ${{ steps.semver.outputs.next }}
           tag: ${{ steps.semver.outputs.next }}
+          commit: ${{ github.sha }}
 
       - name: Update CHANGELOG.md
         id: changelog
@@ -32,11 +33,10 @@ jobs:
         with:
           token: ${{ github.token }}
           tag: ${{ steps.semver.outputs.next }}
-          excludeTypes: "build,other,style"
+          excludeTypes: "ci,build,docs,other,style"
 
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4
-        id: last_commit
         with:
           branch: main
           commit_message: 'docs(changelog): add ${{ steps.semver.outputs.next }} release info'
@@ -58,7 +58,6 @@ jobs:
           makeLatest: true
           name: ${{ steps.semver.outputs.next }}
           tag: ${{ steps.semver.outputs.next }}
-          commit: ${{ steps.last_commit.outputs.commit_hash }}
           token: ${{ github.token }}
           artifacts: "ha-nexa-bridge-x-${{ steps.semver.outputs.next }}.zip"
           body: |

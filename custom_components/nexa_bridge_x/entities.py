@@ -25,9 +25,9 @@ from .const import (DOMAIN, SENSOR_MAP, ENERGY_MAP)
 from .nexa import NexaNode
 
 
-def create_friendly_name(prefix: str, node: NexaNode) -> str:
+def create_friendly_name(suffix: str, node: NexaNode) -> str:
     """Create a friendly name for HA"""
-    return f"{prefix} {node.name or node.id}"
+    return f"{node.name or node.id} {suffix}"
 
 
 class NexaEntity(CoordinatorEntity):

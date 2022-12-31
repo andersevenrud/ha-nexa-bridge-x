@@ -50,7 +50,7 @@ names based on features and configuration.
 > will create new entities. Duplicate names will be suffixed with a number.
 > It is recommended that you name them something simple, i.e. if you have a switch
 > in your connected to a power strip, lamp, etc. name it "Living Room". All devices
-> gets prefixed in HA with the type of device.
+> gets suffixed in HA with the type of device.
 
 ## Documentation
 

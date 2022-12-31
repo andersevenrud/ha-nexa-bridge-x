@@ -43,6 +43,8 @@ class PlaceholderHub:
         except Exception:  # pylint: disable=broad-except
             return False
 
+        return True
+
 
 async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str, Any]:
     """Validate the user input allows us to connect.

@@ -1,6 +1,6 @@
 {
   "domain": "nexa_bridge_x",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "name": "Nexa Bridge X",
   "config_flow": true,
   "documentation": "https://github.com/andersevenrud/ha-nexa-bridge-x/#readme",

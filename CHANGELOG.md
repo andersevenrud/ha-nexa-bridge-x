@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.6.0] - 2022-12-31
+### :sparkles: New Features
+- [`43b22bc`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/43b22bc96aa2958f10da1f834b1cb39ab8f43a67) - add nexa notification sensor support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :memo: Documentation Changes
+- [`4a028fd`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/4a028fdc10cc52c1df1a5998cd7e38b7941bc6d3) - **changelog**: add v0.5.0 release info *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`473b3c8`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/473b3c80307693666996819c80a5c21ae5de24a7) - **readme**: update features *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`1d407e0`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/1d407e0400ec06a71ec14e3890e71d55637a1cc9) - **manifest**: bump version *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.5.0] - 2022-12-31
 ### :sparkles: New Features
 - [`002a691`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/002a691c12b7e6f6a2ac96795f88acdc8a296561) - distinguish binary sensors *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -122,3 +134,4 @@
 [v0.3.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.2.0...v0.3.0
 [v0.4.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.3.0...v0.4.0
 [v0.5.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.4.0...v0.5.0
+[v0.6.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.5.0...v0.6.0

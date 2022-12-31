@@ -19,6 +19,7 @@ Makes it possible to view and control devices set up in the Nexa App/Web UI.
 * Control switches
 * Control dimmer switches
 * Control lights
+* Control Sonos player
 
 ## Installation
 

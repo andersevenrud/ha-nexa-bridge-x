@@ -14,7 +14,9 @@ from homeassistant.const import (
     POWER_WATT,
     ELECTRIC_CURRENT_AMPERE,
     ENERGY_KILO_WATT_HOUR,
-    PERCENTAGE
+    PERCENTAGE,
+    TEMP_CELSIUS,
+    LIGHT_LUX
 )
 
 DOMAIN = "nexa_bridge_x"
@@ -36,7 +38,10 @@ NODE_SENSOR_CAPABILITIES = [
     "meter",
     "power",
     "electric_voltage",
-    "electric_ampere"
+    "electric_ampere",
+    "temperature",
+    "humidity",
+    "luminance"
 ]
 
 SENSOR_MAP = {
@@ -69,7 +74,25 @@ SENSOR_MAP = {
         'unit': ELECTRIC_CURRENT_AMPERE,
         'device': SensorDeviceClass.CURRENT,
         'class': SensorStateClass.MEASUREMENT
-    }
+    },
+    'temperature': {
+        'name': 'Temperature',
+        'unit': TEMP_CELSIUS,
+        'device': SensorDeviceClass.TEMPERATURE,
+        'class': SensorStateClass.MEASUREMENT
+    },
+    'humidity': {
+        'name': 'Temperature',
+        'unit': PERCENTAGE,
+        'device': SensorDeviceClass.HUMIDITY,
+        'class': SensorStateClass.MEASUREMENT
+    },
+    'luminance': {
+        'name': 'Luminance',
+        'unit': LIGHT_LUX,
+        'device': SensorDeviceClass.ILLUMINANCE,
+        'class': SensorStateClass.MEASUREMENT
+    },
 }
 
 ENERGY_MAP = {

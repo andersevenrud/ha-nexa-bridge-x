@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.4.0] - 2022-12-31
+### :sparkles: New Features
+- [`fe493d2`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/fe493d26df5761f19272265be95a941ea0579afa) - change friendly name order *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :memo: Documentation Changes
+- [`f70cd9f`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/f70cd9f4179131b9eb5d166fca0b99cb6d91cae0) - **changelog**: add v0.3.0 release info *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`70ef2cc`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/70ef2cc36dd75d82802df0d1744bdde3986775cf) - **readme**: remove screenshot *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`0d2cf43`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/0d2cf43e5c79b8801e09e3e68f27ad892893168d) - **readme**: add naming tips *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`e0045cc`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/e0045cc72e15d90d71e50309fa9e4f18d33edd64) - **manifest**: bump version *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.3.0] - 2022-12-30
 ### :sparkles: New Features
 - [`c789c09`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/c789c09de5bab2f456dc80d6af6a347c8aa82777) - expose more device information *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -95,3 +108,4 @@
 [v0.1.3]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.1.2...v0.1.3
 [v0.2.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.1.3...v0.2.0
 [v0.3.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.2.0...v0.3.0
+[v0.4.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.3.0...v0.4.0

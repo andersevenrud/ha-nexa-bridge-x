@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.8.1] - 2022-12-31
+### :recycle: Refactors
+- [`e7b0d56`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/e7b0d56acc7fcd87bf7b1316bc54473105b7edd9) - more idiomatic python syntax *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :memo: Documentation Changes
+- [`74d755b`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/74d755b2a1f4e4421fa29e89813a870974a20f68) - **changelog**: add v0.8.0 release info *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`0465cf0`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/0465cf09e7926401f1e5c41c61653053db44abe0) - **manifest**: bump version *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.8.0] - 2022-12-31
 ### :sparkles: New Features
 - [`7a3db97`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/7a3db9702214ef41cecc79cd103c31d76bc4f126) - media player support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -164,3 +175,4 @@
 [v0.6.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.5.0...v0.6.0
 [v0.7.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.6.0...v0.7.0
 [v0.8.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.7.0...v0.8.0
+[v0.8.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.8.0...v0.8.1

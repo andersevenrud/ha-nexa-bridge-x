@@ -43,12 +43,11 @@ Add the integration in HA settings and set up the correct connection credentials
 
 > The factory login is `nexa` / `nexa`.
 
-All connected devices will appear automatically as entities with names based on features and configuration.
+All connected devices will appear automatically as a device with entities using
+names based on features and configuration.
 
 > The names configured in the App/Web UI defines the internal unique ID. Changing these
 > will create new entities. Duplicate names will be suffixed with a number.
-
-![example entity list](https://user-images.githubusercontent.com/161548/210004115-f69afac7-289b-47f5-801e-fc26a1f9ffb4.png)
 
 ## Documentation
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## [v0.7.0] - 2022-12-31
+### :sparkles: New Features
+- [`8e9b5b7`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/8e9b5b7cbc8aae19e023a3c424ed4913f0ec0ecf) - temperature/humidity/luminance sensor support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :memo: Documentation Changes
+- [`104e1a7`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/104e1a77837bb6807b55779fa8d9a12eb3f624d7) - **changelog**: add v0.6.0 release info *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`f8d75db`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/f8d75db5dee7a4cc1723875d67008cd3bac4cb99) - **manifest**: bump version *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.6.0] - 2022-12-31
 ### :sparkles: New Features
 - [`43b22bc`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/43b22bc96aa2958f10da1f834b1cb39ab8f43a67) - add nexa notification sensor support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -135,3 +146,4 @@
 [v0.4.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.3.0...v0.4.0
 [v0.5.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.4.0...v0.5.0
 [v0.6.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.5.0...v0.6.0
+[v0.7.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.6.0...v0.7.0

@@ -27,6 +27,13 @@ jobs:
           tag: ${{ steps.semver.outputs.next }}
           commit: ${{ github.sha }}
 
+      - name: Bump component version
+        uses: jossef/action-set-json-field@v2
+        with:
+          file: custom_components/nexa_bridge_x/manifest.json
+          field: version
+          value: ${{ steps.semver.outputs.nextStrict }}
+
       - name: Update CHANGELOG.md
         id: changelog
         uses: requarks/changelog-action@v1
@@ -34,6 +41,13 @@ jobs:
           token: ${{ github.token }}
           tag: ${{ steps.semver.outputs.next }}
           excludeTypes: "ci,build,docs,other,style"
+
+      - name: Commit manifest.json
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: 'chore(manifest): bump version'
+          file_pattern: custom_components/nexa_bridge_x/manifest.json
 
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4

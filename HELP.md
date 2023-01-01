@@ -27,9 +27,14 @@ Ensure that you're connecting to the correct IP and with the correct credentials
 If you're having issues with a device or don't see a device you have connected to your bridge,
 run the following commands:
 
+> Assumes access to a Linux environment or WSL.
+
 ```bash
 curl --user nexa:nexa http://<ip-of-bridge>/v1/info -o bridge-information.txt
 curl --user nexa:nexa http://<ip-of-bridge>/v1/nodes -o bridge-nodes.txt
+
+# Optionally provide information about discovery to help improve automatic configuration
+avahi-browse --all -p --no-db-lookup -t | grep nexabridge > bridge-discovery.txt
 ```
 
 > **Make sure to remove any personal information from the information file. This will contain

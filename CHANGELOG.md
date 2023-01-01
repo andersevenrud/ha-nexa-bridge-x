@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.10.2] - 2023-01-01
+### :bug: Bug Fixes
+- [`d599ba6`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/d599ba6a0cc7e95e14c8a44fb0afa5a65a10fd09) - **ci**: change commit tag for manifest version bump *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.10.1] - 2023-01-01
 ### :bug: Bug Fixes
 - [`4b3a6b6`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/4b3a6b689824fc29e5018f54a76bd5cf1967b2f6) - always use api state for dimmer entity *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -205,3 +210,4 @@
 [v0.9.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.8.1...v0.9.0
 [v0.10.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.9.0...v0.10.0
 [v0.10.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.10.0...v0.10.1
+[v0.10.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.10.1...v0.10.2

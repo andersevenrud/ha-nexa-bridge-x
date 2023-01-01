@@ -1,7 +1,7 @@
 {
   "domain": "nexa_bridge_x",
   "name": "Nexa Bridge X",
-  "version": "0.10.2",
+  "version": "0.11.0",
   "config_flow": true,
   "documentation": "https://github.com/andersevenrud/ha-nexa-bridge-x/#readme",
   "issue_tracker": "https://github.com/andersevenrud/ha-nexa-bridge-x/issues",
@@ -12,7 +12,9 @@
       "name": "nexabridge2"
     }
   ],
-  "dependencies": ["zeroconf"],
+  "dependencies": [
+    "zeroconf"
+  ],
   "codeowners": [
     "@andersevenrud"
   ],

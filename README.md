@@ -8,8 +8,9 @@ Makes it possible to view and control devices set up in the Nexa App/Web UI.
 
 ## Features
 
-> This project depends on you! See the [help file](HELP.md) if you want to see support for more devices.
-> I only have access to devices I'm personally using, and this bridge supports several protocols and gateways.
+> This project depends on you! I don't have access to all the devices supported
+> by this bridge. Go to the [device support](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/6)
+> issue on github for more information or to report experience with your devices.
 
 * Monitor energy use
 * Monitor switch states
@@ -60,11 +61,10 @@ names based on features and configuration.
 
 ## Documentation
 
-See the [help file](HELP.md) if you're having issues with this integration.
+* [Help for this integration](https://github.com/andersevenrud/ha-nexa-bridge-x/blob/main/HELP.md)
+* [Nexa Bridge X API](https://nexa.se/docs/)
 
 Kudos to Nexa for providing developer documentation for this device!
-
-* [Nexa Bridge X API](https://nexa.se/docs/)
 
 ## License
 

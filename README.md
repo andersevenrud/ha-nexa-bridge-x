@@ -63,6 +63,7 @@ names based on features and configuration.
 
 * [Help for this integration](https://github.com/andersevenrud/ha-nexa-bridge-x/blob/main/HELP.md)
 * [Nexa Bridge X API](https://nexa.se/docs/)
+* [Misc documentation](https://gist.github.com/andersevenrud/e4637c0cbde665f72f864032e540aa5d)
 
 Kudos to Nexa for providing developer documentation for this device!
 

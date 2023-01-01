@@ -140,7 +140,7 @@ class NexaApi:
                 async with session.get(url, auth=auth) as response:
                     return await self.handle_response(response)
 
-    async def test_connection(self) -> None:
+    async def test_connection(self) -> NexaInfoData:
         """See if the connection is valid"""
         result = await self.fetch_info()
 
@@ -157,6 +157,8 @@ class NexaApi:
         # TODO: Add semver check in the future if there are firmware diffs
         if not str(result["version"]).startswith("2"):
             raise NexaApiNotCompatibleError("Endpoint not compatible")
+
+        return result
 
     async def fetch_info(self) -> NexaInfoData:
         """Get information about bridge"""

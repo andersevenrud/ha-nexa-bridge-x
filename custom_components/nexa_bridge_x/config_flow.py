@@ -32,31 +32,19 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
 )
 
 
-class PlaceholderHub:
-    def __init__(self, host: str) -> None:
-        self.host = host
-
-    async def authenticate(self, username: str, password: str) -> bool:
-        try:
-            api = NexaApi(self.host, username, password)
-            await api.test_connection()
-        except Exception:  # pylint: disable=broad-except
-            return False
-
-        return True
-
-
 async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str, Any]:
     """Validate the user input allows us to connect.
 
     Data has the keys from STEP_USER_DATA_SCHEMA with values provided by the user.
     """
-    hub = PlaceholderHub(data["host"])
 
-    if not await hub.authenticate(data["username"], data["password"]):
+    try:
+        api = NexaApi(data["host"], data["username"], data["password"])
+        info = await api.test_connection()
+    except Exception:
         raise InvalidAuth
 
-    return {"title": "Nexa Bridge X"}
+    return {"title": info["name"]}
 
 
 class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
@@ -64,6 +52,7 @@ class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
 
     VERSION = 1
 
+    _discovered_name: str | None = None
     _discovered_host: str | None = None
     _discovered_username: str | None = None
     _discovered_password: str | None = None
@@ -118,10 +107,11 @@ class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
 
         try:
             api = NexaApi(host, 'nexa', 'nexa')
-            await api.test_connection()
+            info = await api.test_connection()
         except Exception:  # pylint: disable=broad-except
             return self.async_abort(reason="unknown")
 
+        self._discovered_name = info["name"]
         self._discovered_host = host
         self._discovered_username = username
         self._discovered_password = password
@@ -158,7 +148,7 @@ class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
             )
 
         return self.async_create_entry(
-            title="Nexa Bridge X",
+            title=self._discovered_name,
             data=form
         )
 

@@ -12,7 +12,7 @@
       "name": "nexabridge2"
     }
   ],
-  "dependencies": [],
+  "dependencies": ["zeroconf"],
   "codeowners": [
     "@andersevenrud"
   ],

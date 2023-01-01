@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.10.0] - 2023-01-01
+### :sparkles: New Features
+- [`a866d54`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/a866d549f52e724f4d982016879a5551545d9115) - **nexa**: improved connection check *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`3a67d1f`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/3a67d1f12572d0cb959415b99ed3fec96b44e9c4) - use name from bridge as added integration name *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.9.0] - 2022-12-31
 ### :sparkles: New Features
 - [`fa0629c`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/fa0629cf3a14b3720f647a73f221cdad9ed7ab04) - zeroconf auto discovery *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -192,3 +198,4 @@
 [v0.8.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.7.0...v0.8.0
 [v0.8.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.8.0...v0.8.1
 [v0.9.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.8.1...v0.9.0
+[v0.10.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.9.0...v0.10.0

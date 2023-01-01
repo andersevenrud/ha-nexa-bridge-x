@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.11.0] - 2023-01-01
+### :sparkles: New Features
+- [`2d70ac2`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/2d70ac2a80ad12762a34124a559198833af9cdfd) - add zeroconf to dependencies *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :recycle: Refactors
+- [`1f50161`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/1f5016177abf8f96bf9266faf951c59447453ebd) - direct api calls from entities *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.10.2] - 2023-01-01
 ### :bug: Bug Fixes
 - [`d599ba6`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/d599ba6a0cc7e95e14c8a44fb0afa5a65a10fd09) - **ci**: change commit tag for manifest version bump *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -211,3 +219,4 @@
 [v0.10.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.9.0...v0.10.0
 [v0.10.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.10.0...v0.10.1
 [v0.10.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.10.1...v0.10.2
+[v0.11.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.10.2...v0.11.0

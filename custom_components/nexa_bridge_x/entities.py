@@ -72,7 +72,6 @@ class NexaDimmerEntity(NexaEntity, LightEntity):
         _LOGGER.info("Found light %s: %s", node.id, node.name)
         super().__init__(coordinator)
         self.id = node.id
-        self.switch_to_state = None
         self._attr_name = create_friendly_name("Light", node)
         self._attr_unique_id = f"dimmer_{node.id}"
 
@@ -83,38 +82,25 @@ class NexaDimmerEntity(NexaEntity, LightEntity):
             value = node.get_value("switchLevel")
             value_percentage = int(value * 100)
 
-            if self.switch_to_state is not None:
-                self._attr_is_on = self.switch_to_state
-                if self.switch_to_state is True and value_percentage == 0:
-                    self.switch_to_state = None
-                if self.switch_to_state is False and value_percentage > 0:
-                    self.switch_to_state = None
-            else:
-                self._attr_is_on = value_percentage > 0
-
+            self._attr_is_on = value_percentage > 0
             self._attr_brightness = int(value * 255)
             self._attr_name = create_friendly_name("Light", node)
             self.async_write_ha_state()
-        else:
-            self.switch_to_state = False
 
     async def async_turn_on(self, **kwargs) -> None:
         if ATTR_BRIGHTNESS in kwargs:
-            value = kwargs.get(ATTR_BRIGHTNESS, 255)
-            await self.coordinator.handle_dimmer(self.id, value / 255)
+            value = kwargs.get(ATTR_BRIGHTNESS, 255) / 255
         else:
             value = 1.0
-            await self.coordinator.handle_dimmer(self.id, 1)
 
-        self.switch_to_state = True
         self._attr_is_on = True
-        self._attr_brightness = value
+        self._attr_brightness = int(value * 255)
 
         self.async_write_ha_state()
+        await self.coordinator.handle_dimmer(self.id, value)
         await self.coordinator.async_request_refresh()
 
     async def async_turn_off(self, **kwargs) -> None:
-        self.switch_to_state = False
         self._attr_is_on = False
         self._attr_brightness = 0
 

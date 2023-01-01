@@ -29,7 +29,7 @@ from homeassistant.components.light import (
     ATTR_BRIGHTNESS
 )
 from .const import (DOMAIN, SENSOR_MAP, ENERGY_MAP)
-from .nexa import NexaNode
+from .nexa import (NexaNode, NexaNodeValueType)
 import logging
 
 _LOGGER = logging.getLogger(__name__)
@@ -97,7 +97,7 @@ class NexaDimmerEntity(NexaEntity, LightEntity):
         self._attr_brightness = int(value * 255)
 
         self.async_write_ha_state()
-        await self.coordinator.handle_dimmer(self.id, value)
+        await self._api_call(value)
         await self.coordinator.async_request_refresh()
 
     async def async_turn_off(self, **kwargs) -> None:
@@ -105,8 +105,11 @@ class NexaDimmerEntity(NexaEntity, LightEntity):
         self._attr_brightness = 0
 
         self.async_write_ha_state()
-        await self.coordinator.handle_dimmer(self.id, 0)
+        await self._api_call(0.0)
         await self.coordinator.async_request_refresh()
+
+    async def _api_call(self, value: float):
+        await self.coordinator.api.node_call(self.id, "switchLevel", value)
 
 
 class NexaSwitchEntity(NexaEntity, SwitchEntity):
@@ -128,7 +131,7 @@ class NexaSwitchEntity(NexaEntity, SwitchEntity):
             self.async_write_ha_state()
 
     async def async_turn_on(self, **kwargs) -> None:
-        await self.coordinator.handle_switch(self.id, True)
+        await self._api_call(True)
 
         self._attr_is_on = True
 
@@ -136,12 +139,15 @@ class NexaSwitchEntity(NexaEntity, SwitchEntity):
         await self.coordinator.async_request_refresh()
 
     async def async_turn_off(self, **kwargs) -> None:
-        await self.coordinator.handle_switch(self.id, False)
+        await self._api_call(False)
 
         self._attr_is_on = False
 
         self.async_write_ha_state()
         await self.coordinator.async_request_refresh()
+
+    async def _api_call(self, value: bool):
+        await self.coordinator.api.node_call(self.id, "switchBinary", value)
 
 
 class NexaSensorEntity(NexaEntity, SensorEntity):
@@ -276,32 +282,19 @@ class NexaMediaPlayerEntity(NexaEntity, MediaPlayerEntity):
 
     async def async_media_play(self) -> None:
         """Send play command to media player"""
-        await self.coordinator.handle_media_player(
-            self.id,
-            "mediaPlayPause",
-            True
-        )
+        await self._api_call("mediaPlayPause", True)
 
     async def async_media_pause(self) -> None:
         """Send pause command to media player"""
-        await self.coordinator.handle_media_player(
-            self.id,
-            "mediaPlayPause",
-            False
-        )
+        await self._api_call("mediaPlayPause", False)
 
     async def async_set_volume_level(self, volume: float) -> None:
         """Send volume level to media player"""
-        await self.coordinator.handle_media_player(
-            self.id,
-            "mediaVolume",
-            int(volume * 100)
-        )
+        await self._api_call("mediaVolume", int(volume * 100))
 
     async def async_mute_volume(self, mute: bool) -> None:
         """Send mute command to media player."""
-        await self.coordinator.handle_media_player(
-            self.id,
-            "mediaMute",
-            mute
-        )
+        await self._api_call("mediaMute", mute)
+
+    async def _api_call(self, cap: str, value: NexaNodeValueType):
+        await self.coordinator.api.node_call(self.id, cap, value)

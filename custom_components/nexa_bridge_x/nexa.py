@@ -354,31 +354,6 @@ class NexaCoordinator(DataUpdateCoordinator):
                     return node
         return None
 
-    async def handle_switch(
-        self,
-        node_id: str,
-        value: bool
-    ) -> None:
-        """Handle a switch action"""
-        await self.api.node_call(node_id, "switchBinary", value)
-
-    async def handle_dimmer(
-        self,
-        node_id: str,
-        value: NexaNodeValueType
-    ) -> None:
-        """Handle a dimmer action"""
-        await self.api.node_call(node_id, "switchLevel", value)
-
-    async def handle_media_player(
-        self,
-        node_id: str,
-        capability: str,
-        value: NexaNodeValueType
-    ) -> None:
-        """Handle a media player action"""
-        await self.api.node_call(node_id, capability, value)
-
     async def _async_update_data(self) -> None:
         """Update data for all nodes in the background"""
         try:

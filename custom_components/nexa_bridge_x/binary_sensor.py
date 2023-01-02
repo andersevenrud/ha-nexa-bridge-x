@@ -20,10 +20,16 @@ async def async_setup_entry(
 ) -> None:
     """Set up all detected binary sensors"""
     coordinator = hass.data[DOMAIN][entry.entry_id].coordinator
+
+    found_sensors = filter(
+        lambda node: node.is_binary_sensor(),
+        coordinator.data.nodes
+    )
+
     entities = (
-        NexaBinarySensorEntity(coordinator, node, "switchBinary")
-        for node in coordinator.data.nodes
-        if node.is_binary_sensor()
+        NexaBinarySensorEntity(coordinator, node, name)
+        for node in found_sensors
+        for name in node.get_binary_capabilities()
     )
 
     if entities:

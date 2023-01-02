@@ -28,7 +28,7 @@ from homeassistant.components.light import (
     ColorMode,
     ATTR_BRIGHTNESS
 )
-from .const import (DOMAIN, SENSOR_MAP, ENERGY_MAP)
+from .const import (DOMAIN, SENSOR_MAP, ENERGY_MAP, BINARY_MAP)
 from .nexa import (NexaNode, NexaNodeValueType)
 import logging
 
@@ -198,21 +198,32 @@ class NexaBinarySensorEntity(NexaEntity, BinarySensorEntity):
     def __init__(
         self,
         coordinator: DataUpdateCoordinator,
-        node: NexaNode
+        node: NexaNode,
+        key: str
     ):
         _LOGGER.info("Found binary sensor %s: %s", node.id, node.name)
         super().__init__(coordinator)
         self.id = node.id
+        self.key = key
         self._attr_is_on = None
-        self._attr_name = create_friendly_name("Binary Sensor", node)
-        self._attr_unique_id = f"binary_sensor_{node.id}"
+        self._attr_unique_id = f"binary_sensor_{node.id}_{key}"
+
+        if key in BINARY_MAP:
+            friendly = f"{BINARY_MAP[key]['name']} Sensor"
+            self._attr_name = create_friendly_name(friendly, node)
+        else:
+            self._attr_name = create_friendly_name("Binary Sensor", node)
 
     @callback
     def _handle_coordinator_update(self) -> None:
         node = self.coordinator.get_node_by_id(self.id)
         if node:
-            self._attr_is_on = node.get_value("switchBinary")
-            self._attr_name = create_friendly_name("Binary Sensor", node)
+            self._attr_is_on = node.get_value(self.key)
+            if self.key in BINARY_MAP:
+                friendly = f"{BINARY_MAP[self.key]['name']} Sensor"
+                self._attr_name = create_friendly_name(friendly, node)
+            else:
+                self._attr_name = create_friendly_name("Binary Sensor", node)
             self.async_write_ha_state()
 
 

@@ -285,6 +285,13 @@ class NexaNode:
         self.capabilities = node["capabilities"]
         self.values = values
 
+    def get_binary_capabilities(self) -> list[str]:
+        """Get all capabilities"""
+        return list(filter(
+            lambda n: n in NODE_BINARY_CAPABILITIES,
+            self.capabilities
+        ))
+
     def get_sensor_capabilities(self) -> list[str]:
         """Get all capabilities"""
         return list(filter(

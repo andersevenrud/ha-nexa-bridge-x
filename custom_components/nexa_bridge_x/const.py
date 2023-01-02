@@ -36,7 +36,8 @@ NODE_BINARY_CAPABILITIES = [
     "notificationMotion",
     "notificationSmoke",
     "notificationWater",
-    "notificationTwilight"
+    "notificationTwilight",
+    "notificationTamper"
 ]
 
 NODE_SENSOR_CAPABILITIES = [
@@ -58,6 +59,27 @@ ENERGY_ATTRS = [
     "yesterday_kilowatt_hours",
     "month_kilowatt_hours"
 ]
+
+BINARY_MAP = {
+    "notificationContact": {
+        "name": "Contact"
+    },
+    "notificationMotion": {
+        "name": "Motion"
+    },
+    "notificationSmoke": {
+        "name": "Smoke"
+    },
+    "notificationWater": {
+        "name": "Water"
+    },
+    "notificationTwilight": {
+        "name": "Twilight"
+    },
+    "notificationTamper": {
+        "name": "Tamper"
+    }
+}
 
 SENSOR_MAP = {
     "switchLevel": {

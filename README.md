@@ -14,13 +14,13 @@ Makes it possible to view and control devices set up in the Nexa App/Web UI.
 
 * Monitor energy use
 * Monitor switch states
-* Monitor dimmer switch states
-* Monitor temperatures, humidity, luminance
-* Monitor notification states (motion, contact, smoke, etc.)
+* Monitor dimmer levels
+* Monitor sensors (temperatures, humidity, luminance, etc.)
+* Monitor binary sensors (motion, contact, smoke, etc.)
 * Control switches
-* Control dimmer switches
-* Control lights
-* Control Sonos player
+* Control dimmer levels
+* Control lights (Hue, Trådfri, Twinkly)
+* Control media player (Sonos)
 
 ## Installation
 

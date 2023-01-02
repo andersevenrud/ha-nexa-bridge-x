@@ -39,7 +39,8 @@ NODE_BINARY_CAPABILITIES = [
     "notificationSmoke",
     "notificationWater",
     "notificationTwilight",
-    "notificationTamper"
+    "notificationTamper",
+    "switchBinary"
 ]
 
 NODE_SENSOR_CAPABILITIES = [
@@ -81,7 +82,10 @@ BINARY_MAP = {
     },
     "notificationTamper": {
         "name": "Tamper"
-    }
+    },
+    "switchBinary": {
+        "name": "Switch"
+    },
 }
 
 SENSOR_MAP = {

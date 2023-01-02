@@ -8,7 +8,7 @@ License: MIT
 from __future__ import annotations
 from functools import reduce
 from datetime import timedelta
-from typing import Any
+from typing import cast, Any
 from aiohttp.web import Response
 from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.config_entries import ConfigEntry
@@ -22,7 +22,8 @@ from .const import (
     NODE_BINARY_CAPABILITIES,
     NODE_MEDIA_CAPABILITIES,
     POLL_INTERVAL,
-    POLL_TIMEOUT
+    POLL_TIMEOUT,
+    RECONNECT_SLEEP
 )
 import asyncio
 import aiohttp
@@ -39,6 +40,8 @@ NexaEnergyNodeData = Any
 NexaNodeData = Any
 NexaInfoData = Any
 NexaCallData = Any
+NexaWebsocketMessage = str
+NexaWebsocketData = Any
 
 
 def is_capable_of(node: NexaNode, items: list(str)):
@@ -76,16 +79,129 @@ class NexaPlatform:
 
         self.api = NexaApi(host, username, password)
         self.coordinator = NexaCoordinator(hass, self.api)
+        self.ws = NexaWebSocket(host, hass, self.coordinator)
+
+    async def destroy(self) -> None:
+        await self.ws.destroy()
 
     async def init(self) -> None:
         """Initialize all services"""
         await self.api.test_connection()
         await self.coordinator.async_config_entry_first_refresh()
+        await self.ws.connect()
+
+
+class NexaWebSocket:
+    """Nexa Websocket"""
+    host: str
+    stopping: bool = False
+    task = None
+    ws: aiohttp.ws | None = None
+    session: aiohttp.session | None = None
+
+    def __init__(
+        self,
+        host: str,
+        hass: HomeAssistant,
+        coordinator: NexaCoordinator
+    ) -> None:
+        self.host = host
+        self.hass = hass
+        self.coordinator = coordinator
+
+    async def destroy(self) -> None:
+        """Stop all running things"""
+        self.stopping = True
+        _LOGGER.debug("Destroying websocket api instance")
+
+        await self.close()
+
+    async def close(self) -> None:
+        """Close the running session"""
+        _LOGGER.debug("Closing websocket")
+
+        if self.ws:
+            await self.ws.close()
+            self.ws = None
+
+        if self.session:
+            await self.session.close()
+            self.session = None
+
+        if self.task:
+            self.task.cancel()
+            self.task = None
+
+    async def on_message(self, msg: NexaWebsocketMessage) -> None:
+        if not msg.startswith("{"):
+            msg = msg.split(':', 1)[1]
+
+        try:
+            _LOGGER.debug("Websocket message: %s", msg)
+            data = json.loads(msg)
+        except Exception as err:
+            _LOGGER.warning("Invalid websocket message (%s): %s", msg, err)
+            return
+
+        try:
+            await self.coordinator.update_node_from_message(data)
+        except Exception:
+            _LOGGER.warning("Failed to handle message: %s", msg)
+
+    async def run(self, url):
+        try:
+            async with aiohttp.ClientSession() as session:
+                self.session = session
+
+                try:
+                    async with session.ws_connect(url) as ws:
+                        self.ws = ws
+
+                        async for msg in self.ws:
+                            try:
+                                if msg.type in (aiohttp.WSMsgType.CLOSED,
+                                                aiohttp.WSMsgType.ERROR):
+                                    break
+
+                                if msg.data:
+                                    await self.on_message(
+                                        cast(NexaWebsocketMessage, msg.data)
+                                    )
+                            except Exception:
+                                _LOGGER.error("Websocket message error")
+
+                except Exception:
+                    _LOGGER.warning("Failed to create websocket connection...")
+
+        except Exception:
+            _LOGGER.error("Failed to create websocket session...")
+
+        asyncio.create_task(self.connect(True))
+
+    async def connect(self, reconnect: bool = False) -> None:
+        """Handle websocket connection"""
+
+        await self.close()
+
+        if self.stopping:
+            return
+
+        url = f"ws://{self.host}:8887"
+
+        _LOGGER.debug(
+            "%s to websocket: %s",
+            reconnect and "Reconnecting" or "Connecting",
+            url
+        )
+
+        if reconnect:
+            await asyncio.sleep(RECONNECT_SLEEP)
+
+        self.task = asyncio.create_task(self.run(url))
 
 
 class NexaApi:
     """Nexa API"""
-    host: str
 
     def __init__(self, host: str, username: str, password: str) -> None:
         self.host = host
@@ -299,6 +415,13 @@ class NexaNode:
             self.capabilities
         ))
 
+    def set_value(self, name: str, new_value: NexaNodeValueType) -> None:
+        """Set current state value"""
+        for value in self.values:
+            if value.name == name:
+                value.value = new_value
+                break
+
     def get_value(self, name: str) -> NexaNodeValueType | None:
         """Get current state value"""
         for value in self.values:
@@ -355,11 +478,32 @@ class NexaCoordinator(DataUpdateCoordinator):
 
     def get_node_by_id(self, node_id: str) -> NexaNode | None:
         """Gets node by id"""
-        if self.data.nodes:
+        if self.data and self.data.nodes:
             for node in self.data.nodes:
                 if node.id == node_id:
                     return node
         return None
+
+    async def update_node_from_message(self, data: NexaWebsocketData) -> None:
+        """Try to update a node based on message"""
+        if not self.data:
+            _LOGGER.info("Coordinator is not yet ready to update data...")
+            return
+
+        for cap in ("capability", "sourceNode", "value"):
+            if cap not in data:
+                return
+
+        node_id: str = data["sourceNode"]
+        if node_id and str(node_id) != "-1":
+            value: NexaNodeValueType = data["value"]
+            cap: str = data["capability"]
+
+            node = self.get_node_by_id(node_id)
+            if node:
+                _LOGGER.debug("Updating node %s from:  %s", node_id, value)
+                node.set_value(cap, value)
+                self.async_set_updated_data(self.data)
 
     async def _async_update_data(self) -> None:
         """Update data for all nodes in the background"""

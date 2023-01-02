@@ -44,6 +44,9 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         entry,
         PLATFORMS
     ):
-        hass.data[DOMAIN].pop(entry.entry_id)
+        if entry.entry_id in hass.data[DOMAIN]:
+            platform = hass.data[DOMAIN][entry.entry_id]
+            hass.data[DOMAIN].pop(entry.entry_id)
+            await platform.destroy()
 
     return unload_ok

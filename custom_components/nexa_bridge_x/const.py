@@ -25,6 +25,8 @@ POLL_INTERVAL = 10
 
 POLL_TIMEOUT = 10
 
+RECONNECT_SLEEP = 5
+
 NODE_MEDIA_CAPABILITIES = [
     "mediaVolume",
     "mediaPlayPause",

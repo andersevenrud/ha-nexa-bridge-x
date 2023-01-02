@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.13.0] - 2023-01-02
+### :sparkles: New Features
+- [`b01759f`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/b01759f7300abc14869ca68c4ede539823177134) - listen on websocket for updates *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.12.0] - 2023-01-02
 ### :sparkles: New Features
 - [`59d7bc7`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/59d7bc72cf81a063a52c9a0e5b1f51c3be84a0dc) - battery level sensor support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -229,3 +234,4 @@
 [v0.10.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.10.1...v0.10.2
 [v0.11.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.10.2...v0.11.0
 [v0.12.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.11.0...v0.12.0
+[v0.13.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.12.0...v0.13.0

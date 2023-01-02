@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.12.0] - 2023-01-02
+### :sparkles: New Features
+- [`59d7bc7`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/59d7bc72cf81a063a52c9a0e5b1f51c3be84a0dc) - battery level sensor support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :bug: Bug Fixes
+- [`ca2ee03`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/ca2ee038df1c322d3d193e81be48e8d381628181) - correctly detect binary switches *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.11.0] - 2023-01-01
 ### :sparkles: New Features
 - [`2d70ac2`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/2d70ac2a80ad12762a34124a559198833af9cdfd) - add zeroconf to dependencies *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -220,3 +228,4 @@
 [v0.10.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.10.0...v0.10.1
 [v0.10.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.10.1...v0.10.2
 [v0.11.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.10.2...v0.11.0
+[v0.12.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.11.0...v0.12.0

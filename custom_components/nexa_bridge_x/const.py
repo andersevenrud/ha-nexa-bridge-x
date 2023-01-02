@@ -48,7 +48,8 @@ NODE_SENSOR_CAPABILITIES = [
     "electric_ampere",
     "temperature",
     "humidity",
-    "luminance"
+    "luminance",
+    "battery"
 ]
 
 ENERGY_ATTRS = [
@@ -128,6 +129,12 @@ SENSOR_MAP = {
         "name": "Luminance",
         "unit": LIGHT_LUX,
         "device": SensorDeviceClass.ILLUMINANCE,
+        "class": SensorStateClass.MEASUREMENT
+    },
+    "battery": {
+        "name": "Battery",
+        "unit": PERCENTAGE,
+        "device": SensorDeviceClass.BATTERY,
         "class": SensorStateClass.MEASUREMENT
     },
 }

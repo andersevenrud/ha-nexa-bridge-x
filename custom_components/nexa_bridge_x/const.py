@@ -147,37 +147,37 @@ SENSOR_MAP = {
 
 ENERGY_MAP = {
     "total_kilowatt_hours": {
-        "name": "NEXA Total kWh",
+        "name": "Total kWh",
         "unit": ENERGY_KILO_WATT_HOUR,
         "device": SensorDeviceClass.ENERGY,
         "class": SensorStateClass.TOTAL_INCREASING
     },
     "current_wattage": {
-        "name": "NEXA Current W",
+        "name": "Current W",
         "unit": POWER_WATT,
         "device": SensorDeviceClass.POWER,
         "class": SensorStateClass.MEASUREMENT
     },
     "current_kilowatt_hours": {
-        "name": "NEXA Current kWh",
+        "name": "Current kWh",
         "unit": ENERGY_KILO_WATT_HOUR,
         "device": SensorDeviceClass.ENERGY,
         "class": SensorStateClass.MEASUREMENT
     },
     "today_kilowatt_hours": {
-        "name": "NEXA Today kWh",
+        "name": "Today kWh",
         "unit": ENERGY_KILO_WATT_HOUR,
         "device": SensorDeviceClass.ENERGY,
         "class": SensorStateClass.TOTAL_INCREASING
     },
     "yesterday_kilowatt_hours": {
-        "name": "NEXA Yesterday kWh",
+        "name": "Yesterday kWh",
         "unit": ENERGY_KILO_WATT_HOUR,
         "device": SensorDeviceClass.ENERGY,
         "class": SensorStateClass.TOTAL_INCREASING
     },
     "month_kilowatt_hours": {
-        "name": "NEXA Month kWh",
+        "name": "Month kWh",
         "unit": ENERGY_KILO_WATT_HOUR,
         "device": SensorDeviceClass.ENERGY,
         "class": SensorStateClass.TOTAL_INCREASING

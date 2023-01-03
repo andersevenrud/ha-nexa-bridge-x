@@ -35,11 +35,6 @@ import logging
 _LOGGER = logging.getLogger(__name__)
 
 
-def create_friendly_name(suffix: str, node: NexaNode) -> str:
-    """Create a friendly name for HA"""
-    return f"{node.name or node.id} {suffix}"
-
-
 class NexaEntity(CoordinatorEntity):
     """Representation of a Nexa entity."""
 
@@ -63,16 +58,33 @@ class NexaEntity(CoordinatorEntity):
         )
 
 
-class NexaDimmerEntity(NexaEntity, LightEntity):
+class NexaNodeEntity(NexaEntity):
+    """Representation of a Nexa Device entity."""
+
+    _attr_has_entity_name = True
+
+    def __init__(self, node: NexaNode, coordinator: CoordinatorEntity) -> None:
+        super().__init__(coordinator)
+
+        self._attr_device_info = DeviceInfo(
+            name={node.name or node.id},
+            via_device=(DOMAIN, coordinator.config_entry.entry_id),
+            identifiers={
+                (DOMAIN, node.id)
+            }
+        )
+
+
+class NexaDimmerEntity(NexaNodeEntity, LightEntity):
     """Entity for light"""
     _attr_color_mode = ColorMode.BRIGHTNESS
     _attr_supported_color_modes = {ColorMode.ONOFF, ColorMode.BRIGHTNESS}
 
     def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode):
         _LOGGER.info("Found light %s: %s", node.id, node.name)
-        super().__init__(coordinator)
+        super().__init__(node, coordinator)
         self.id = node.id
-        self._attr_name = create_friendly_name("Light", node)
+        self._attr_name = "Light"
         self._attr_unique_id = f"dimmer_{node.id}"
 
     @callback
@@ -84,7 +96,6 @@ class NexaDimmerEntity(NexaEntity, LightEntity):
 
             self._attr_is_on = value_percentage > 0
             self._attr_brightness = int(value * 255)
-            self._attr_name = create_friendly_name("Light", node)
             self.async_write_ha_state()
 
     async def async_turn_on(self, **kwargs) -> None:
@@ -112,14 +123,14 @@ class NexaDimmerEntity(NexaEntity, LightEntity):
         await self.coordinator.api.node_call(self.id, "switchLevel", value)
 
 
-class NexaSwitchEntity(NexaEntity, SwitchEntity):
+class NexaSwitchEntity(NexaNodeEntity, SwitchEntity):
     """Entity for swtich"""
 
     def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode):
         _LOGGER.info("Found switch %s: %s", node.id, node.name)
-        super().__init__(coordinator)
+        super().__init__(node, coordinator)
         self.id = node.id
-        self._attr_name = create_friendly_name("Switch", node)
+        self._attr_name = "Switch"
         self._attr_unique_id = f"switch_{node.id}"
 
     @callback
@@ -127,7 +138,6 @@ class NexaSwitchEntity(NexaEntity, SwitchEntity):
         node = self.coordinator.get_node_by_id(self.id)
         if node:
             self._attr_is_on = node.get_value("switchBinary")
-            self._attr_name = create_friendly_name("Switch", node)
             self.async_write_ha_state()
 
     async def async_turn_on(self, **kwargs) -> None:
@@ -150,7 +160,7 @@ class NexaSwitchEntity(NexaEntity, SwitchEntity):
         await self.coordinator.api.node_call(self.id, "switchBinary", value)
 
 
-class NexaSensorEntity(NexaEntity, SensorEntity):
+class NexaSensorEntity(NexaNodeEntity, SensorEntity):
     """Entity for sensor"""
 
     def __init__(
@@ -160,16 +170,15 @@ class NexaSensorEntity(NexaEntity, SensorEntity):
         key: str
     ):
         _LOGGER.info("Found %s sensor %s: %s", key, node.id, node.name)
-        super().__init__(coordinator)
+        super().__init__(node, coordinator)
         self.id = node.id
         self.key = key
         self._attr_native_value = None
-        self._attr_name = create_friendly_name("Sensor", node)
+        self._attr_name = "Sensor"
         self._attr_unique_id = f"sensor_{node.id}_{key}"
 
         if key in SENSOR_MAP:
-            friendly = f"{SENSOR_MAP[key]['name']} Sensor"
-            self._attr_name = create_friendly_name(friendly, node)
+            self._attr_name = f"{SENSOR_MAP[key]['name']} Sensor"
             self._attr_native_unit_of_measurement = SENSOR_MAP[key]["unit"]
             self._attr_device_class = SENSOR_MAP[key]["device"]
             self._attr_state_class = SENSOR_MAP[key]["class"]
@@ -184,15 +193,10 @@ class NexaSensorEntity(NexaEntity, SensorEntity):
             else:
                 self._attr_native_value = value
 
-            if self.key in SENSOR_MAP:
-                friendly = f"{SENSOR_MAP[self.key]['name']} Sensor"
-                self._attr_name = create_friendly_name(friendly, node)
-            else:
-                self._attr_name = create_friendly_name("Sensor", node)
             self.async_write_ha_state()
 
 
-class NexaBinarySensorEntity(NexaEntity, BinarySensorEntity):
+class NexaBinarySensorEntity(NexaNodeEntity, BinarySensorEntity):
     """Entity for binary sensor"""
 
     def __init__(
@@ -202,28 +206,22 @@ class NexaBinarySensorEntity(NexaEntity, BinarySensorEntity):
         key: str
     ):
         _LOGGER.info("Found binary sensor %s: %s", node.id, node.name)
-        super().__init__(coordinator)
+        super().__init__(node, coordinator)
         self.id = node.id
         self.key = key
         self._attr_is_on = None
         self._attr_unique_id = f"binary_sensor_{node.id}_{key}"
 
         if key in BINARY_MAP:
-            friendly = f"{BINARY_MAP[key]['name']} Sensor"
-            self._attr_name = create_friendly_name(friendly, node)
+            self._attr_name = f"{BINARY_MAP[key]['name']} Sensor"
         else:
-            self._attr_name = create_friendly_name("Binary Sensor", node)
+            self._attr_name = "Binary Sensor"
 
     @callback
     def _handle_coordinator_update(self) -> None:
         node = self.coordinator.get_node_by_id(self.id)
         if node:
             self._attr_is_on = node.get_value(self.key)
-            if self.key in BINARY_MAP:
-                friendly = f"{BINARY_MAP[self.key]['name']} Sensor"
-                self._attr_name = create_friendly_name(friendly, node)
-            else:
-                self._attr_name = create_friendly_name("Binary Sensor", node)
             self.async_write_ha_state()
 
 
@@ -250,7 +248,7 @@ class NexaEnergyEntity(NexaEntity, SensorEntity):
         self.async_write_ha_state()
 
 
-class NexaMediaPlayerEntity(NexaEntity, MediaPlayerEntity):
+class NexaMediaPlayerEntity(NexaNodeEntity, MediaPlayerEntity):
     """Entity for media player"""
 
     _attr_device_class = MediaPlayerDeviceClass.SPEAKER
@@ -271,7 +269,7 @@ class NexaMediaPlayerEntity(NexaEntity, MediaPlayerEntity):
         node: NexaNode
     ):
         _LOGGER.info("Found media player %s: %s", node.id, node.name)
-        super().__init__(coordinator)
+        super().__init__(node, coordinator)
         self.id = node.id
         self._attr_native_value = None
         self._attr_unique_id = f"media_player_{node.id}"

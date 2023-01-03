@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.0.1] - 2023-01-03
+### :bug: Bug Fixes
+- [`8136e36`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/8136e3699366c486962c9d5e44034cb6f59b41c0) - correctly set nested names *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.0.0] - 2023-01-03
 ### :boom: BREAKING CHANGES
 - due to [`a97edf2`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/a97edf2d61d2681f8875de5e7eab694e4fafeb74) - nest devices with devices *(commit by [@andersevenrud](https://github.com/andersevenrud))*:
@@ -259,3 +264,4 @@
 [v0.14.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.13.0...v0.14.0
 [v0.15.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.14.0...v0.15.0
 [v1.0.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.15.0...v1.0.0
+[v1.0.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.0...v1.0.1

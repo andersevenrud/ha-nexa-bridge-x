@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.15.0] - 2023-01-03
+### :sparkles: New Features
+- [`758470e`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/758470e3075d23f221d439a173bb2e19d235eaa4) - syncronize values with timestamps *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.14.0] - 2023-01-02
 ### :sparkles: New Features
 - [`7debb71`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/7debb71f2c1e102fe90948ba85391451d0f0eb71) - also show switches as binary sensor *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -241,3 +246,4 @@
 [v0.12.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.11.0...v0.12.0
 [v0.13.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.12.0...v0.13.0
 [v0.14.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.13.0...v0.14.0
+[v0.15.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.14.0...v0.15.0

@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.0.0] - 2023-01-03
+### :boom: BREAKING CHANGES
+- due to [`a97edf2`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/a97edf2d61d2681f8875de5e7eab694e4fafeb74) - nest devices with devices *(commit by [@andersevenrud](https://github.com/andersevenrud))*:
+
+  nest devices with devices
+
+
+### :sparkles: New Features
+- [`a97edf2`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/a97edf2d61d2681f8875de5e7eab694e4fafeb74) - nest devices with devices *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v0.15.0] - 2023-01-03
 ### :sparkles: New Features
 - [`758470e`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/758470e3075d23f221d439a173bb2e19d235eaa4) - syncronize values with timestamps *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -247,3 +258,4 @@
 [v0.13.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.12.0...v0.13.0
 [v0.14.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.13.0...v0.14.0
 [v0.15.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.14.0...v0.15.0
+[v1.0.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.15.0...v1.0.0

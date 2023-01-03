@@ -67,7 +67,7 @@ class NexaNodeEntity(NexaEntity):
         super().__init__(coordinator)
 
         self._attr_device_info = DeviceInfo(
-            name={node.name or node.id},
+            name=f"{coordinator.data.info.name} {node.name or node.id}",
             via_device=(DOMAIN, coordinator.config_entry.entry_id),
             identifiers={
                 (DOMAIN, node.id)

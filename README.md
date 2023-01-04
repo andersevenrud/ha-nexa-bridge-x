@@ -53,11 +53,9 @@ and you should be ready to go!
 All connected devices will appear automatically as a device with entities using
 names based on features and configuration.
 
-> The names configured in the App/Web UI defines the internal unique ID. Changing these
-> will create new entities. Duplicate names will be suffixed with a number.
+> The names are taken from configurations in the App/Web UI.
 > It is recommended that you name them something simple, i.e. if you have a switch
-> in your connected to a power strip, lamp, etc. name it "Living Room". All devices
-> gets suffixed in HA with the type of device.
+> in your connected to a power strip, lamp, etc. name it "Living Room".
 
 ## Documentation
 

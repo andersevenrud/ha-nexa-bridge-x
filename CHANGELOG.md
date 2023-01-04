@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.0.2] - 2023-01-04
+### :bug: Bug Fixes
+- [`c11a4e4`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/c11a4e4d6fbeacb3619f5a756e41bdea406cc159) - wrong label on humidity sensor *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.0.1] - 2023-01-03
 ### :bug: Bug Fixes
 - [`8136e36`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/8136e3699366c486962c9d5e44034cb6f59b41c0) - correctly set nested names *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -265,3 +270,4 @@
 [v0.15.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.14.0...v0.15.0
 [v1.0.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.15.0...v1.0.0
 [v1.0.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.0...v1.0.1
+[v1.0.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.1...v1.0.2

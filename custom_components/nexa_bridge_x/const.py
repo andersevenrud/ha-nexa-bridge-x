@@ -126,7 +126,7 @@ SENSOR_MAP = {
         "class": SensorStateClass.MEASUREMENT
     },
     "humidity": {
-        "name": "Temperature",
+        "name": "Humidity",
         "unit": PERCENTAGE,
         "device": SensorDeviceClass.HUMIDITY,
         "class": SensorStateClass.MEASUREMENT

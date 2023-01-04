@@ -36,7 +36,7 @@ _LOGGER = logging.getLogger(__name__)
 
 
 class NexaEntity(CoordinatorEntity):
-    """Representation of a Nexa entity."""
+    """Representation of a Nexa Bridge entity"""
 
     _attr_has_entity_name = True
 
@@ -59,7 +59,7 @@ class NexaEntity(CoordinatorEntity):
 
 
 class NexaNodeEntity(NexaEntity):
-    """Representation of a Nexa Device entity."""
+    """Representation of a Nexa Device entity"""
 
     _attr_has_entity_name = True
 
@@ -99,6 +99,7 @@ class NexaDimmerEntity(NexaNodeEntity, LightEntity):
             self.async_write_ha_state()
 
     async def async_turn_on(self, **kwargs) -> None:
+        """Send turn on or light command"""
         if ATTR_BRIGHTNESS in kwargs:
             value = kwargs.get(ATTR_BRIGHTNESS, 255) / 255
         else:
@@ -112,6 +113,7 @@ class NexaDimmerEntity(NexaNodeEntity, LightEntity):
         await self.coordinator.async_request_refresh()
 
     async def async_turn_off(self, **kwargs) -> None:
+        """Send turn off or light command"""
         self._attr_is_on = False
         self._attr_brightness = 0
 
@@ -141,6 +143,7 @@ class NexaSwitchEntity(NexaNodeEntity, SwitchEntity):
             self.async_write_ha_state()
 
     async def async_turn_on(self, **kwargs) -> None:
+        """Send turn on command"""
         await self._api_call(True)
 
         self._attr_is_on = True
@@ -149,6 +152,7 @@ class NexaSwitchEntity(NexaNodeEntity, SwitchEntity):
         await self.coordinator.async_request_refresh()
 
     async def async_turn_off(self, **kwargs) -> None:
+        """Send turn off command"""
         await self._api_call(False)
 
         self._attr_is_on = False

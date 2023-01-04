@@ -51,6 +51,7 @@ def is_capable_of(node: NexaNode, items: list(str)) -> bool:
 
 
 def is_newer_date(current: str, new: str) -> bool:
+    """Check if given timestamp is newer or equal to the current"""
     current_time = dateutil.parser.isoparse(current)
     new_time = dateutil.parser.isoparse(new)
     return new_time >= current_time
@@ -89,6 +90,7 @@ class NexaPlatform:
         self.ws = NexaWebSocket(host, hass, self.coordinator)
 
     async def destroy(self) -> None:
+        """Destroy all running services"""
         await self.ws.destroy()
 
     async def init(self) -> None:
@@ -140,6 +142,7 @@ class NexaWebSocket:
             self.task = None
 
     async def on_message(self, msg: NexaWebsocketMessage) -> None:
+        """Handle message from websocket"""
         if not msg.startswith("{"):
             msg = msg.split(':', 1)[1]
 
@@ -154,7 +157,8 @@ class NexaWebSocket:
         except Exception:
             _LOGGER.warning("Failed to handle message: %s", msg)
 
-    async def run(self, url):
+    async def run(self, url) -> None:
+        """Create websocket connection"""
         try:
             async with aiohttp.ClientSession() as session:
                 self.session = session
@@ -185,7 +189,7 @@ class NexaWebSocket:
         asyncio.create_task(self.connect(True))
 
     async def connect(self, reconnect: bool = False) -> None:
-        """Handle websocket connection"""
+        """Initiate websocket connection"""
 
         await self.close()
 
@@ -422,6 +426,7 @@ class NexaNode:
         ))
 
     def set_values_from_node(self, node: NexaNode) -> None:
+        """Sets values from another node"""
         for new_value in node.values:
             new_time = new_value.time
             for current_value in self.values:
@@ -514,6 +519,7 @@ class NexaCoordinator(DataUpdateCoordinator):
         return None
 
     def update_nodes_from_data(self, data: NexaData):
+        """Try to update nodes from given data"""
         self.data.info = data.info
         self.data.energy = data.energy
 

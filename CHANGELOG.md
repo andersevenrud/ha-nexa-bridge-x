@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.0.3] - 2023-02-05
+### :bug: Bug Fixes
+- [`e031387`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/e031387e297d2a6e870350e85827955730531c11) - **nexa**: incorrect password lookup *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.0.2] - 2023-01-04
 ### :bug: Bug Fixes
 - [`c11a4e4`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/c11a4e4d6fbeacb3619f5a756e41bdea406cc159) - wrong label on humidity sensor *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -271,3 +276,4 @@
 [v1.0.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v0.15.0...v1.0.0
 [v1.0.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.0...v1.0.1
 [v1.0.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.1...v1.0.2
+[v1.0.3]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.2...v1.0.3

@@ -83,7 +83,7 @@ class NexaPlatform:
     def __init__(self, hass: HomeAssistant, entry: ConfigEntry):
         host = entry.data["host"]
         username = entry.data["username"]
-        password = entry.data["username"]
+        password = entry.data["password"]
 
         self.api = NexaApi(host, username, password)
         self.coordinator = NexaCoordinator(hass, self.api)

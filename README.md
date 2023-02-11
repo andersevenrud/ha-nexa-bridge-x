@@ -2,6 +2,8 @@
 
 This is a custom Home Assistant integration for the [Nexa Bridge X](https://nexa.se/nexa-bridge-x).
 
+> The legacy "Nexa Bridge" (non-X) is also supported, but with limited functionality.
+
 Makes it possible to view and control devices set up in the Nexa App/Web UI.
 
 > This project is a **unofficial** integration and not affiliated with Nexa in any way.

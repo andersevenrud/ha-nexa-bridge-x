@@ -10,6 +10,10 @@
     {
       "type": "_ssh._tcp.local.",
       "name": "nexabridge2"
+    },
+    {
+      "type": "_ssh._tcp.local.",
+      "name": "nexabridge"
     }
   ],
   "dependencies": [

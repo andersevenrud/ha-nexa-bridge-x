@@ -32,6 +32,10 @@ DEFAULT_USERNAME = "nexa"
 
 DEFAULT_PASSWORD = "nexa"
 
+WS_PORT = 8887
+
+HTTP_BASIC_AUTH = False
+
 SWITCH_LEVEL_SENSOR = True
 
 SWITCH_BINARY_SENSOR = True
@@ -69,6 +73,12 @@ ENERGY_ATTRS = [
     "today_kilowatt_hours",
     "yesterday_kilowatt_hours",
     "month_kilowatt_hours"
+]
+
+# TODO: Add support for legacy energy metering
+LEGACY_ENERGY_ATTRS = [
+    #"total_kilowatt_hours",
+    #"current_wattage",
 ]
 
 BINARY_MAP = {

@@ -27,6 +27,8 @@ This project was developed using a bridge with firmware version `2.4.1`.
 Assuming Nexa uses appropriate versioning, this integration *should* be compatible with any
 firmware version starting with `2`.
 
+> The legacy "Nexa Bridge" (non-X) with version `1` firmware is supported, but with limited functionality.
+
 ## I can't connect
 
 Ensure that you're connecting to the correct IP and with the correct credentials.

@@ -19,15 +19,19 @@ from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
 
 from .nexa import NexaApi
-from .const import DOMAIN
+from .const import (
+    DOMAIN,
+    DEFAULT_USERNAME,
+    DEFAULT_PASSWORD,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
 STEP_USER_DATA_SCHEMA = vol.Schema(
     {
         vol.Required("host"): str,
-        vol.Required("username", default="nexa"): str,
-        vol.Required("password", default="nexa"): str,
+        vol.Required("username", default=DEFAULT_USERNAME): str,
+        vol.Required("password", default=DEFAULT_PASSWORD): str,
     }
 )
 
@@ -96,8 +100,8 @@ class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
         """Start a discovery flow from zeroconf."""
         uid: str = discovery_info.hostname
         host: str = discovery_info.host
-        username: str = "nexa"
-        password: str = "nexa"
+        username: str = DEFAULT_USERNAME
+        password: str = DEFAULT_PASSWORD
 
         await self.async_set_unique_id(uid.upper())
 

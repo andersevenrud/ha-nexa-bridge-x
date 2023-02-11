@@ -27,6 +27,10 @@ POLL_TIMEOUT = 10
 
 RECONNECT_SLEEP = 5
 
+DEFAULT_USERNAME = "nexa"
+
+DEFAULT_PASSWORD = "nexa"
+
 NODE_MEDIA_CAPABILITIES = [
     "mediaVolume",
     "mediaPlayPause",

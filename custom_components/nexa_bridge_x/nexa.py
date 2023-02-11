@@ -9,7 +9,7 @@ from __future__ import annotations
 from functools import reduce
 from datetime import timedelta
 from typing import cast, Any
-from aiohttp.web import Response
+from homeassistant.helpers.httpx_client import get_async_client
 from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -23,7 +23,9 @@ from .const import (
     NODE_MEDIA_CAPABILITIES,
     POLL_INTERVAL,
     POLL_TIMEOUT,
-    RECONNECT_SLEEP
+    RECONNECT_SLEEP,
+    WS_PORT,
+    HTTP_BASIC_AUTH
 )
 import dateutil.parser
 import asyncio
@@ -31,12 +33,14 @@ import aiohttp
 import json
 import logging
 import async_timeout
+import httpx
 
 _LOGGER = logging.getLogger(__name__)
 
 # TODO: Add correct typing
 NexaNodeValueType = str | int | float | bool
 NexaEnergyData = Any
+NexaLegacyEnergyData = Any
 NexaEnergyNodeData = Any
 NexaNodeData = Any
 NexaInfoData = Any
@@ -55,6 +59,25 @@ def is_newer_date(current: str, new: str) -> bool:
     current_time = dateutil.parser.isoparse(current)
     new_time = dateutil.parser.isoparse(new)
     return new_time >= current_time
+
+
+def values_from_events(node: NexaNodeData, legacy: bool) -> list[NexaNodeValue]:
+    """Creates a list of node values based on node data"""
+    prev_key = legacy and "value" or "prevValue"
+    keys = (prev_key, "value", "time")
+    ignores = ("methodCall")
+    values = []
+
+    for key, data in node["lastEvents"].items():
+        if key not in ignores and all(k in data for k in keys):
+            values.append(NexaNodeValue(
+                key,
+                data["value"],
+                data[prev_key],
+                data["time"]
+            ))
+
+    return values
 
 
 class NexaApiError(Exception):
@@ -84,10 +107,11 @@ class NexaPlatform:
         host = entry.data["host"]
         username = entry.data["username"]
         password = entry.data["password"]
+        legacy = entry.data["legacy"]
 
-        self.api = NexaApi(host, username, password)
-        self.coordinator = NexaCoordinator(hass, self.api)
-        self.ws = NexaWebSocket(host, hass, self.coordinator)
+        self.api = NexaApi(hass, host, username, password, legacy)
+        self.coordinator = NexaCoordinator(hass, self.api, legacy)
+        self.ws = NexaWebSocket(hass, host, self.coordinator)
 
     async def destroy(self) -> None:
         """Destroy all running services"""
@@ -110,12 +134,12 @@ class NexaWebSocket:
 
     def __init__(
         self,
-        host: str,
         hass: HomeAssistant,
+        host: str,
         coordinator: NexaCoordinator
     ) -> None:
-        self.host = host
         self.hass = hass
+        self.host = host
         self.coordinator = coordinator
 
     async def destroy(self) -> None:
@@ -196,7 +220,7 @@ class NexaWebSocket:
         if self.stopping:
             return
 
-        url = f"ws://{self.host}:8887"
+        url = f"ws://{self.host}:{WS_PORT}"
 
         _LOGGER.debug(
             "%s to websocket: %s",
@@ -213,28 +237,38 @@ class NexaWebSocket:
 class NexaApi:
     """Nexa API"""
 
-    def __init__(self, host: str, username: str, password: str) -> None:
+    def __init__(
+        self,
+        hass: HomeAssistant,
+        host: str,
+        username: str,
+        password: str,
+        legacy: bool
+    ) -> None:
+        self.hass = hass
         self.host = host
         self.username = username
         self.password = password
+        self.legacy = legacy
+        self._client = get_async_client(hass)
 
-    async def handle_response(self, response: Response) -> Any:
+    async def handle_response(self, method: str, response: httpx.Response) -> Any:
         """Handles response"""
         _LOGGER.debug("%s %s: %s",
-                      str.upper(response.method),
+                      str.upper(method),
                       response.url,
-                      response.status)
+                      response.status_code)
 
-        if not response.ok:
-            text = await response.text()
-            if response.status == 400:
-                raise NexaApiInvalidBodyError(text)
-            if response.status == 401:
-                raise NexaApiAuthorizationError(text)
+        ok = response.status_code >= 200 and response.status_code < 300
+        if not ok:
+            if response.status_code == 400:
+                raise NexaApiInvalidBodyError(response.text)
+            if response.status_code == 401:
+                raise NexaApiAuthorizationError(response.text)
 
-            raise NexaApiGeneralError(text)
+            raise NexaApiGeneralError(response.text)
 
-        return await response.json()
+        return response.json()
 
     async def request(
         self,
@@ -244,27 +278,22 @@ class NexaApi:
     ) -> Response:
         """Performs a request"""
         url = "http://%s/v1/%s" % (self.host, endpoint or "")
-        auth = aiohttp.BasicAuth(self.username, self.password)
 
-        async with aiohttp.ClientSession() as session:
-            if method == "post":
-                headers = {
-                    "accept": "application/json",
-                    "content-type": "application/json"
-                }
+        if HTTP_BASIC_AUTH or not self.legacy:
+            auth = httpx.BasicAuth(self.username, self.password)
+        else:
+            auth = httpx.DigestAuth(self.username, self.password)
 
-                _LOGGER.debug("POST %s: %s", url, json.dumps(body))
+        _LOGGER.debug("%s %s: %s", str.upper(method), url, json.dumps(body))
 
-                async with session.post(
-                    url,
-                    auth=auth,
-                    json=body,
-                    headers=headers
-                ) as response:
-                    return await self.handle_response(response)
-            else:
-                async with session.get(url, auth=auth) as response:
-                    return await self.handle_response(response)
+        response = await self._client.request(
+            method,
+            url,
+            auth=auth,
+            json=body,
+        )
+
+        return await self.handle_response(method, response)
 
     async def test_connection(self) -> NexaInfoData:
         """See if the connection is valid"""
@@ -277,11 +306,14 @@ class NexaApi:
             if key not in result:
                 raise NexaApiNotCompatibleError("Device response invalid")
 
-        if result["systemType"] != "Bridge2":
+        check_type = self.legacy and "Bridge1" or "Bridge2"
+        check_ver = self.legacy and "1" or "2"
+
+        if result["systemType"] != check_type:
             raise NexaApiNotCompatibleError("Device system not compatible")
 
         # TODO: Add semver check in the future if there are firmware diffs
-        if not str(result["version"]).startswith("2"):
+        if not str(result["version"]).startswith(check_ver):
             raise NexaApiNotCompatibleError("Endpoint not compatible")
 
         return result
@@ -292,18 +324,28 @@ class NexaApi:
 
     async def fetch_nodes(self) -> list[NexaNodeData]:
         """Get all configured nodes"""
-        return await self.request("get", "nodes")
+        result = await self.request("get", "nodes")
+
+        if self.legacy:
+            return await asyncio.gather(*[
+                self.fetch_node(r["id"]) for r in result
+            ])
+
+        return result
 
     async def fetch_node(self, node: str) -> NexaNodeData:
         """Get a confiured node"""
         return await self.request("get", f"nodes/{node}")
 
-    async def fetch_energy(self) -> NexaEnergyData:
+    async def fetch_energy(self) -> NexaEnergyData | NexaLegacyEnergyData:
         """Get energy stats"""
         return await self.request("get", "energy")
 
-    async def fetch_energy_nodes(self) -> NexaEnergyNodeData:
+    async def fetch_energy_nodes(self) -> NexaEnergyNodeData | None:
         """Get energy node stats"""
+        if self.legacy:
+            return None
+
         return await self.request("get", "energy/nodes")
 
     async def node_call(
@@ -313,7 +355,12 @@ class NexaApi:
         value: any
     ) -> NexaCallData:
         """Perform an action on a device"""
-        body = {"capability": capability, "value": value}
+        if self.legacy and capability == "switchBinary":
+            binaryValue = value and "turnOn" or "turnOff"
+            body = {"cap": capability, "method": binaryValue}
+        else:
+            body = {"cap": capability, "value": value}
+
         return await self.request("post", f"nodes/{node}/call", body)
 
 
@@ -358,8 +405,9 @@ class NexaEnergy:
 
     def __init__(
         self,
-        data: NexaEnergyData,
-        node_data: NexaEnergyNodeData
+        data: NexaEnergyData | NexaLegacyEnergyData,
+        node_data: NexaEnergyNodeData | None,
+        legacy: bool
     ):
         self.total_kilowatt_hours = None
         self.current_wattage = None
@@ -368,6 +416,26 @@ class NexaEnergy:
         self.yesterday_kilowatt_hours = None
         self.month_kilowatt_hours = None
 
+        if not legacy and data and node_data:
+            self.populate(data, node_data)
+        elif legacy and data:
+            self.populate_legacy(data)
+
+    def populate_legacy(
+        self,
+        data: NexaLegacyEnergyData
+    ):
+        """Populate legacy energy data from api"""
+        # FIXME: What even are these values ?!
+        self.current_wattage = data["kW"] / 1000
+        self.total_kilowatt_hours = data["kWh"]
+
+    def populate(
+        self,
+        data: NexaEnergyData,
+        node_data: NexaEnergyNodeData,
+    ):
+        """Populate energy data from api"""
         if node_data["status"] == "OK":
             if "list" in node_data["data"]:
                 self.total_kilowatt_hours = reduce(
@@ -395,21 +463,11 @@ class NexaNode:
     capabilities: list[str]
     values: list[NexaNodeValue]
 
-    def __init__(self, node: NexaNodeData):
-        values = []
-        for key, data in node["lastEvents"].items():
-            nv = NexaNodeValue(
-                key,
-                data["value"],
-                data["prevValue"],
-                data["time"]
-            )
-            values.append(nv)
-
+    def __init__(self, node: NexaNodeData, legacy: bool):
         self.id = node["id"]
         self.name = node["name"]
         self.capabilities = node["capabilities"]
-        self.values = values
+        self.values = values_from_events(node, legacy)
 
     def get_binary_capabilities(self) -> list[str]:
         """Get all capabilities"""
@@ -501,7 +559,7 @@ class NexaData:
 class NexaCoordinator(DataUpdateCoordinator):
     """Coordinates updates between entities"""
 
-    def __init__(self, hass: HomeAssistant, api: NexaApi):
+    def __init__(self, hass: HomeAssistant, api: NexaApi, legacy: bool):
         super().__init__(
             hass,
             _LOGGER,
@@ -509,6 +567,7 @@ class NexaCoordinator(DataUpdateCoordinator):
             update_interval=timedelta(seconds=POLL_INTERVAL),
         )
         self.api = api
+        self.legacy = legacy
 
     def get_node_by_id(self, node_id: str) -> NexaNode | None:
         """Gets node by id"""
@@ -534,15 +593,16 @@ class NexaCoordinator(DataUpdateCoordinator):
             _LOGGER.info("Coordinator is not yet ready to update data...")
             return
 
-        for cap in ("capability", "sourceNode", "value"):
-            if cap not in data:
-                return
+        cap_key = self.legacy and "name" or "capability"
+        keys = (cap_key, "sourceNode", "value", "time")
+        if not all(k in data for k in keys):
+            return
 
         node_id: str = data["sourceNode"]
         if node_id and str(node_id) != "-1":
             value: NexaNodeValueType = data["value"]
             time: NexaNodeValueType = data["time"]
-            cap: str = data["capability"]
+            cap: str = data[cap_key]
 
             _LOGGER.debug("Coordinator update message: %s", data)
 
@@ -566,8 +626,8 @@ class NexaCoordinator(DataUpdateCoordinator):
 
                 data = NexaData(
                     NexaInfo(info),
-                    list(map(lambda n: NexaNode(n), nodes)),
-                    NexaEnergy(energy, energy_nodes)
+                    list(map(lambda n: NexaNode(n, self.legacy), nodes)),
+                    NexaEnergy(energy, energy_nodes, self.legacy)
                 )
 
                 if self.data:

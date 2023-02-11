@@ -10,7 +10,7 @@ from itertools import chain
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.config_entries import ConfigEntry
-from .const import (DOMAIN, ENERGY_ATTRS)
+from .const import (DOMAIN, ENERGY_ATTRS, LEGACY_ENERGY_ATTRS)
 from .entities import (
     NexaSensorEntity,
     NexaEnergyEntity
@@ -30,9 +30,10 @@ async def async_setup_entry(
         coordinator.data.nodes
     )
 
+    use_attrs = LEGACY_ENERGY_ATTRS if coordinator.legacy else ENERGY_ATTRS
     energy_entities = (
         NexaEnergyEntity(coordinator, attr)
-        for attr in (ENERGY_ATTRS)
+        for attr in use_attrs
     )
 
     sensor_entities = (

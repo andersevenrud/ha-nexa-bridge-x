@@ -32,6 +32,7 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
         vol.Required("host"): str,
         vol.Required("username", default=DEFAULT_USERNAME): str,
         vol.Required("password", default=DEFAULT_PASSWORD): str,
+        vol.Required("legacy", default=False): bool,
     }
 )
 
@@ -43,7 +44,7 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
     """
 
     try:
-        api = NexaApi(data["host"], data["username"], data["password"])
+        api = NexaApi(hass, data["host"], data["username"], data["password"], data["legacy"])
         info = await api.test_connection()
     except Exception:
         raise InvalidAuth
@@ -60,6 +61,7 @@ class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
     _discovered_host: str | None = None
     _discovered_username: str | None = None
     _discovered_password: str | None = None
+    _discovered_legacy: bool = False
 
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
@@ -67,7 +69,8 @@ class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
         """Handle the initial step."""
         if user_input is None:
             return self.async_show_form(
-                step_id="user", data_schema=STEP_USER_DATA_SCHEMA
+                step_id="user",
+                data_schema=STEP_USER_DATA_SCHEMA
             )
 
         errors = {}
@@ -102,6 +105,7 @@ class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
         host: str = discovery_info.host
         username: str = DEFAULT_USERNAME
         password: str = DEFAULT_PASSWORD
+        is_legacy: bool = "nexabridge2" not in uid
 
         await self.async_set_unique_id(uid.upper())
 
@@ -110,7 +114,7 @@ class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
         })
 
         try:
-            api = NexaApi(host, 'nexa', 'nexa')
+            api = NexaApi(self.hass, host, 'nexa', 'nexa', is_legacy)
             info = await api.test_connection()
         except Exception:  # pylint: disable=broad-except
             return self.async_abort(reason="unknown")
@@ -119,13 +123,15 @@ class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
         self._discovered_host = host
         self._discovered_username = username
         self._discovered_password = password
+        self._discovered_legacy = is_legacy
 
         self._set_confirm_only()
 
         self.context["title_placeholders"] = {
             "host": host,
             "username": username,
-            "password": password
+            "password": password,
+            "legacy": is_legacy,
         }
 
         return await self.async_step_discovery_confirm()
@@ -141,6 +147,7 @@ class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
             "host": self._discovered_host,
             "username": self._discovered_username,
             "password": self._discovered_password,
+            "legacy": self._discovered_legacy,
         }
 
         if user_input is None:

@@ -1,5 +1,20 @@
 # Help
 
+## Logs
+
+The first thing you should do is to check the logs from Home Assistant.
+
+> This can be viewed from `Settings -> System -> Logs -> LOAD FULL LOGS`.
+
+For more verbose information from this integration, add the following
+to your `configuration.yaml` file:
+
+```yaml
+logger:
+  logs:
+    custom_components.nexa_bridge_x: debug
+```
+
 ## Device Compatibility
 
 See [the device issue](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/6)

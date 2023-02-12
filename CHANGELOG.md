@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.0.4] - 2023-02-12
+### :bug: Bug Fixes
+- [`52f4f9e`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/52f4f9ed56f89dfbb072d9b5943e350f34b40969) - **const**: current kwh invalid device *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :recycle: Refactors
+- [`e93d09b`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/e93d09b960eb264a05859acb976e26b7db5acc3e) - move default credentials to const *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`275fbb3`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/275fbb33850c31ae0883d5e8c1d6488fcd2cdde8) - **config_flow**: add default login credentials *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.0.3] - 2023-02-05
 ### :bug: Bug Fixes
 - [`e031387`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/e031387e297d2a6e870350e85827955730531c11) - **nexa**: incorrect password lookup *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -277,3 +288,4 @@
 [v1.0.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.0...v1.0.1
 [v1.0.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.1...v1.0.2
 [v1.0.3]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.2...v1.0.3
+[v1.0.4]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.3...v1.0.4

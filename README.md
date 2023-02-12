@@ -40,7 +40,8 @@ Makes it possible to view and control devices set up in the Nexa App/Web UI.
 
 ## Setup
 
-Your bridge should be discovered automatically in the devices settings page.
+Your bridge should be discovered automatically in the integrations list
+under "devices & settings" in the settings page.
 Just click the configure button and you should be ready to go!
 
 > If it's not showing, just click the "add integration" button and search for

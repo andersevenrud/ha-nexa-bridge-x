@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.0.5] - 2023-02-12
+### :bug: Bug Fixes
+- [`f7c6fad`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/f7c6fadaeaa286fc5e9f03c1fa088080d341c2dd) - **const**: current kwh invalid unit *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.0.4] - 2023-02-12
 ### :bug: Bug Fixes
 - [`52f4f9e`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/52f4f9ed56f89dfbb072d9b5943e350f34b40969) - **const**: current kwh invalid device *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -289,3 +294,4 @@
 [v1.0.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.1...v1.0.2
 [v1.0.3]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.2...v1.0.3
 [v1.0.4]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.3...v1.0.4
+[v1.0.5]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.4...v1.0.5

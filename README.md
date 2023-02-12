@@ -28,26 +28,25 @@ Makes it possible to view and control devices set up in the Nexa App/Web UI.
 
 * Install and open [HACS](https://hacs.xyz/)
 * Add a custom repository from the hamburger menu
-* Use the URL to this repository and select "integration"
+* Use the [URL](https://github.com/andersevenrud/ha-nexa-bridge-x.git) to this repository and select "integration"
 * Restart HA
 
 ### Manual
 
 * [Download a release](https://github.com/andersevenrud/ha-nexa-bridge-x/releases)
-* Create a `custom_components` directory inside of your HA `config` directory
+* Create a `custom_components` directory inside of your HA configuration directory
 * Unzip into the `custom_components` directory
 * Restart HA
 
 ## Setup
 
-Your bridge should be discovered automatically. Just click the configure button
-and you should be ready to go!
+Your bridge should be discovered automatically in the devices settings page.
+Just click the configure button and you should be ready to go!
 
 > If it's not showing, just click the "add integration" button and search for
-> "Nexa Bridge X" to manually add it. This requires entering login information.
-> The factory login is `nexa` / `nexa`.
+> "Nexa Bridge X",
 
-All connected devices will appear automatically as a device with entities using
+All connected sensors etc. will appear automatically as a device with entities using
 names based on features and configuration.
 
 > The names are taken from configurations in the App/Web UI.
@@ -64,4 +63,4 @@ Kudos to Nexa for providing developer documentation for this device!
 
 ## License
 
-MIT
+[MIT](https://github.com/andersevenrud/ha-nexa-bridge-x/blob/main/LICENSE)

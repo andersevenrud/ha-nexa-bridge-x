@@ -32,6 +32,10 @@ DEFAULT_USERNAME = "nexa"
 
 DEFAULT_PASSWORD = "nexa"
 
+SWITCH_LEVEL_SENSOR = True
+
+SWITCH_BINARY_SENSOR = True
+
 NODE_MEDIA_CAPABILITIES = [
     "mediaVolume",
     "mediaPlayPause",
@@ -44,12 +48,10 @@ NODE_BINARY_CAPABILITIES = [
     "notificationSmoke",
     "notificationWater",
     "notificationTwilight",
-    "notificationTamper",
-    "switchBinary"
-]
+    "notificationTamper"
+] + (SWITCH_BINARY_SENSOR and ["switchBinary"] or [])
 
 NODE_SENSOR_CAPABILITIES = [
-    "switchLevel",
     "meter",
     "power",
     "electric_voltage",
@@ -58,7 +60,7 @@ NODE_SENSOR_CAPABILITIES = [
     "humidity",
     "luminance",
     "battery"
-]
+] + (SWITCH_LEVEL_SENSOR and ["switchLevel"] or [])
 
 ENERGY_ATTRS = [
     "total_kilowatt_hours",

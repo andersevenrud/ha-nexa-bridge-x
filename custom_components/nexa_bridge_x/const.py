@@ -14,6 +14,7 @@ from homeassistant.const import (
     POWER_WATT,
     ELECTRIC_CURRENT_AMPERE,
     ENERGY_KILO_WATT_HOUR,
+    POWER_KILO_WATT,
     PERCENTAGE,
     TEMP_CELSIUS,
     LIGHT_LUX
@@ -164,7 +165,7 @@ ENERGY_MAP = {
     },
     "current_kilowatt_hours": {
         "name": "Current kWh",
-        "unit": ENERGY_KILO_WATT_HOUR,
+        "unit": POWER_KILO_WATT,
         "device": SensorDeviceClass.POWER,
         "class": SensorStateClass.MEASUREMENT
     },

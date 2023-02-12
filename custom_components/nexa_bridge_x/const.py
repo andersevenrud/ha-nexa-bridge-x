@@ -165,7 +165,7 @@ ENERGY_MAP = {
     "current_kilowatt_hours": {
         "name": "Current kWh",
         "unit": ENERGY_KILO_WATT_HOUR,
-        "device": SensorDeviceClass.ENERGY,
+        "device": SensorDeviceClass.POWER,
         "class": SensorStateClass.MEASUREMENT
     },
     "today_kilowatt_hours": {

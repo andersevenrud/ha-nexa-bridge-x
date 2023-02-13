@@ -595,7 +595,7 @@ class NexaCoordinator(DataUpdateCoordinator):
     async def update_node_from_message(self, data: NexaWebsocketData) -> None:
         """Try to update a node based on message"""
         if not self.data:
-            _LOGGER.info("Coordinator is not yet ready to update data...")
+            _LOGGER.debug("Coordinator is not yet ready to update data...")
             return
 
         cap_key = self.legacy and "name" or "capability"

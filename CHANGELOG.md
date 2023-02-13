@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.1.1] - 2023-02-13
+### :bug: Bug Fixes
+- [`d9f8918`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/d9f89183592d1db669781591f254595f6acbdec7) - **nexa**: hotfix because no config migration *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.1.0] - 2023-02-13
 ### :sparkles: New Features
 - [`b940de2`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/b940de25b4c8135d360be6dd3344dd2fe5eb7bcd) - basic legacy api support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -306,3 +311,4 @@
 [v1.0.4]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.3...v1.0.4
 [v1.0.5]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.4...v1.0.5
 [v1.1.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.5...v1.1.0
+[v1.1.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.1.0...v1.1.1

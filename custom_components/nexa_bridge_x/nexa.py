@@ -108,7 +108,10 @@ class NexaPlatform:
         host = entry.data["host"]
         username = entry.data["username"]
         password = entry.data["password"]
-        legacy = entry.data["legacy"]
+        legacy = False
+
+        if "legacy" in entry.data:
+            legacy = entry.data["legacy"]
 
         self.api = NexaApi(hass, host, username, password, legacy)
         self.coordinator = NexaCoordinator(hass, self.api, legacy)

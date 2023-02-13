@@ -22,9 +22,9 @@ from homeassistant.const import (
 
 DOMAIN = "nexa_bridge_x"
 
-POLL_INTERVAL = 10
+POLL_INTERVAL = 20
 
-POLL_TIMEOUT = 10
+POLL_TIMEOUT = 15
 
 RECONNECT_SLEEP = 5
 

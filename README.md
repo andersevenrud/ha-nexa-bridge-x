@@ -1,18 +1,16 @@
 # Home Assistant - Nexa Bridge X Integration
 
-This is a custom Home Assistant integration for the [Nexa Bridge X](https://nexa.se/nexa-bridge-x).
+This is a *unofficial* Home Assistant integration for the [Nexa Bridge X](https://nexa.se/nexa-bridge-x).
 
 > The legacy "Nexa Bridge" (non-X) is also supported, but with limited functionality.
 
 Makes it possible to view and control devices set up in the Nexa App/Web UI.
 
-> This project is a **unofficial** integration and not affiliated with Nexa in any way.
+> This project depends on you! I don't have access to different types of firmware and limited access to smart
+> devices supported by the bridge. Go to the [device support](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/6)
+> issue on github for more information or to report experience with your devices.
 
 ## Features
-
-> This project depends on you! I don't have access to all the devices supported
-> by this bridge. Go to the [device support](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/6)
-> issue on github for more information or to report experience with your devices.
 
 * Monitor energy use
 * Monitor switch states

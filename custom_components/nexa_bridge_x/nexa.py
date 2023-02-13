@@ -23,6 +23,7 @@ from .const import (
     NODE_MEDIA_CAPABILITIES,
     POLL_INTERVAL,
     POLL_TIMEOUT,
+    CALL_TIMEOUT,
     RECONNECT_SLEEP,
     WS_PORT,
     HTTP_BASIC_AUTH
@@ -291,6 +292,7 @@ class NexaApi:
             url,
             auth=auth,
             json=body,
+            timeout=CALL_TIMEOUT,
         )
 
         return await self.handle_response(method, response)

@@ -1,5 +1,15 @@
 # Changelog
 
+## [v1.1.0] - 2023-02-13
+### :sparkles: New Features
+- [`b940de2`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/b940de25b4c8135d360be6dd3344dd2fe5eb7bcd) - basic legacy api support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`4538226`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/4538226bb76ba9ef2bed25737fc2a793ec66568f) - **const**: add configuration for level/switch sensor *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`cc2ab8d`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/cc2ab8db7a521390e99e290eeedb7c75981a7c38) - **const**: bump polling timings *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`a7e9692`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/a7e96925b8950d17d101fa2a71c3fedef640992a) - add method call timeout value *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.0.5] - 2023-02-12
 ### :bug: Bug Fixes
 - [`f7c6fad`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/f7c6fadaeaa286fc5e9f03c1fa088080d341c2dd) - **const**: current kwh invalid unit *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -295,3 +305,4 @@
 [v1.0.3]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.2...v1.0.3
 [v1.0.4]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.3...v1.0.4
 [v1.0.5]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.4...v1.0.5
+[v1.1.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.5...v1.1.0

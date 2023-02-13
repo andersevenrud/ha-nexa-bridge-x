@@ -463,7 +463,7 @@ class NexaEnergy:
 
 class NexaNode:
     """Model for a node"""
-    id: str
+    id: str | int
     name: str
     capabilities: list[str]
     values: list[NexaNodeValue]
@@ -593,7 +593,7 @@ class NexaCoordinator(DataUpdateCoordinator):
                 current_node.set_values_from_node(node)
 
     async def update_node_from_message(self, data: NexaWebsocketData) -> None:
-        """Try to update a node based on message"""
+        """Try to update a node based on websocket message"""
         if not self.data:
             _LOGGER.debug("Coordinator is not yet ready to update data...")
             return
@@ -617,7 +617,7 @@ class NexaCoordinator(DataUpdateCoordinator):
                 self.async_set_updated_data(self.data)
 
     async def _async_update_data(self) -> None:
-        """Update data for all nodes in the background"""
+        """Update data by pulling in the background"""
         try:
             async with async_timeout.timeout(POLL_TIMEOUT):
                 results = await asyncio.gather(*[

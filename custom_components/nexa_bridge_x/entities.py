@@ -105,21 +105,11 @@ class NexaDimmerEntity(NexaNodeEntity, LightEntity):
         else:
             value = 1.0
 
-        self._attr_is_on = True
-        self._attr_brightness = int(value * 255)
-
-        self.async_write_ha_state()
         await self._api_call(value)
-        await self.coordinator.async_request_refresh()
 
     async def async_turn_off(self, **kwargs) -> None:
         """Send turn off or light command"""
-        self._attr_is_on = False
-        self._attr_brightness = 0
-
-        self.async_write_ha_state()
         await self._api_call(0.0)
-        await self.coordinator.async_request_refresh()
 
     async def _api_call(self, value: float):
         await self.coordinator.api.node_call(self.id, "switchLevel", value)
@@ -146,19 +136,9 @@ class NexaSwitchEntity(NexaNodeEntity, SwitchEntity):
         """Send turn on command"""
         await self._api_call(True)
 
-        self._attr_is_on = True
-
-        self.async_write_ha_state()
-        await self.coordinator.async_request_refresh()
-
     async def async_turn_off(self, **kwargs) -> None:
         """Send turn off command"""
         await self._api_call(False)
-
-        self._attr_is_on = False
-
-        self.async_write_ha_state()
-        await self.coordinator.async_request_refresh()
 
     async def _api_call(self, value: bool):
         await self.coordinator.api.node_call(self.id, "switchBinary", value)

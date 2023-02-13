@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.1.2] - 2023-02-13
+### :recycle: Refactors
+- [`9bb9375`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/9bb93752f2e927de682460ba68d3165277cbc6fe) - don't mutate local state on switch/dimmer actions *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`8b78359`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/8b783596e707325fc3a250f93b1e9c1a93982ec3) - **nexa**: decrease log level for coordinator ready state *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.1.1] - 2023-02-13
 ### :bug: Bug Fixes
 - [`d9f8918`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/d9f89183592d1db669781591f254595f6acbdec7) - **nexa**: hotfix because no config migration *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -312,3 +320,4 @@
 [v1.0.5]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.4...v1.0.5
 [v1.1.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.5...v1.1.0
 [v1.1.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.1.0...v1.1.1
+[v1.1.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.1.1...v1.1.2

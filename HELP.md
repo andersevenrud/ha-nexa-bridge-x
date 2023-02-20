@@ -1,5 +1,10 @@
 # Help
 
+## How do I use my stateless switches ?
+
+You should be able to use the events `nexa_bridge_x_custom_event` for automation
+where the `type` field contains the event from the device.
+
 ## Logs
 
 The first thing you should do is to check the logs from Home Assistant.

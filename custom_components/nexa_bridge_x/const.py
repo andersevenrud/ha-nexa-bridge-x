@@ -65,7 +65,8 @@ NODE_SENSOR_CAPABILITIES = [
     "temperature",
     "humidity",
     "luminance",
-    "battery"
+    "battery",
+    "customEvent"
 ] + (SWITCH_LEVEL_SENSOR and ["switchLevel"] or [])
 
 ENERGY_ATTRS = [
@@ -161,6 +162,12 @@ SENSOR_MAP = {
         "unit": PERCENTAGE,
         "device": SensorDeviceClass.BATTERY,
         "class": SensorStateClass.MEASUREMENT
+    },
+    "customEvent": {
+        "name": "Trigger",
+        "unit": None,
+        "device": SensorDeviceClass.ENUM,
+        "class": None
     },
 }
 

@@ -167,6 +167,10 @@ class NexaSensorEntity(NexaNodeEntity, SensorEntity):
             self._attr_device_class = SENSOR_MAP[key]["device"]
             self._attr_state_class = SENSOR_MAP[key]["class"]
 
+        if key == "customEvent":
+            self._attr_name = f"Last {SENSOR_MAP[key]['name']}"
+            self._attr_options = node.custom_events
+
     @callback
     def _handle_coordinator_update(self) -> None:
         node = self.coordinator.get_node_by_id(self.id)

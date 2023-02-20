@@ -18,6 +18,7 @@ from homeassistant.helpers.update_coordinator import (
     UpdateFailed,
 )
 from .const import (
+    DOMAIN,
     NODE_SENSOR_CAPABILITIES,
     NODE_BINARY_CAPABILITIES,
     NODE_MEDIA_CAPABILITIES,
@@ -182,8 +183,8 @@ class NexaWebSocket:
 
         try:
             await self.coordinator.update_node_from_message(data)
-        except Exception:
-            _LOGGER.warning("Failed to handle message: %s", msg)
+        except Exception as e:
+            _LOGGER.warning("Failed to handle message: %s - %s", msg, e)
 
     async def run(self, url) -> None:
         """Create websocket connection"""
@@ -467,12 +468,35 @@ class NexaNode:
     name: str
     capabilities: list[str]
     values: list[NexaNodeValue]
+    custom_events: list[str] = []
 
     def __init__(self, node: NexaNodeData, legacy: bool):
         self.id = node["id"]
         self.name = node["name"]
         self.capabilities = node["capabilities"]
         self.values = values_from_events(node, legacy)
+
+        if "extraInfo" in node:
+            if "customEvents" in node["extraInfo"]:
+                self.custom_events = [
+                    e["id"]
+                    for e in node["extraInfo"]["customEvents"]
+                ]
+
+    def get_event(
+        self,
+        name: str,
+        new_value: NexaNodeValueType,
+        new_time: str
+    ) -> None:
+        """Creates an internal event"""
+        if name == "customEvent":
+            return {
+                "device_id": self.id,
+                "type": new_value
+            }
+
+        return None
 
     def get_binary_capabilities(self) -> list[str]:
         """Get all capabilities"""
@@ -573,6 +597,7 @@ class NexaCoordinator(DataUpdateCoordinator):
         )
         self.api = api
         self.legacy = legacy
+        self.hass = hass
 
     def get_node_by_id(self, node_id: str) -> NexaNode | None:
         """Gets node by id"""
@@ -614,6 +639,10 @@ class NexaCoordinator(DataUpdateCoordinator):
             node = self.get_node_by_id(node_id)
             if node:
                 node.set_value(cap, value, time)
+                event = node.get_event(cap, value, time)
+                if event:
+                    self.hass.bus.async_fire(f"{DOMAIN}_custom_event", event)
+
                 self.async_set_updated_data(self.data)
 
     async def _async_update_data(self) -> None:

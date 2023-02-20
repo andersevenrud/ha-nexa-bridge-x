@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.2.0] - 2023-02-20
+### :sparkles: New Features
+- [`dd938f7`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/dd938f77ec11e7549dd9436d52b64635b8acada4) - support custom events and forward to hass event bus *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.1.2] - 2023-02-13
 ### :recycle: Refactors
 - [`9bb9375`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/9bb93752f2e927de682460ba68d3165277cbc6fe) - don't mutate local state on switch/dimmer actions *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -321,3 +326,4 @@
 [v1.1.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.0.5...v1.1.0
 [v1.1.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.1.0...v1.1.1
 [v1.1.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.1.1...v1.1.2
+[v1.2.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.1.2...v1.2.0

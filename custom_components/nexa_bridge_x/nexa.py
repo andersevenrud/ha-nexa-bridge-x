@@ -522,9 +522,9 @@ class NexaNode:
                 if current_value.name == new_value.name:
                     if is_newer_date(current_time, new_time):
                         current_value.value = new_value.value
-                        _LOGGER.debug("Patching node %s from node: %s = %s", self.id, current_value.name, new_value.value)
+                        _LOGGER.debug("[%s] Updating '%s' from node -> %s", self.id, current_value.name, new_value.value)
                     else:
-                        _LOGGER.debug("Not Patching node %s from node - outdated", self.id)
+                        _LOGGER.debug("[%s] Ignoring '%s' from node ", self.id, current_value.name)
                     break
 
     def set_value(
@@ -539,9 +539,9 @@ class NexaNode:
                 if is_newer_date(value.time, new_time):
                     value.value = new_value
                     value.time = new_time
-                    _LOGGER.debug("Patching node %s with value: %s = %s", self.id, name, new_value)
+                    _LOGGER.debug("[%s] Updating '%s' from value -> %s", self.id, name, new_value)
                 else:
-                    _LOGGER.debug("Not Patching node %s from value - outdated", self.id)
+                    _LOGGER.debug("[%s] Ignoring '%s' from value", self.id, name)
                 break
 
     def get_value(self, name: str) -> NexaNodeValueType | None:
@@ -635,7 +635,7 @@ class NexaCoordinator(DataUpdateCoordinator):
             time: NexaNodeValueType = data["time"]
             cap: str = data[cap_key]
 
-            _LOGGER.debug("Coordinator update message: %s", data)
+            #_LOGGER.debug("Coordinator update message: %s", data)
 
             node = self.get_node_by_id(node_id)
             if node:

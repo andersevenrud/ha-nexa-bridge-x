@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.2.4] - 2023-02-25
+### :wrench: Chores
+- [`1054fb1`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/1054fb1ffbd308c69a87f5200fe3f266bba315eb) - **manifest**: formatting based on hassfest *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`8fa2822`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/8fa282264291a21308d6d1cba0bbad44f8e711a4) - add constant for forcing legacy node enum *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`7b3439d`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/7b3439d6c5b18ccea41a99a51594ee3edb4c25dd) - **nexa**: update logging *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`c2acd1a`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/c2acd1afc8d0b552eef806bee4a84a52822964b0) - **nexa**: remove equal check in date comparison *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.2.3] - 2023-02-25
 ### :bug: Bug Fixes
 - [`f4e22dc`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/f4e22dc4b4e2decb0b43bda2756469d9058c9f39) - **nexa**: propagate message events immediately *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -345,3 +353,4 @@
 [v1.2.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.0...v1.2.1
 [v1.2.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.1...v1.2.2
 [v1.2.3]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.2...v1.2.3
+[v1.2.4]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.3...v1.2.4

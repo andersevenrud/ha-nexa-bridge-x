@@ -42,6 +42,8 @@ SWITCH_LEVEL_SENSOR = True
 
 SWITCH_BINARY_SENSOR = True
 
+FORCE_NODE_ENUM = False
+
 NODE_MEDIA_CAPABILITIES = [
     "mediaVolume",
     "mediaPlayPause",

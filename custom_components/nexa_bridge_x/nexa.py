@@ -27,7 +27,8 @@ from .const import (
     CALL_TIMEOUT,
     RECONNECT_SLEEP,
     WS_PORT,
-    HTTP_BASIC_AUTH
+    HTTP_BASIC_AUTH,
+    FORCE_NODE_ENUM
 )
 import dateutil.parser
 import asyncio
@@ -332,7 +333,7 @@ class NexaApi:
         """Get all configured nodes"""
         result = await self.request("get", "nodes")
 
-        if self.legacy:
+        if FORCE_NODE_ENUM or self.legacy:
             return await asyncio.gather(*[
                 self.fetch_node(r["id"]) for r in result
             ])

@@ -1,27 +1,27 @@
 {
-  "domain": "nexa_bridge_x",
-  "name": "Nexa Bridge X",
-  "version": "1.2.3",
-  "config_flow": true,
-  "documentation": "https://github.com/andersevenrud/ha-nexa-bridge-x/#readme",
-  "issue_tracker": "https://github.com/andersevenrud/ha-nexa-bridge-x/issues",
-  "requirements": [],
-  "zeroconf": [
-    {
-      "type": "_ssh._tcp.local.",
-      "name": "nexabridge2"
-    },
-    {
-      "type": "_ssh._tcp.local.",
-      "name": "nexabridge"
-    }
-  ],
-  "dependencies": [
-    "zeroconf"
-  ],
-  "codeowners": [
-    "@andersevenrud"
-  ],
-  "iot_class": "local_polling",
-  "integration_type": "hub"
+	"domain": "nexa_bridge_x",
+	"name": "Nexa Bridge X",
+	"codeowners": [
+		"@andersevenrud"
+	],
+	"config_flow": true,
+	"dependencies": [
+		"zeroconf"
+	],
+	"documentation": "https://github.com/andersevenrud/ha-nexa-bridge-x/#readme",
+	"integration_type": "hub",
+	"iot_class": "local_polling",
+	"issue_tracker": "https://github.com/andersevenrud/ha-nexa-bridge-x/issues",
+	"requirements": [],
+	"version": "1.2.3",
+	"zeroconf": [
+		{
+			"type": "_ssh._tcp.local.",
+			"name": "nexabridge2"
+		},
+		{
+			"type": "_ssh._tcp.local.",
+			"name": "nexabridge"
+		}
+	]
 }

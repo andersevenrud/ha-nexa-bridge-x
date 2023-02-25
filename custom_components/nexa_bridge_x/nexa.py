@@ -58,10 +58,10 @@ def is_capable_of(node: NexaNode, items: list(str)) -> bool:
 
 
 def is_newer_date(current: str, new: str) -> bool:
-    """Check if given timestamp is newer or equal to the current"""
+    """Check if given timestamp is newer to the current"""
     current_time = dateutil.parser.isoparse(current)
     new_time = dateutil.parser.isoparse(new)
-    return new_time >= current_time
+    return new_time > current_time
 
 
 def values_from_events(node: NexaNodeData, legacy: bool) -> list[NexaNodeValue]:

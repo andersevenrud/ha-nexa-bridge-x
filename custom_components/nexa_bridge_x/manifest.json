@@ -1,7 +1,7 @@
 {
   "domain": "nexa_bridge_x",
   "name": "Nexa Bridge X",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "config_flow": true,
   "documentation": "https://github.com/andersevenrud/ha-nexa-bridge-x/#readme",
   "issue_tracker": "https://github.com/andersevenrud/ha-nexa-bridge-x/issues",

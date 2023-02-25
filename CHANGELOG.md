@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.2.2] - 2023-02-25
+### :bug: Bug Fixes
+- [`4a69b10`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/4a69b108573b93d6770ca6a2f93e38e8b38438c8) - **nexa**: don't postpone polls on message updates *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.2.1] - 2023-02-25
 ### :wrench: Chores
 - [`f105519`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/f105519bdcaf346227dc75e32657497018c8bc9c) - **const**: increase default poll interval *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -333,3 +338,4 @@
 [v1.1.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.1.1...v1.1.2
 [v1.2.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.1.2...v1.2.0
 [v1.2.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.0...v1.2.1
+[v1.2.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.1...v1.2.2

@@ -644,6 +644,7 @@ class NexaCoordinator(DataUpdateCoordinator):
                     self.hass.bus.async_fire(f"{DOMAIN}_custom_event", event)
 
                 #self.async_set_updated_data(self.data)
+                self.async_update_listeners()
 
     async def _async_update_data(self) -> None:
         """Update data by pulling in the background"""

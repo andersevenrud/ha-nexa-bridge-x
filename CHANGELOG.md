@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.2.5] - 2023-03-01
+### :wrench: Chores
+- [`fa4568e`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/fa4568e89e2bbae116c54b11338f0db91f610ae7) - **const**: remove inclusion of virtual light/binary sensors *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.2.4] - 2023-02-25
 ### :wrench: Chores
 - [`1054fb1`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/1054fb1ffbd308c69a87f5200fe3f266bba315eb) - **manifest**: formatting based on hassfest *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -354,3 +359,4 @@
 [v1.2.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.1...v1.2.2
 [v1.2.3]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.2...v1.2.3
 [v1.2.4]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.3...v1.2.4
+[v1.2.5]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.4...v1.2.5

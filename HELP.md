@@ -42,25 +42,22 @@ Ensure that you're connecting to the correct IP and with the correct credentials
 
 ## I can't see my device
 
-> If you have registered a new device in the App/Web UI you have to reload the integration first.
-> This is done from the integration settings and the hamburger menu on the card shown on the page.
-> If it still does not show up, proceed with instructions.
+If you have registered a new device in the App/Web UI you have to reload the integration first.
+This is done from the integration settings and the hamburger menu on the card shown on the page.
+If it still does not show up, see [connection issues](#connection-issues);
 
-If you're having issues with a device or don't see a device you have connected to your bridge,
-run the following commands:
+## Connection issues
 
-> Assumes access to a Linux environment or WSL.
+If you have general issues with connectivity (or crashes related) to the bridge or devices,
+create a [new issue on github](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/new)
+with a description of the problem and copies of any errors from HA, and preferrably data
+dumps from your bridge.
 
-```bash
-curl --user nexa:nexa http://<ip-of-bridge>/v1/info -o bridge-information.txt
-curl --user nexa:nexa http://<ip-of-bridge>/v1/nodes -o bridge-nodes.txt
+Providing data dumps can be done with utilities like [Postman](https://www.postman.com/downloads/).
 
-# Optionally provide information about discovery to help improve automatic configuration
-avahi-browse --all -p --no-db-lookup -t | grep nexabridge > bridge-discovery.txt
-```
+The most critical data comes from `http://<bridge-ip-address>/api/info` and
+`http://<bridge-ip-address>/api/nodes` and can be accessed using `nexa` as both username
+and password.
 
-> **Make sure to remove any personal information from the information file. This will contain
-> location data.**
-
-Then leave a [comment in the device issue](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/6) with the files attached.
-
+**Some of this data can contain personal information (like location in the "info", so make sure
+to censor this before attaching to the issue.**

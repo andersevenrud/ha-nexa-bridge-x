@@ -473,7 +473,7 @@ class NexaNode:
 
     def __init__(self, node: NexaNodeData, legacy: bool):
         self.id = node["id"]
-        self.name = node["name"]
+        self.name = "name" in node and node["name"] or str(node["id"])
         self.capabilities = node["capabilities"]
         self.values = values_from_events(node, legacy)
 

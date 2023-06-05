@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.3.0] - 2023-06-05
+### :sparkles: New Features
+- [`73a2f7d`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/73a2f7d186ad10cb1cb4a9e5a4728b74fffd63a0) - **const**: additional legacy notification capabilities *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.2.6] - 2023-06-05
 ### :bug: Bug Fixes
 - [`7847d7f`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/7847d7fa994fb62f57f64282be4c78d130e76e6e) - **nexa**: revert to id if name missing in node *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -366,3 +371,4 @@
 [v1.2.4]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.3...v1.2.4
 [v1.2.5]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.4...v1.2.5
 [v1.2.6]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.5...v1.2.6
+[v1.3.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.6...v1.3.0

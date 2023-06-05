@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.2.6] - 2023-06-05
+### :bug: Bug Fixes
+- [`7847d7f`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/7847d7fa994fb62f57f64282be4c78d130e76e6e) - **nexa**: revert to id if name missing in node *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.2.5] - 2023-03-01
 ### :wrench: Chores
 - [`fa4568e`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/fa4568e89e2bbae116c54b11338f0db91f610ae7) - **const**: remove inclusion of virtual light/binary sensors *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -360,3 +365,4 @@
 [v1.2.3]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.2...v1.2.3
 [v1.2.4]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.3...v1.2.4
 [v1.2.5]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.4...v1.2.5
+[v1.2.6]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.5...v1.2.6

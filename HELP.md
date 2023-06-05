@@ -59,5 +59,5 @@ The most critical data comes from `http://<bridge-ip-address>/api/info` and
 `http://<bridge-ip-address>/api/nodes` and can be accessed using `nexa` as both username
 and password.
 
-**Some of this data can contain personal information (like location in the "info", so make sure
+**Some of this data can contain personal information (like location in the "info"), so make sure
 to censor this before attaching to the issue.**

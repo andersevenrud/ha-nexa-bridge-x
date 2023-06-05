@@ -56,7 +56,9 @@ NODE_BINARY_CAPABILITIES = [
     "notificationSmoke",
     "notificationWater",
     "notificationTwilight",
-    "notificationTamper"
+    "notificationTamper",
+    "notificationButton",
+    "notification"
 ] + (SWITCH_BINARY_SENSOR and ["switchBinary"] or [])
 
 NODE_SENSOR_CAPABILITIES = [
@@ -104,6 +106,12 @@ BINARY_MAP = {
     },
     "notificationTamper": {
         "name": "Tamper"
+    },
+    "notificationButton": {
+        "name": "Button"
+    },
+    "notification": {
+        "name": "Value"
     },
     "switchBinary": {
         "name": "Switch"

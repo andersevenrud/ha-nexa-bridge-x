@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.3.1] - 2023-10-05
+### :recycle: Refactors
+- [`c0a8d81`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/c0a8d81a3aee4fab1827ccbc1160d446568b7f65) - **nexa**: use old style union in typing *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.3.0] - 2023-06-05
 ### :sparkles: New Features
 - [`73a2f7d`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/73a2f7d186ad10cb1cb4a9e5a4728b74fffd63a0) - **const**: additional legacy notification capabilities *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -372,3 +377,4 @@
 [v1.2.5]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.4...v1.2.5
 [v1.2.6]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.5...v1.2.6
 [v1.3.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.6...v1.3.0
+[v1.3.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.3.0...v1.3.1

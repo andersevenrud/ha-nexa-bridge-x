@@ -8,7 +8,7 @@ License: MIT
 from __future__ import annotations
 from functools import reduce
 from datetime import timedelta
-from typing import cast, Any
+from typing import cast, Any, Union
 from homeassistant.helpers.httpx_client import get_async_client
 from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.config_entries import ConfigEntry
@@ -41,7 +41,7 @@ import httpx
 _LOGGER = logging.getLogger(__name__)
 
 # TODO: Add correct typing
-NexaNodeValueType = str | int | float | bool
+NexaNodeValueType = Union[str, int, float, bool]
 NexaEnergyData = Any
 NexaLegacyEnergyData = Any
 NexaEnergyNodeData = Any

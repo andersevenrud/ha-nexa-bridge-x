@@ -31,6 +31,9 @@ POLL_TIMEOUT = 60
 # How long to wait for a call to the bridge to respond
 CALL_TIMEOUT = 30
 
+# How long to wait for the initial poll request
+DISCOVERY_TIMEOUT = 120
+
 # How long for a websocket to reconnect after failure
 RECONNECT_SLEEP = 5
 

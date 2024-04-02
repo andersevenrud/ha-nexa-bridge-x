@@ -10,13 +10,12 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.const import (
-    ELECTRIC_POTENTIAL_VOLT,
-    POWER_WATT,
-    ELECTRIC_CURRENT_AMPERE,
-    ENERGY_KILO_WATT_HOUR,
-    POWER_KILO_WATT,
+    UnitOfPower,
+    UnitOfEnergy,
+    UnitOfElectricPotential,
+    UnitOfElectricCurrent,
+    UnitOfTemperature,
     PERCENTAGE,
-    TEMP_CELSIUS,
     LIGHT_LUX
 )
 
@@ -127,31 +126,31 @@ SENSOR_MAP = {
     },
     "meter": {
         "name": "Energy",
-        "unit": ENERGY_KILO_WATT_HOUR,
+        "unit": UnitOfEnergy.KILO_WATT_HOUR,
         "device": SensorDeviceClass.ENERGY,
         "class": SensorStateClass.TOTAL_INCREASING
     },
     "power": {
         "name": "Wattage",
-        "unit": POWER_WATT,
+        "unit": UnitOfPower.WATT,
         "device": SensorDeviceClass.POWER,
         "class": SensorStateClass.MEASUREMENT
     },
     "electric_voltage": {
         "name": "Voltage",
-        "unit": ELECTRIC_POTENTIAL_VOLT,
+        "unit": UnitOfElectricPotential.VOLT,
         "device": SensorDeviceClass.VOLTAGE,
         "class": SensorStateClass.MEASUREMENT
     },
     "electric_ampere": {
         "name": "Amperage",
-        "unit": ELECTRIC_CURRENT_AMPERE,
+        "unit": UnitOfElectricCurrent.AMPERE,
         "device": SensorDeviceClass.CURRENT,
         "class": SensorStateClass.MEASUREMENT
     },
     "temperature": {
         "name": "Temperature",
-        "unit": TEMP_CELSIUS,
+        "unit": UnitOfTemperature.CELSIUS,
         "device": SensorDeviceClass.TEMPERATURE,
         "class": SensorStateClass.MEASUREMENT
     },
@@ -184,37 +183,37 @@ SENSOR_MAP = {
 ENERGY_MAP = {
     "total_kilowatt_hours": {
         "name": "Total kWh",
-        "unit": ENERGY_KILO_WATT_HOUR,
+        "unit": UnitOfEnergy.KILO_WATT_HOUR,
         "device": SensorDeviceClass.ENERGY,
         "class": SensorStateClass.TOTAL_INCREASING
     },
     "current_wattage": {
         "name": "Current W",
-        "unit": POWER_WATT,
+        "unit": UnitOfPower.WATT,
         "device": SensorDeviceClass.POWER,
         "class": SensorStateClass.MEASUREMENT
     },
     "current_kilowatt_hours": {
         "name": "Current kWh",
-        "unit": POWER_KILO_WATT,
+        "unit": UnitOfPower.KILO_WATT,
         "device": SensorDeviceClass.POWER,
         "class": SensorStateClass.MEASUREMENT
     },
     "today_kilowatt_hours": {
         "name": "Today kWh",
-        "unit": ENERGY_KILO_WATT_HOUR,
+        "unit": UnitOfEnergy.KILO_WATT_HOUR,
         "device": SensorDeviceClass.ENERGY,
         "class": SensorStateClass.TOTAL_INCREASING
     },
     "yesterday_kilowatt_hours": {
         "name": "Yesterday kWh",
-        "unit": ENERGY_KILO_WATT_HOUR,
+        "unit": UnitOfEnergy.KILO_WATT_HOUR,
         "device": SensorDeviceClass.ENERGY,
         "class": SensorStateClass.TOTAL_INCREASING
     },
     "month_kilowatt_hours": {
         "name": "Month kWh",
-        "unit": ENERGY_KILO_WATT_HOUR,
+        "unit": UnitOfEnergy.KILO_WATT_HOUR,
         "device": SensorDeviceClass.ENERGY,
         "class": SensorStateClass.TOTAL_INCREASING
     },

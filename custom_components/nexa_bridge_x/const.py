@@ -43,8 +43,11 @@ DEFAULT_PASSWORD = "nexa"
 # Nexa API websocket port
 WS_PORT = 8887
 
+# Always use Basic auth instead of Digest
 HTTP_BASIC_AUTH = False
 
+# Force value enumeration instead of aggregation
+# This will always be true for legacy devices
 FORCE_NODE_ENUM = False
 
 NODE_MEDIA_CAPABILITIES = [

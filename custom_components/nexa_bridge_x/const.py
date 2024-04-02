@@ -19,20 +19,28 @@ from homeassistant.const import (
     LIGHT_LUX
 )
 
+# HomeAssitant Integration unique identifier
 DOMAIN = "nexa_bridge_x"
 
+# How often to poll the bridge for updates
 POLL_INTERVAL = 60
 
+# How long to wait for a poll request to respond
 POLL_TIMEOUT = 60
 
+# How long to wait for a call to the bridge to respond
 CALL_TIMEOUT = 30
 
+# How long for a websocket to reconnect after failure
 RECONNECT_SLEEP = 5
 
+# Nexa API username
 DEFAULT_USERNAME = "nexa"
 
+# Nexa API password
 DEFAULT_PASSWORD = "nexa"
 
+# Nexa API websocket port
 WS_PORT = 8887
 
 HTTP_BASIC_AUTH = False

@@ -30,6 +30,7 @@ Makes it possible to view and control devices set up in the Nexa App/Web UI.
 * Add a custom repository from the hamburger menu
 * Use the [URL](https://github.com/andersevenrud/ha-nexa-bridge-x.git) to this repository and select "integration"
 * Restart HA
+![custom_repos](https://github.com/sonite/ha-nexa-bridge-x/assets/1986942/58793398-e105-47b9-8d6f-e6ff65c5e260)
 
 ### Manual
 

@@ -45,10 +45,6 @@ WS_PORT = 8887
 
 HTTP_BASIC_AUTH = False
 
-SWITCH_LEVEL_SENSOR = False
-
-SWITCH_BINARY_SENSOR = False
-
 FORCE_NODE_ENUM = False
 
 NODE_MEDIA_CAPABILITIES = [
@@ -66,7 +62,7 @@ NODE_BINARY_CAPABILITIES = [
     "notificationTamper",
     "notificationButton",
     "notification"
-] + (SWITCH_BINARY_SENSOR and ["switchBinary"] or [])
+]
 
 NODE_SENSOR_CAPABILITIES = [
     "meter",
@@ -78,7 +74,7 @@ NODE_SENSOR_CAPABILITIES = [
     "luminance",
     "battery",
     "customEvent"
-] + (SWITCH_LEVEL_SENSOR and ["switchLevel"] or [])
+]
 
 ENERGY_ATTRS = [
     "total_kilowatt_hours",

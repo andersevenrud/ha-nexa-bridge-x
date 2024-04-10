@@ -71,14 +71,15 @@ def values_from_events(node: NexaNodeData, legacy: bool) -> list[NexaNodeValue]:
     ignores = ("methodCall")
     values = []
 
-    for key, data in node["lastEvents"].items():
-        if key not in ignores and all(k in data for k in keys):
-            values.append(NexaNodeValue(
-                key,
-                data["value"],
-                data[prev_key],
-                data["time"]
-            ))
+    if "lastEvents" in node:
+        for key, data in node["lastEvents"].items():
+            if key not in ignores and all(k in data for k in keys):
+                values.append(NexaNodeValue(
+                    key,
+                    data["value"],
+                    data[prev_key],
+                    data["time"]
+                ))
 
     return values
 

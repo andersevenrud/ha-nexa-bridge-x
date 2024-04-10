@@ -78,7 +78,7 @@ class NexaNodeEntity(NexaEntity):
 class NexaDimmerEntity(NexaNodeEntity, LightEntity):
     """Entity for light"""
     _attr_color_mode = ColorMode.BRIGHTNESS
-    _attr_supported_color_modes = {ColorMode.ONOFF, ColorMode.BRIGHTNESS}
+    _attr_supported_color_modes = {ColorMode.BRIGHTNESS}
 
     def __init__(self, coordinator: DataUpdateCoordinator, node: NexaNode):
         _LOGGER.info("Found light %s: %s", node.id, node.name)

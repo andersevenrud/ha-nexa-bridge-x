@@ -1,5 +1,19 @@
 # Changelog
 
+## [v1.4.0] - 2024-04-10
+### :sparkles: New Features
+- [`e175ab5`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/e175ab54fd09d5d00c7cafd6a4f2da8a355d7614) - **nexa**: simplify version checking *(PR [#44](https://github.com/andersevenrud/ha-nexa-bridge-x/pull/44) by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :recycle: Refactors
+- [`3b647f9`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/3b647f96e0184b492cdf2b8c7b4f84c756d9a6d8) - **const**: replace deprecated constants *(PR [#39](https://github.com/andersevenrud/ha-nexa-bridge-x/pull/39) by [@sonite](https://github.com/sonite))*
+  - :arrow_lower_right: *addresses issue [#36](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/36) opened by [@andersevenrud](https://github.com/andersevenrud)*
+- [`c874b53`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/c874b53c8d5e14404d5e997bd4bb8cb6919968f7) - **const**: remove deprecated sensor configuration *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+- [`4ce3b91`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/4ce3b9133695548a9cf7d16bc755ae644478dd30) - **entities**: remove onoff from light *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+### :wrench: Chores
+- [`41cf1b6`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/41cf1b68eb686724c6de9370a4447ba1f7c19398) - **const**: increase default timers *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.3.1] - 2023-10-05
 ### :recycle: Refactors
 - [`c0a8d81`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/c0a8d81a3aee4fab1827ccbc1160d446568b7f65) - **nexa**: use old style union in typing *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -378,3 +392,4 @@
 [v1.2.6]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.5...v1.2.6
 [v1.3.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.6...v1.3.0
 [v1.3.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.3.0...v1.3.1
+[v1.4.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.3.1...v1.4.0

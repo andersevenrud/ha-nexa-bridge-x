@@ -313,15 +313,18 @@ class NexaApi:
             if key not in result:
                 raise NexaApiNotCompatibleError("Device response invalid")
 
-        check_type = self.legacy and "Bridge1" or "Bridge2"
-        check_ver = self.legacy and "1" or "2"
+        if result["systemType"] not in ["Bridge1", "Bridge2"]:
+           raise NexaApiNotCompatibleError("Device system not compatible")
 
-        if result["systemType"] != check_type:
-            raise NexaApiNotCompatibleError("Device system not compatible")
-
+        #check_type = self.legacy and "Bridge1" or "Bridge2"
+        #check_ver = self.legacy and "1" or "2"
+        #
+        #if result["systemType"] != check_type:
+        #    raise NexaApiNotCompatibleError("Device system not compatible")
+        #
         # TODO: Add semver check in the future if there are firmware diffs
-        if not str(result["version"]).startswith(check_ver):
-            raise NexaApiNotCompatibleError("Endpoint not compatible")
+        #if not str(result["version"]).startswith(check_ver):
+        #    raise NexaApiNotCompatibleError("Endpoint not compatible")
 
         return result
 

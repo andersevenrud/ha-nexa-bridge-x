@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.4.1] - 2024-04-10
+### :bug: Bug Fixes
+- [`0f73dc7`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/0f73dc74a91f7ee50ec5bb4eb251050db5ea2597) - **nexa**: ensure last events is set on enum *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.4.0] - 2024-04-10
 ### :sparkles: New Features
 - [`e175ab5`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/e175ab54fd09d5d00c7cafd6a4f2da8a355d7614) - **nexa**: simplify version checking *(PR [#44](https://github.com/andersevenrud/ha-nexa-bridge-x/pull/44) by [@andersevenrud](https://github.com/andersevenrud))*
@@ -393,3 +398,4 @@
 [v1.3.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.2.6...v1.3.0
 [v1.3.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.3.0...v1.3.1
 [v1.4.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.3.1...v1.4.0
+[v1.4.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.4.0...v1.4.1

@@ -1,11 +1,14 @@
 # Help
 
-This project was developed using a bridge with firmware version `2.4.1`.
+This project was developed using a bridge with firmware version `2.4.1`. The legacy
+non-X bridge is also supported but with limited functionality.
 
-Assuming Nexa uses appropriate versioning, this integration *should* be compatible with any
-firmware version starting with `2`.
+The bridges are codenamed:
 
-> The legacy "Nexa Bridge" (non-X) with version `1` firmware is supported, but with limited functionality.
+* `Bridge1` with `1.6` firmware or lower (legacy)
+* `Bridge2` with `1.7.3` formware or `2.x` (aka "X")
+
+**Ensure that your firmware is up to date**. Some X bridges ship with old firmware.
 
 ## I can't connect
 
@@ -14,9 +17,6 @@ Ensure that you're connecting to the correct IP and with the correct credentials
 > The factory login is `nexa` / `nexa`.
 
 ## I don't see any sensor values
-
-**Ensure that your bridge Firmware is up to date**. Some devices seem to ship with legacy
-firmware.
 
 If you have registered a new device in the App/Web UI you have to reload the integration first.
 This is done from the integration settings and the hamburger menu on the card shown on the page.

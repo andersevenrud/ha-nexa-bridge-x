@@ -286,7 +286,7 @@ class NexaApi:
         """Performs a request"""
         url = "http://%s/v1/%s" % (self.host, endpoint or "")
 
-        if HTTP_BASIC_AUTH or not self.legacy:
+        if HTTP_BASIC_AUTH:
             auth = httpx.BasicAuth(self.username, self.password)
         else:
             auth = httpx.DigestAuth(self.username, self.password)

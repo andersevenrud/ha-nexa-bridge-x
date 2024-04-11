@@ -6,7 +6,7 @@ non-X bridge is also supported but with limited functionality.
 The bridges are codenamed:
 
 * `Bridge1` with `1.6` firmware or lower (legacy)
-* `Bridge2` with `1.7.3` formware or `2.x` (aka "X")
+* `Bridge2` with `1.7.3` firmware or `2.x` (aka "X")
 
 **Ensure that your firmware is up to date**. Some X bridges ship with old firmware.
 

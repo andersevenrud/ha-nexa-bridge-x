@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.5.0] - 2024-04-11
+### :sparkles: New Features
+- [`4f8dbdd`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/4f8dbdd465825917ef1deb7116deffd0c1854c57) - **nexa**: always use digest authentication *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.4.1] - 2024-04-10
 ### :bug: Bug Fixes
 - [`0f73dc7`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/0f73dc74a91f7ee50ec5bb4eb251050db5ea2597) - **nexa**: ensure last events is set on enum *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -399,3 +404,4 @@
 [v1.3.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.3.0...v1.3.1
 [v1.4.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.3.1...v1.4.0
 [v1.4.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.4.0...v1.4.1
+[v1.5.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.4.1...v1.5.0

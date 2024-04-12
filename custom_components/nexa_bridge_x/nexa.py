@@ -351,7 +351,11 @@ class NexaApi:
         if self.legacy:
             return None
 
-        return await self.request("get", "energy/nodes")
+        try:
+            # Not all non-legacy firmware has this apparently
+            return await self.request("get", "energy/nodes")
+        except Exception:
+            return None
 
     async def node_call(
         self,
@@ -421,10 +425,13 @@ class NexaEnergy:
         self.yesterday_kilowatt_hours = None
         self.month_kilowatt_hours = None
 
-        if not legacy and data and node_data:
-            self.populate(data, node_data)
-        elif legacy and data:
-            self.populate_legacy(data)
+        try:
+            if not legacy and data and node_data:
+                self.populate(data, node_data)
+            elif legacy and data:
+                self.populate_legacy(data)
+        except Exception:
+            pass
 
     def populate_legacy(
         self,

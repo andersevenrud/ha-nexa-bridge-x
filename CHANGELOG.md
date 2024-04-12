@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.5.2] - 2024-04-12
+### :wrench: Chores
+- [`2f02f2c`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/2f02f2c8c5c58ed8741767f7eff91940df7c1fb6) - **nexa**: energy call fallback value *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.5.1] - 2024-04-11
 ### :wrench: Chores
 - [`d4bf416`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/d4bf4168075045079561adb1d50b43837defd7a4) - **nexa**: enforce system type check *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -411,3 +416,4 @@
 [v1.4.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.4.0...v1.4.1
 [v1.5.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.4.1...v1.5.0
 [v1.5.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.5.0...v1.5.1
+[v1.5.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.5.1...v1.5.2

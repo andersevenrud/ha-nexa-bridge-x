@@ -344,7 +344,7 @@ class NexaApi:
 
         if (FORCE_NODE_ENUM or self.legacy) and not skip_enum:
             new_result = []
-            async for r in result:
+            for r in result:
                 try:
                     data = await self.fetch_node(r["id"])
                     new_result.append(data)

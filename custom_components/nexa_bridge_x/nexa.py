@@ -24,6 +24,7 @@ from .const import (
     NODE_MEDIA_CAPABILITIES,
     POLL_INTERVAL,
     POLL_TIMEOUT,
+    DISCOVERY_TIMEOUT,
     CALL_TIMEOUT,
     RECONNECT_SLEEP,
     WS_PORT,
@@ -80,6 +81,10 @@ def values_from_events(node: NexaNodeData, legacy: bool) -> list[NexaNodeValue]:
                     data[prev_key],
                     data["time"]
                 ))
+    else:
+        if legacy and "capabilities" in node:
+            for key in node["capabilities"]:
+                values.append(NexaNodeValue(key, None, None, "0"))
 
     return values
 
@@ -327,14 +332,20 @@ class NexaApi:
         """Get information about bridge"""
         return await self.request("get", "info")
 
-    async def fetch_nodes(self) -> list[NexaNodeData]:
+    async def fetch_nodes(self, skip_enum: bool) -> list[NexaNodeData]:
         """Get all configured nodes"""
         result = await self.request("get", "nodes")
 
-        if FORCE_NODE_ENUM or self.legacy:
-            return await asyncio.gather(*[
-                self.fetch_node(r["id"]) for r in result
-            ])
+        if (FORCE_NODE_ENUM or self.legacy) and not skip_enum:
+            new_result = []
+            for r in result:
+                try:
+                    data = await self.fetch_node(r["id"])
+                    new_result.append(data)
+                except:
+                    _LOGGER.error("Failed to enum node data: %s", r["id"])
+
+            return new_result
 
         return result
 
@@ -604,6 +615,7 @@ class NexaCoordinator(DataUpdateCoordinator):
         self.api = api
         self.legacy = legacy
         self.hass = hass
+        self.has_polled = False
 
     def get_node_by_id(self, node_id: str) -> NexaNode | None:
         """Gets node by id"""
@@ -655,10 +667,12 @@ class NexaCoordinator(DataUpdateCoordinator):
     async def _async_update_data(self) -> None:
         """Update data by pulling in the background"""
         try:
-            async with async_timeout.timeout(POLL_TIMEOUT):
+            timeout = POLL_TIMEOUT if self.has_polled else DISCOVERY_TIMEOUT
+
+            async with async_timeout.timeout(timeout):
                 results = await asyncio.gather(*[
                     self.api.fetch_info(),
-                    self.api.fetch_nodes(),
+                    self.api.fetch_nodes(self.has_polled),
                     self.api.fetch_energy(),
                     self.api.fetch_energy_nodes(),
                 ])
@@ -670,6 +684,8 @@ class NexaCoordinator(DataUpdateCoordinator):
                     list(map(lambda n: NexaNode(n, self.legacy), nodes)),
                     NexaEnergy(energy, energy_nodes, self.legacy)
                 )
+
+                self.has_polled = True
 
                 if self.data:
                     self.update_nodes_from_data(data)

@@ -1,5 +1,12 @@
 # Changelog
 
+## [v1.6.0] - 2024-05-03
+### :sparkles: New Features
+- [`3f0af19`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/3f0af19de30b0ab786c68c6246906a2f0bd592e2) - alternative legacy poll mechanism *(PR [#35](https://github.com/andersevenrud/ha-nexa-bridge-x/pull/35) by [@andersevenrud](https://github.com/andersevenrud))*
+  - :arrow_lower_right: *addresses issue [#32](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/32) opened by [@passatraggaren](https://github.com/passatraggaren)*
+  - :arrow_lower_right: *addresses issue [#34](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/34) opened by [@sonite](https://github.com/sonite)*
+
+
 ## [v1.5.2] - 2024-04-12
 ### :wrench: Chores
 - [`2f02f2c`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/2f02f2c8c5c58ed8741767f7eff91940df7c1fb6) - **nexa**: energy call fallback value *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -417,3 +424,4 @@
 [v1.5.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.4.1...v1.5.0
 [v1.5.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.5.0...v1.5.1
 [v1.5.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.5.1...v1.5.2
+[v1.6.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.5.2...v1.6.0

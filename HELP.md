@@ -10,6 +10,11 @@ The bridges are codenamed:
 
 **Ensure that your firmware is up to date**. Some X bridges ship with old firmware.
 
+> *Unfortunately there is no way to manually initiate firmware updates.
+> If your devices does not have the 2.x firmware installed even if using a
+> registered Nexa account, Contact [support](https://support.nexa.se/hc/sv/requests/new)*.
+> From my understanding they establish a remote connection and can perform the firmware update.
+
 ## I can't connect
 
 Ensure that you're connecting to the correct IP and with the correct credentials.

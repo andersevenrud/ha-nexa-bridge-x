@@ -38,6 +38,7 @@ import json
 import logging
 import async_timeout
 import httpx
+import datetime
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -83,8 +84,12 @@ def values_from_events(node: NexaNodeData, legacy: bool) -> list[NexaNodeValue]:
                 ))
     else:
         if legacy and "capabilities" in node:
+            now_time = datetime.datetime.now().astimezone().replace(microsecond=0).isoformat()
+            _LOGGER.warning("Node '%s' contained no events, reverting to capabilities", node["name"])
+
             for key in node["capabilities"]:
-                values.append(NexaNodeValue(key, None, None, "0"))
+                if key not in ignores:
+                    values.append(NexaNodeValue(key, None, None, now_time))
 
     return values
 

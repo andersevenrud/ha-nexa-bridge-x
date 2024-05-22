@@ -42,6 +42,9 @@ Create a [new issue on github](https://github.com/andersevenrud/ha-nexa-bridge-x
 with a description of the problem and copies of any errors from HA logs, and preferrably data
 dumps from your bridge.
 
+There's also a [discord server](https://discord.gg/CaZS5uWN) where you can ask for help, but
+using Github is always preferred.
+
 Providing data dumps can be done with utilities like [Postman](https://www.postman.com/downloads/).
 
 The most critical data comes from `http://<bridge-ip-address>/api/info` and

@@ -339,9 +339,11 @@ class NexaApi:
 
     async def fetch_nodes(self, skip_enum: bool) -> list[NexaNodeData]:
         """Get all configured nodes"""
-        result = await self.request("get", "nodes")
+        if skip_enum:
+            return []
 
-        if (FORCE_NODE_ENUM or self.legacy) and not skip_enum:
+        result = await self.request("get", "nodes")
+        if FORCE_NODE_ENUM or self.legacy:
             new_result = []
             for r in result:
                 try:

@@ -29,7 +29,8 @@ from .const import (
     RECONNECT_SLEEP,
     WS_PORT,
     HTTP_BASIC_AUTH,
-    FORCE_NODE_ENUM
+    FORCE_NODE_ENUM,
+    FORCE_NODE_POLL
 )
 import dateutil.parser
 import asyncio
@@ -81,10 +82,6 @@ def values_from_events(node: NexaNodeData, legacy: bool) -> list[NexaNodeValue]:
                     data[prev_key],
                     data["time"]
                 ))
-    else:
-        if legacy and "capabilities" in node:
-            for key in node["capabilities"]:
-                values.append(NexaNodeValue(key, None, None, "0"))
 
     return values
 
@@ -332,11 +329,13 @@ class NexaApi:
         """Get information about bridge"""
         return await self.request("get", "info")
 
-    async def fetch_nodes(self, skip_enum: bool) -> list[NexaNodeData]:
+    async def fetch_nodes(self, skip: bool) -> list[NexaNodeData]:
         """Get all configured nodes"""
-        result = await self.request("get", "nodes")
+        if skip and self.legacy:
+            return []
 
-        if (FORCE_NODE_ENUM or self.legacy) and not skip_enum:
+        result = await self.request("get", "nodes")
+        if FORCE_NODE_ENUM or self.legacy:
             new_result = []
             for r in result:
                 try:
@@ -668,11 +667,12 @@ class NexaCoordinator(DataUpdateCoordinator):
         """Update data by pulling in the background"""
         try:
             timeout = POLL_TIMEOUT if self.has_polled else DISCOVERY_TIMEOUT
+            skip = False if FORCE_NODE_POLL else self.has_polled
 
             async with async_timeout.timeout(timeout):
                 results = await asyncio.gather(*[
                     self.api.fetch_info(),
-                    self.api.fetch_nodes(self.has_polled),
+                    self.api.fetch_nodes(skip),
                     self.api.fetch_energy(),
                     self.api.fetch_energy_nodes(),
                 ])

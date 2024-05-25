@@ -53,6 +53,9 @@ HTTP_BASIC_AUTH = False
 # This will always be true for legacy devices
 FORCE_NODE_ENUM = False
 
+# Force always polling on legacy devices
+FORCE_NODE_POLL = False
+
 NODE_MEDIA_CAPABILITIES = [
     "mediaVolume",
     "mediaPlayPause",

@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.6.1] - 2024-05-25
+### :bug: Bug Fixes
+- [`d06f20e`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/d06f20ecd15a2029551ddce015f282bf94f140e3) - empty nodes on legacy *(PR [#46](https://github.com/andersevenrud/ha-nexa-bridge-x/pull/46) by [@andersevenrud](https://github.com/andersevenrud))*
+  - :arrow_lower_right: *fixes issue [#45](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/45) opened by [@sonite](https://github.com/sonite)*
+
+
 ## [v1.6.0] - 2024-05-03
 ### :sparkles: New Features
 - [`3f0af19`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/3f0af19de30b0ab786c68c6246906a2f0bd592e2) - alternative legacy poll mechanism *(PR [#35](https://github.com/andersevenrud/ha-nexa-bridge-x/pull/35) by [@andersevenrud](https://github.com/andersevenrud))*
@@ -425,3 +431,4 @@
 [v1.5.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.5.0...v1.5.1
 [v1.5.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.5.1...v1.5.2
 [v1.6.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.5.2...v1.6.0
+[v1.6.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.6.0...v1.6.1

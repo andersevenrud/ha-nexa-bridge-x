@@ -63,6 +63,7 @@ NODE_MEDIA_CAPABILITIES = [
 ]
 
 NODE_BINARY_CAPABILITIES = [
+    "notificationPushButton",
     "notificationContact",
     "notificationMotion",
     "notificationSmoke",
@@ -101,6 +102,9 @@ LEGACY_ENERGY_ATTRS = [
 ]
 
 BINARY_MAP = {
+    "notificationPushButton": {
+        "name": "Pushbutton"
+    },
     "notificationContact": {
         "name": "Contact"
     },

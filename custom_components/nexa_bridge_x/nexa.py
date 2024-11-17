@@ -320,7 +320,7 @@ class NexaApi:
             if result["systemType"] != "Bridge1":
                 raise NexaApiNotCompatibleError("Endpoint not compatible")
         else:
-            if result["systemType"] != "Bridge2":
+            if result["systemType"] != "Bridge2" or result["systemType"] != "Bridge3":
                 raise NexaApiNotCompatibleError("Endpoint not compatible")
 
         return result

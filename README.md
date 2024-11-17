@@ -47,8 +47,7 @@ Just click the configure button and you should be ready to go!
 > If it's not showing, just click the "add integration" button and search for
 > "Nexa Bridge X",
 
-All connected sensors etc. will appear automatically as a device with entities using
-names based on features and configuration.
+All connected sensors etc. will be available as Entities inside Home Assistant.
 
 > The names are taken from configurations in the App/Web UI.
 > It is recommended that you name them something simple, i.e. if you have a switch

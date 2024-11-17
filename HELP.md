@@ -47,8 +47,8 @@ using Github is always preferred.
 
 Providing data dumps can be done with utilities like [Postman](https://www.postman.com/downloads/).
 
-The most critical data comes from `http://<bridge-ip-address>/api/info` and
-`http://<bridge-ip-address>/api/nodes` and can be accessed using `nexa` as both username
+The most critical data comes from `http://<bridge-ip-address>/v1/info` and
+`http://<bridge-ip-address>/v1/nodes` and can be accessed using `nexa` as both username
 and password with Digest Authentication enabled.
 
 **Some of this data can contain personal information (like location in the "info"), so make sure

@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.8.0] - 2024-11-17
+### :sparkles: New Features
+- [`360e919`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/360e919805475f78f2f43eb414b234e8db73d818) - bridge3 support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.7.0] - 2024-06-03
 ### :sparkles: New Features
 - [`eb263a9`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/eb263a995b386b8457b4c02f3b7a6ad315cd8b10) - push button capability support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -438,3 +443,4 @@
 [v1.6.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.5.2...v1.6.0
 [v1.6.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.6.0...v1.6.1
 [v1.7.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.6.1...v1.7.0
+[v1.8.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.7.0...v1.8.0

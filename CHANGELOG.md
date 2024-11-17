@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.8.1] - 2024-11-17
+### :bug: Bug Fixes
+- [`8cadf0d`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/8cadf0dd1542cdb8211c4cd6de5fd176522ef4fb) - bridge check not working correctly *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.8.0] - 2024-11-17
 ### :sparkles: New Features
 - [`360e919`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/360e919805475f78f2f43eb414b234e8db73d818) - bridge3 support *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -444,3 +449,4 @@
 [v1.6.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.6.0...v1.6.1
 [v1.7.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.6.1...v1.7.0
 [v1.8.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.7.0...v1.8.0
+[v1.8.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.8.0...v1.8.1

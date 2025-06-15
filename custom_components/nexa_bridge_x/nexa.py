@@ -586,6 +586,10 @@ class NexaNode:
         """If this is a media player"""
         return is_capable_of(self, NODE_MEDIA_CAPABILITIES)
 
+    def is_motor(self) -> bool:
+        """If this is a motor"""
+        return is_capable_of(self, ["motor"])
+
 
 class NexaData:
     """Model for polled data"""

@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.9.0] - 2025-06-16
+### :sparkles: New Features
+- [`8546df7`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/8546df7b218702bb2ac4229b5f57bc93a0802e63) - motor button & sensor support *(PR [#57](https://github.com/andersevenrud/ha-nexa-bridge-x/pull/57) by [@andersevenrud](https://github.com/andersevenrud))*
+  - :arrow_lower_right: *addresses issue [#56](https://github.com/andersevenrud/ha-nexa-bridge-x/issues/56) opened by [@hndrix-o](https://github.com/hndrix-o)*
+
+
 ## [v1.8.1] - 2024-11-17
 ### :bug: Bug Fixes
 - [`8cadf0d`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/8cadf0dd1542cdb8211c4cd6de5fd176522ef4fb) - bridge check not working correctly *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -450,3 +456,4 @@
 [v1.7.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.6.1...v1.7.0
 [v1.8.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.7.0...v1.8.0
 [v1.8.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.8.0...v1.8.1
+[v1.9.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.8.1...v1.9.0

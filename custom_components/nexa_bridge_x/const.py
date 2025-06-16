@@ -83,7 +83,8 @@ NODE_SENSOR_CAPABILITIES = [
     "humidity",
     "luminance",
     "battery",
-    "customEvent"
+    "customEvent",
+    "motor"
 ]
 
 ENERGY_ATTRS = [

@@ -316,7 +316,7 @@ class NexaMotorButtonEntity(NexaNodeEntity, ButtonEntity):
         super().__init__(node, coordinator)
         self.id = node.id
         self._attr_name = label
-        self._attr_unique_id = f"motor_button_{node.id}"
+        self._attr_unique_id = f"motor_button_{node.id}_{command}"
         self._attr_icon = icon or "mdi:gesture-tap"
         self._command = command
 

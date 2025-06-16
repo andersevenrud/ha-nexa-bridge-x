@@ -588,7 +588,7 @@ class NexaNode:
 
     def is_motor(self) -> bool:
         """If this is a motor"""
-        return is_capable_of(self, ["motor"])
+        return "motor" in self.capabilities
 
 
 class NexaData:

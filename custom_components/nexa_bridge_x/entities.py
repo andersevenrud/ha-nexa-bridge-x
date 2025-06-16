@@ -17,6 +17,7 @@ from homeassistant.components.media_player import (
     MediaPlayerState,
     MediaType,
 )
+from homeassistant.components.button import ButtonEntity
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.device_registry import DeviceEntryType
 from homeassistant.helpers.update_coordinator import (
@@ -167,6 +168,9 @@ class NexaSensorEntity(NexaNodeEntity, SensorEntity):
             self._attr_device_class = SENSOR_MAP[key]["device"]
             self._attr_state_class = SENSOR_MAP[key]["class"]
 
+            if "options" in SENSOR_MAP[key]:
+                self._attr_options = SENSOR_MAP[key]["options"]
+
         if key == "customEvent":
             self._attr_name = f"Last {SENSOR_MAP[key]['name']}"
             self._attr_options = node.custom_events
@@ -292,6 +296,32 @@ class NexaMediaPlayerEntity(NexaNodeEntity, MediaPlayerEntity):
     async def async_mute_volume(self, mute: bool) -> None:
         """Send mute command to media player."""
         await self._api_call("mediaMute", mute)
+
+    async def _api_call(self, cap: str, value: NexaNodeValueType):
+        await self.coordinator.api.node_call(self.id, cap, value)
+
+
+class NexaMotorButtonEntity(NexaNodeEntity, ButtonEntity):
+    """Entity for motor control button"""
+
+    def __init__(
+            self,
+            coordinator: DataUpdateCoordinator,
+            node: NexaNode,
+            label: str,
+            command: str,
+            icon: str | None = None
+    ):
+        _LOGGER.info("Found motor %s: %s", node.id, node.name)
+        super().__init__(node, coordinator)
+        self.id = node.id
+        self._attr_name = label
+        self._attr_unique_id = f"motor_button_{node.id}_{command}"
+        self._attr_icon = icon or "mdi:gesture-tap"
+        self._command = command
+
+    async def async_press(self) -> None:
+        await self._api_call("motor", self._command)
 
     async def _api_call(self, cap: str, value: NexaNodeValueType):
         await self.coordinator.api.node_call(self.id, cap, value)

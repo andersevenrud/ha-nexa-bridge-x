@@ -83,7 +83,8 @@ NODE_SENSOR_CAPABILITIES = [
     "humidity",
     "luminance",
     "battery",
-    "customEvent"
+    "customEvent",
+    "motor"
 ]
 
 ENERGY_ATTRS = [
@@ -195,6 +196,13 @@ SENSOR_MAP = {
         "device": SensorDeviceClass.ENUM,
         "class": None
     },
+    "motor": {
+        "name": "Motor",
+        "unit": None,
+        "device": SensorDeviceClass.ENUM,
+        "class": None,
+        "options": ["up", "down", "stop"]
+    }
 }
 
 ENERGY_MAP = {

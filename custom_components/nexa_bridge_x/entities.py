@@ -168,13 +168,12 @@ class NexaSensorEntity(NexaNodeEntity, SensorEntity):
             self._attr_device_class = SENSOR_MAP[key]["device"]
             self._attr_state_class = SENSOR_MAP[key]["class"]
 
+            if "options" in SENSOR_MAP[key]:
+                self._attr_options = SENSOR_MAP[key]["options"]
+
         if key == "customEvent":
             self._attr_name = f"Last {SENSOR_MAP[key]['name']}"
             self._attr_options = node.custom_events
-        elif key == "motor":
-            self._attr_name = "Motor Sensor"
-            self._attr_device_class = "enum"
-            self._attr_options = ["up", "down", "stop"]
 
     @callback
     def _handle_coordinator_update(self) -> None:

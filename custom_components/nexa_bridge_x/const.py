@@ -196,6 +196,13 @@ SENSOR_MAP = {
         "device": SensorDeviceClass.ENUM,
         "class": None
     },
+    "motor": {
+        "name": "Motor",
+        "unit": None,
+        "device": SensorDeviceClass.ENUM,
+        "class": None,
+        "options": ["up", "down", "stop"]
+    }
 }
 
 ENERGY_MAP = {

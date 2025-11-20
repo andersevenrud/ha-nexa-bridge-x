@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.9.2] - 2025-11-20
+### :wrench: Chores
+- [`48fefc6`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/48fefc61892ed62f7df68ee6428e94f49507c56a) - **hacs**: add countries to config *(commit by [@andersevenrud](https://github.com/andersevenrud))*
+
+
 ## [v1.9.1] - 2025-11-20
 ### :wrench: Chores
 - [`6112c88`](https://github.com/andersevenrud/ha-nexa-bridge-x/commit/6112c883c889d3bfcfbe7c486fb04a453df9978c) - **hacs**: update config *(commit by [@andersevenrud](https://github.com/andersevenrud))*
@@ -463,3 +468,4 @@
 [v1.8.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.8.0...v1.8.1
 [v1.9.0]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.8.1...v1.9.0
 [v1.9.1]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.9.0...v1.9.1
+[v1.9.2]: https://github.com/andersevenrud/ha-nexa-bridge-x/compare/v1.9.1...v1.9.2

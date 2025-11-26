@@ -26,10 +26,9 @@ Makes it possible to view and control devices set up in the Nexa App/Web UI.
 
 ### Managed
 
-* Install and open [HACS](https://hacs.xyz/)
-* Add a custom repository from the hamburger menu
-* Use the [URL](https://github.com/andersevenrud/ha-nexa-bridge-x.git) to this repository and select "integration"
-* Restart HA
+Installation is easiest using [HACS](https://hacs.xyz/):
+
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=andersevenrud&repository=ha-nexa-bridge-x).
 
 ### Manual
 

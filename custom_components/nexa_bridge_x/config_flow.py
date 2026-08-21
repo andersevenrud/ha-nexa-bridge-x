@@ -10,6 +10,7 @@ from __future__ import annotations
 import logging
 from typing import Any
 
+import httpx
 import voluptuous as vol
 
 from homeassistant.components import zeroconf
@@ -18,7 +19,11 @@ from homeassistant.config_entries import ConfigFlow
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
 
-from .nexa import NexaApi
+from .nexa import (
+    NexaApi,
+    NexaApiAuthorizationError,
+    NexaApiError,
+)
 from .const import (
     DOMAIN,
     DEFAULT_USERNAME,
@@ -46,8 +51,10 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
     try:
         api = NexaApi(hass, data["host"], data["username"], data["password"], data["legacy"])
         info = await api.test_connection()
-    except Exception:
-        raise InvalidAuth
+    except NexaApiAuthorizationError as err:
+        raise InvalidAuth from err
+    except (NexaApiError, httpx.HTTPError) as err:
+        raise CannotConnect from err
 
     return {"title": info["name"]}
 
@@ -105,7 +112,6 @@ class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
         host: str = discovery_info.host
         username: str = DEFAULT_USERNAME
         password: str = DEFAULT_PASSWORD
-        is_legacy: bool = "nexabridge2" not in uid
 
         await self.async_set_unique_id(uid.upper())
 
@@ -114,8 +120,11 @@ class NexaBridgeXFlowHandler(ConfigFlow, domain=DOMAIN):
         })
 
         try:
-            api = NexaApi(self.hass, host, 'nexa', 'nexa', is_legacy)
-            info = await api.test_connection()
+            api = NexaApi(self.hass, host, username, password, False)
+            info = await api.fetch_info()
+            is_legacy: bool = info.get("systemType") == "Bridge1"
+            api.legacy = is_legacy
+            await api.test_connection()
         except Exception:  # pylint: disable=broad-except
             return self.async_abort(reason="unknown")
 

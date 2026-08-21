@@ -93,10 +93,10 @@ class NexaDimmerEntity(NexaNodeEntity, LightEntity):
         node = self.coordinator.get_node_by_id(self.id)
         if node:
             value = node.get_value("switchLevel")
-            value_percentage = int(value * 100)
+            if value is not None:
+                self._attr_is_on = int(value * 100) > 0
+                self._attr_brightness = int(value * 255)
 
-            self._attr_is_on = value_percentage > 0
-            self._attr_brightness = int(value * 255)
             self.async_write_ha_state()
 
     async def async_turn_on(self, **kwargs) -> None:
@@ -180,7 +180,7 @@ class NexaSensorEntity(NexaNodeEntity, SensorEntity):
         node = self.coordinator.get_node_by_id(self.id)
         if node:
             value = node.get_value(self.key)
-            if self.key == "switchLevel":
+            if self.key == "switchLevel" and value is not None:
                 self._attr_native_value = int(value * 100)
             else:
                 self._attr_native_value = value
@@ -276,7 +276,11 @@ class NexaMediaPlayerEntity(NexaNodeEntity, MediaPlayerEntity):
             else:
                 self._attr_state = MediaPlayerState.PAUSED
 
-            self._attr_volume_level = node.get_value("mediaVolume")
+            volume = node.get_value("mediaVolume")
+            if volume is not None:
+                volume = volume / 100
+
+            self._attr_volume_level = volume
             self._attr_is_volume_muted = node.get_value("mediaMute")
 
             self.async_write_ha_state()

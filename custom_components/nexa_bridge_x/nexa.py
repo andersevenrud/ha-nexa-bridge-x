@@ -54,7 +54,7 @@ NexaWebsocketMessage = str
 NexaWebsocketData = Any
 
 
-def is_capable_of(node: NexaNode, items: list(str)) -> bool:
+def is_capable_of(node: NexaNode, items: list[str]) -> bool:
     """Check if given capability is available"""
     return any(cap for cap in items if cap in node.capabilities)
 
@@ -70,7 +70,7 @@ def values_from_events(node: NexaNodeData, legacy: bool) -> list[NexaNodeValue]:
     """Creates a list of node values based on node data"""
     prev_key = legacy and "value" or "prevValue"
     keys = (prev_key, "value", "time")
-    ignores = ("methodCall")
+    ignores = ("methodCall",)
     values = []
 
     if "lastEvents" in node:
@@ -138,8 +138,8 @@ class NexaWebSocket:
     host: str
     stopping: bool = False
     task = None
-    ws: aiohttp.ws | None = None
-    session: aiohttp.session | None = None
+    ws: aiohttp.ClientWebSocketResponse | None = None
+    session: aiohttp.ClientSession | None = None
 
     def __init__(
         self,
@@ -240,6 +240,9 @@ class NexaWebSocket:
         if reconnect:
             await asyncio.sleep(RECONNECT_SLEEP)
 
+            if self.stopping:
+                return
+
         self.task = asyncio.create_task(self.run(url))
 
 
@@ -284,7 +287,7 @@ class NexaApi:
         method: str,
         endpoint: str,
         body: Any = None
-    ) -> Response:
+    ) -> Any:
         """Performs a request"""
         url = "http://%s/v1/%s" % (self.host, endpoint or "")
 
@@ -449,7 +452,7 @@ class NexaEnergy:
     ):
         """Populate legacy energy data from api"""
         # FIXME: What even are these values ?!
-        self.current_wattage = data["kW"] / 1000
+        self.current_wattage = data["kW"] * 1000
         self.total_kilowatt_hours = data["kWh"]
 
     def populate(
@@ -484,13 +487,14 @@ class NexaNode:
     name: str
     capabilities: list[str]
     values: list[NexaNodeValue]
-    custom_events: list[str] = []
+    custom_events: list[str]
 
     def __init__(self, node: NexaNodeData, legacy: bool):
         self.id = node["id"]
         self.name = "name" in node and node["name"] or str(node["id"])
         self.capabilities = node["capabilities"]
         self.values = values_from_events(node, legacy)
+        self.custom_events = []
 
         if "extraInfo" in node:
             if "customEvents" in node["extraInfo"]:
@@ -504,7 +508,7 @@ class NexaNode:
         name: str,
         new_value: NexaNodeValueType,
         new_time: str
-    ) -> None:
+    ) -> dict[str, Any] | None:
         """Creates an internal event"""
         if name == "customEvent":
             return {
@@ -537,6 +541,7 @@ class NexaNode:
                 if current_value.name == new_value.name:
                     if is_newer_date(current_time, new_time):
                         current_value.value = new_value.value
+                        current_value.time = new_value.time
                         _LOGGER.debug("[%s] Updating '%s' from node -> %s", self.id, current_value.name, new_value.value)
                     else:
                         _LOGGER.debug("[%s] Ignoring '%s' from node ", self.id, current_value.name)
@@ -667,7 +672,7 @@ class NexaCoordinator(DataUpdateCoordinator):
                 #self.async_set_updated_data(self.data)
                 self.async_update_listeners()
 
-    async def _async_update_data(self) -> None:
+    async def _async_update_data(self) -> NexaData:
         """Update data by pulling in the background"""
         try:
             timeout = POLL_TIMEOUT if self.has_polled else DISCOVERY_TIMEOUT

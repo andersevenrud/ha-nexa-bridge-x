@@ -26,5 +26,4 @@ async def async_setup_entry(
         if node.is_light()
     )
 
-    if entities:
-        async_add_entities(entities)
+    async_add_entities(entities)

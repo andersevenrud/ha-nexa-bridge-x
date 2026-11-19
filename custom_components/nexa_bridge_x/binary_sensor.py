@@ -32,5 +32,4 @@ async def async_setup_entry(
         for name in node.get_binary_capabilities()
     )
 
-    if entities:
-        async_add_entities(entities)
+    async_add_entities(entities)
